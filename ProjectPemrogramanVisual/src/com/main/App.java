@@ -14,6 +14,7 @@ public class App {
         // Controller.showDaftarAdmin();
 
         // Controller.showDashboardMitra(1);
-        Controller.showDashboardAdmin(true);
+        Controller.showDashboardCustomer(1);
+        // Controller.showDashboardAdmin(true);
     }
 }
