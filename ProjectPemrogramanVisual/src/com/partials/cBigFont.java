@@ -9,6 +9,6 @@ public class cBigFont extends JLabel {
         setBounds(x, y, 450, 70);
         setVerticalAlignment(JLabel.CENTER);
         setFont(cFonts.BIG_FONT);
-        setForeground(cColor.WHITE);
+        setForeground(cColor.GREEN);
     }
 }
