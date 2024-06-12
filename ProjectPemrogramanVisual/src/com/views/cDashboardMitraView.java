@@ -42,6 +42,22 @@ public class cDashboardMitraView extends cDashboardApp {
       menuDataMeja.setBackground(cColor.GREEN);
       menuDataMeja.setSidebarNonAktif();
 
+      menuDataCustomer.setForeground(cColor.WHITE);
+      menuDataCustomer.setBackground(cColor.GREEN);
+      menuDataCustomer.setSidebarNonAktif();
+
+      menuDataKaryawan.setForeground(cColor.WHITE);
+      menuDataKaryawan.setBackground(cColor.GREEN);
+      menuDataKaryawan.setSidebarNonAktif();
+
+      menuTransaksi.setForeground(cColor.WHITE);
+      menuTransaksi.setBackground(cColor.GREEN);
+      menuTransaksi.setSidebarNonAktif();
+
+      menuOrderBahan.setForeground(cColor.WHITE);
+      menuOrderBahan.setBackground(cColor.GREEN);
+      menuOrderBahan.setSidebarNonAktif();
+
       menuLogout.setSidebarNonAktif();
     } catch (Exception e) {
       // TODO: handle exception
