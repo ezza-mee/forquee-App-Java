@@ -53,6 +53,7 @@ public class cDashboardAdminView extends cDashboardApp {
         try {
             content.removeAll();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

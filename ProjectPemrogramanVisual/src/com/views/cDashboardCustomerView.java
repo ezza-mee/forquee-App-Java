@@ -12,14 +12,11 @@ public class cDashboardCustomerView extends cDashboardApp {
 
   // sidebar menu
   private cSidebarMenu menuBeranda = new cSidebarMenu("Beranda", 70);
-  private cSidebarMenu menuDataMenu = new cSidebarMenu("Data Menu", 70 + 50);
-  private cSidebarMenu menuDataPromo = new cSidebarMenu("Data Promo", 70 + 50 + 50);
-  private cSidebarMenu menuDataMeja = new cSidebarMenu("Data Meja", 70 + 50 + 50 + 50);
-  private cSidebarMenu menuDataCustomer = new cSidebarMenu("Data Customer", 70 + 50 + 50 + 50 + 50);
-  private cSidebarMenu menuDataKaryawan = new cSidebarMenu("Data Karyawan", 70 + 50 + 50 + 50 + 50 + 50);
-  private cSidebarMenu menuTransaksi = new cSidebarMenu("Transaksi", 70 + 50 + 50 + 50 + 50 + 50 + 50);
-  private cSidebarMenu menuOrderBahan = new cSidebarMenu("Order Bahan", 70 + 50 + 50 + 50 + 50 + 50 + 50 + 50);
-  private cSidebarMenu menuLogout = new cSidebarMenu("Logout", 70 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50);
+  private cSidebarMenu menuDataMenu = new cSidebarMenu("Menu Produk", 70 + 50);
+  private cSidebarMenu menuOrder = new cSidebarMenu("Order Produk", 70 + 50 + 50);
+  private cSidebarMenu menuHistory = new cSidebarMenu("History Produk", 70 + 50 + 50 + 50);
+  private cSidebarMenu menuAkun = new cSidebarMenu("Akun", 70 + 50 + 50 + 50 + 50);
+  private cSidebarMenu menuLogout = new cSidebarMenu("Logout", 70 + 50 + 50 + 50 + 50 + 50);
 
   // method resetSidebar
   private void resetSidebar() {
@@ -34,34 +31,23 @@ public class cDashboardCustomerView extends cDashboardApp {
       menuDataMenu.setBackground(cColor.GREEN);
       menuDataMenu.setSidebarNonAktif();
 
-      menuDataPromo.setForeground(cColor.WHITE);
-      menuDataPromo.setBackground(cColor.GREEN);
-      menuDataPromo.setSidebarNonAktif();
+      menuOrder.setForeground(cColor.WHITE);
+      menuOrder.setBackground(cColor.GREEN);
+      menuOrder.setSidebarNonAktif();
 
-      menuDataMeja.setForeground(cColor.WHITE);
-      menuDataMeja.setBackground(cColor.GREEN);
-      menuDataMeja.setSidebarNonAktif();
+      menuHistory.setForeground(cColor.WHITE);
+      menuHistory.setBackground(cColor.GREEN);
+      menuHistory.setSidebarNonAktif();
 
-      menuDataCustomer.setForeground(cColor.WHITE);
-      menuDataCustomer.setBackground(cColor.GREEN);
-      menuDataCustomer.setSidebarNonAktif();
+      menuAkun.setForeground(cColor.WHITE);
+      menuAkun.setBackground(cColor.GREEN);
+      menuAkun.setSidebarNonAktif();
 
-      menuDataKaryawan.setForeground(cColor.WHITE);
-      menuDataKaryawan.setBackground(cColor.GREEN);
-      menuDataKaryawan.setSidebarNonAktif();
-
-
-      menuTransaksi.setForeground(cColor.WHITE);
-      menuTransaksi.setBackground(cColor.GREEN);
-      menuTransaksi.setSidebarNonAktif();
-
-      menuOrderBahan.setForeground(cColor.WHITE);
-      menuOrderBahan.setBackground(cColor.GREEN);
-      menuOrderBahan.setSidebarNonAktif();
-
+      menuLogout.setForeground(cColor.WHITE);
+      menuLogout.setBackground(cColor.GREEN);
       menuLogout.setSidebarNonAktif();
     } catch (Exception e) {
-      // TODO: handle exception
+      e.printStackTrace();
     }
   }
 
@@ -77,77 +63,55 @@ public class cDashboardCustomerView extends cDashboardApp {
     super("Dashboard Customer");
     idMitra = id;
     roleText.setText("Customer | Nama Customer");
+
     menuBeranda.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent me) {
         initsBeranda();
       }
     });
+
     menuDataMenu.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent me) {
         initsDataMenu();
       }
     });
-    menuDataPromo.addMouseListener(new java.awt.event.MouseAdapter() {
+
+    menuOrder.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent me) {
-        initsDataPromo();
+        initsOrder();
       }
     });
-    menuDataMeja.addMouseListener(new java.awt.event.MouseAdapter() {
+
+    menuHistory.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent me) {
-        initsDataMeja();
+        initsHistory();
       }
     });
-    menuDataCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+
+    menuAkun.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent me) {
-        initsDataCustomer();
+        initsAkun();
       }
     });
-    menuDataKaryawan.addMouseListener(new java.awt.event.MouseAdapter() {
-      @Override
-      public void mouseClicked(java.awt.event.MouseEvent me) {
-        initsDataKaryawan();
-      }
-    });
-    menuTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
-      @Override
-      public void mouseClicked(java.awt.event.MouseEvent me) {
-        initsTransaksi();
-      }
-    });
-    menuOrderBahan.addMouseListener(new java.awt.event.MouseAdapter() {
-      @Override
-      public void mouseClicked(java.awt.event.MouseEvent me) {
-        initsOrderBahan();
-      }
-    });
+
     menuLogout.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent me) {
-        Object[] options = { "YA", "BATAL" };
-        int confirm = JOptionPane.showOptionDialog(null, "Yakin ingin logout?", "Logout",
-            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-            null, options, options[0]);
-        if (confirm == 0) {
-          idMitra = null;
-          idSelected = null;
-          com.main.Controller.showLoginMitra();
-        }
+        initsLogout();
       }
     });
+
     // add component default
     sidebar.add(menuBeranda);
     sidebar.add(menuDataMenu);
-    sidebar.add(menuDataPromo);
-    sidebar.add(menuDataMeja);
-    sidebar.add(menuDataCustomer);
-    sidebar.add(menuDataKaryawan);
-    sidebar.add(menuTransaksi);
-    sidebar.add(menuOrderBahan);
+    sidebar.add(menuOrder);
+    sidebar.add(menuHistory);
+    sidebar.add(menuAkun);
     sidebar.add(menuLogout);
     initsBeranda();
   }
@@ -170,74 +134,60 @@ public class cDashboardCustomerView extends cDashboardApp {
     menuDataMenu.setForeground(cColor.GREEN);
     refreshContent();
     menuDataMenu.setSidebarAktif();
-    menuTitle.setText("Data Menu");
+    menuTitle.setText("Menu");
     setVisible(true);
   }
 
-  private void initsDataPromo() {
+  private void initsOrder() {
     idSelected = null;
     resetSidebar();
-    menuDataPromo.setBackground(cColor.WHITE);
-    menuDataPromo.setForeground(cColor.GREEN);
+    menuOrder.setBackground(cColor.WHITE);
+    menuOrder.setForeground(cColor.GREEN);
     refreshContent();
-    menuDataPromo.setSidebarAktif();
-    menuTitle.setText("Data Promo");
+    menuOrder.setSidebarAktif();
+    menuTitle.setText("Order");
     setVisible(true);
   }
 
-  private void initsDataMeja() {
+  private void initsHistory() {
     idSelected = null;
     resetSidebar();
-    menuDataMeja.setBackground(cColor.WHITE);
-    menuDataMeja.setForeground(cColor.GREEN);
+    menuHistory.setBackground(cColor.WHITE);
+    menuHistory.setForeground(cColor.GREEN);
     refreshContent();
-    menuDataMeja.setSidebarAktif();
-    menuTitle.setText("Data Meja");
+    menuHistory.setSidebarAktif();
+    menuTitle.setText("History");
     setVisible(true);
   }
 
-  private void initsDataCustomer() {
+  private void initsAkun() {
     idSelected = null;
     resetSidebar();
-    menuDataCustomer.setBackground(cColor.WHITE);
-    menuDataCustomer.setForeground(cColor.GREEN);
+    menuAkun.setBackground(cColor.WHITE);
+    menuAkun.setForeground(cColor.GREEN);
     refreshContent();
-    menuDataCustomer.setSidebarAktif();
-    menuTitle.setText("Data Meja");
+    menuAkun.setSidebarAktif();
+    menuTitle.setText("Akun");
     setVisible(true);
   }
 
-  private void initsDataKaryawan() {
+  private void initsLogout() {
     idSelected = null;
     resetSidebar();
-    menuDataKaryawan.setBackground(cColor.WHITE);
-    menuDataKaryawan.setForeground(cColor.GREEN);
+    menuLogout.setBackground(cColor.WHITE);
+    menuLogout.setForeground(cColor.GREEN);
     refreshContent();
-    menuDataKaryawan.setSidebarAktif();
-    menuTitle.setText("Data Meja");
-    setVisible(true);
-  }
+    menuLogout.setSidebarAktif();
 
-  private void initsTransaksi() {
-    idSelected = null;
-    resetSidebar();
-    menuTransaksi.setBackground(cColor.WHITE);
-    menuTransaksi.setForeground(cColor.GREEN);
-    refreshContent();
-    menuTransaksi.setSidebarAktif();
-    menuTitle.setText("Data Meja");
-    setVisible(true);
-  }
-
-  private void initsOrderBahan() {
-    idSelected = null;
-    resetSidebar();
-    menuOrderBahan.setBackground(cColor.WHITE);
-    menuOrderBahan.setForeground(cColor.GREEN);
-    refreshContent();
-    menuOrderBahan.setSidebarAktif();
-    menuTitle.setText("Data Meja");
-    setVisible(true);
+    Object[] options = { "YA", "BATAL" };
+    int confirm = JOptionPane.showOptionDialog(null, "Yakin ingin logout?", "Logout",
+        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+        null, options, options[0]);
+    if (confirm == 0) {
+      idMitra = null;
+      idSelected = null;
+      com.main.Controller.showLoginMitra();
+    }
   }
 
 }
