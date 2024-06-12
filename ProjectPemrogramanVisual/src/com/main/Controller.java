@@ -38,7 +38,8 @@ public class Controller {
     }
 
     public static void showDashboardCustomer(Integer id) {
-
+        cDashboardCustomerView dashboardCustomer = new cDashboardCustomerView(id);
+        dashboardCustomer.setVisible(true);
     }
 
     public static void showDashboardMitra(Integer id) {
