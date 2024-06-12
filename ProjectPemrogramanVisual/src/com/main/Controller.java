@@ -47,7 +47,7 @@ public class Controller {
     }
 
     public static void showDashboardAdmin(boolean statusLogin) {
-        dashboardAdminView dashboardAdmin = new dashboardAdminView(statusLogin);
+        cDashboardAdminView dashboardAdmin = new cDashboardAdminView(statusLogin);
         dashboardAdmin.setVisible(true);
     }
 
