@@ -15,7 +15,7 @@ public class cDashboardAdminView extends cDashboardApp {
     private cSidebarMenu menuDataKaryawan = new cSidebarMenu("Data Menu", 70 + 50);
     private cSidebarMenu menuTransaksi = new cSidebarMenu("Transaksi", 70 + 50 + 50);
     private cSidebarMenu menuHistory = new cSidebarMenu("History", 70 + 50 + 50 + 50);
-    private cSidebarMenu menuLogout = new cSidebarMenu("Logout", 70 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50);
+    private cSidebarMenu menuLogout = new cSidebarMenu("Logout", 70 + 50 + 50 + 50 + 50);
 
     // method resetSidebar
     private void resetSidebar() {
