@@ -847,6 +847,7 @@ public class cDashboardCustomerView extends cDashboardApp {
       idCustomer = null;
       idSelected = null;
       com.main.Controller.showLoginCustomer();
+      cDashboardCustomerView.this.setVisible(false);
     }
   }
 

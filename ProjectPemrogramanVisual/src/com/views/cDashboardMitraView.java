@@ -43,7 +43,7 @@ public class cDashboardMitraView extends cDashboardApp {
   // component of data menu
   private cButton btnMenuMakanan = new cButton("Makanan", 450, 40, 150, 30, 20);
   private cButton btnMenuCoffe = new cButton("Coffe", 650, 40, 150, 30, 20);
-private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20);
+  private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20);
   private cButton btnTambahMakanan = new cButton("Tambah", 850, 480, 150, 30, 20);
   private cButton btnKembaliMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
   private cButton btnTambahCoffe = new cButton("Tambah", 850, 480, 150, 30, 20);
@@ -77,8 +77,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
   private cLabelInfo labelDeskripsiMakanan = new cLabelInfo("Deskripsi Makanan", 580, 90, 300, 40);
   private cTextarea txtDeskripsiMakanan = new cTextarea(580, 120, 300, 120, true);
   private cErrorLabel errorDeskripsiMakanan = new cErrorLabel("Deskripsi Makanan tidak boleh Kosong!", 580, 235, 300);
-  private cLabelInfo labelHargaTotalMakanan = new cLabelInfo("Harga Total Makanan", 580, 270, 300, 40);
-  private cTextField txtHargaTotalMakanan = new cTextField(580, 302, 300);
   private cButton btnHapusMakanan = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanMakanan = new cButton("Simpan", 730, 480, 150, 30, 20);
 
@@ -96,8 +94,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
   private cLabelInfo labelDeskripsiCoffe = new cLabelInfo("Deskripsi Coffe", 580, 90, 300, 40);
   private cTextarea txtDeskripsiCoffe = new cTextarea(580, 120, 300, 120, true);
   private cErrorLabel errorDeskripsiCoffe = new cErrorLabel("Deskripsi Coffe tidak boleh Kosong!", 580, 235, 300);
-  private cLabelInfo labelHargaTotalCoffe = new cLabelInfo("Harga Total Coffe", 580, 270, 300, 40);
-  private cTextField txtHargaTotalCoffe = new cTextField(580, 302, 300);
   private cButton btnHapusCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
 
@@ -116,8 +112,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
   private cTextarea txtDeskripsiNonCoffe = new cTextarea(580, 120, 300, 120, true);
   private cErrorLabel errorDeskripsiNonCoffe = new cErrorLabel("Deskripsi Non Coffe tidak boleh Kosong!", 580, 235,
       300);
-  private cLabelInfo labelHargaTotalNonCoffe = new cLabelInfo("Harga Total NonCoffe", 580, 270, 300, 40);
-  private cTextField txtHargaTotalNonCoffe = new cTextField(580, 302, 300);
   private cButton btnHapusNonCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanNonCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
 
@@ -624,7 +618,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
         txtJumlahMakanan.setText(null);
         txtDeskripsiMakanan.setText(null);
         txtHargaMakanan.setText(null);
-        txtHargaTotalMakanan.setText(null);
       }
     });
 
@@ -648,8 +641,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
     content.add(labelDeskripsiMakanan);
     content.add(txtDeskripsiMakanan);
     content.add(errorDeskripsiMakanan);
-    content.add(labelHargaTotalMakanan);
-    content.add(txtHargaTotalMakanan);
     content.add(btnSimpanMakanan);
     content.add(btnHapusMakanan);
     content.add(btnKembaliMakanan);
@@ -699,7 +690,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
         txtJumlahCoffe.setText(null);
         txtDeskripsiCoffe.setText(null);
         txtHargaCoffe.setText(null);
-        txtHargaTotalCoffe.setText(null);
       }
     });
 
@@ -723,8 +713,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
     content.add(labelDeskripsiCoffe);
     content.add(txtDeskripsiCoffe);
     content.add(errorDeskripsiCoffe);
-    content.add(labelHargaTotalCoffe);
-    content.add(txtHargaTotalCoffe);
     content.add(btnSimpanCoffe);
     content.add(btnHapusCoffe);
     content.add(btnKembaliCoffe);
@@ -774,7 +762,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
         txtJumlahNonCoffe.setText(null);
         txtDeskripsiNonCoffe.setText(null);
         txtHargaNonCoffe.setText(null);
-        txtHargaTotalNonCoffe.setText(null);
       }
     });
 
@@ -798,8 +785,6 @@ private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20)
     content.add(labelDeskripsiNonCoffe);
     content.add(txtDeskripsiNonCoffe);
     content.add(errorDeskripsiNonCoffe);
-    content.add(labelHargaTotalNonCoffe);
-    content.add(txtHargaTotalNonCoffe);
     content.add(btnSimpanNonCoffe);
     content.add(btnHapusNonCoffe);
     content.add(btnKembaliNonCoffe);
