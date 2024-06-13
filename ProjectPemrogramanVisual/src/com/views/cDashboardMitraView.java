@@ -43,7 +43,7 @@ public class cDashboardMitraView extends cDashboardApp {
   // component of data menu
   private cButton btnMenuMakanan = new cButton("Makanan", 450, 40, 150, 30, 20);
   private cButton btnMenuCoffe = new cButton("Coffe", 650, 40, 150, 30, 20);
-  private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20);
+private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20);
   private cButton btnTambahMakanan = new cButton("Tambah", 850, 480, 150, 30, 20);
   private cButton btnKembaliMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
   private cButton btnTambahCoffe = new cButton("Tambah", 850, 480, 150, 30, 20);
