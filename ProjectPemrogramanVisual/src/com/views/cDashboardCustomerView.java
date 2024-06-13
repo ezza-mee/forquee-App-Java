@@ -197,8 +197,8 @@ public class cDashboardCustomerView extends cDashboardApp {
   private cTextField txtNomorHpDataAkun = new cTextField(190, 325, 300);
   private cPasswordField txtPasswordDataAkun = new cPasswordField(580, 115, 300);
   private cTextarea txtAlamatDataAkun = new cTextarea(580, 215, 300, 100, true);
-  private cButton btnHapusDataAkun = new cButton("Hapus", 600, 430, 150, 30, 20);
-  private cButton btnSimpanDataAkun = new cButton("Simpan", 750, 430, 150, 30, 20);
+  private cButton btnHapusDataAkun = new cButton("Hapus", 560, 430, 150, 30, 20);
+  private cButton btnSimpanDataAkun = new cButton("Simpan", 730, 430, 150, 30, 20);
 
   // method resetSidebar
   private void resetSidebar() {
