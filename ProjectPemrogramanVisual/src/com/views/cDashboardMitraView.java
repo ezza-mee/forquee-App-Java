@@ -42,33 +42,39 @@ public class cDashboardMitraView extends cDashboardApp {
   private cBigFont valueOrderBahanBeranda = new cBigFont("0", 420, 405);
 
   // component of data menu
-  private cButton btnMenuMakanan = new cButton("Makanan", 450, 40, 150, 30, 20);
-  private cButton btnMenuCoffe = new cButton("Coffe", 650, 40, 150, 30, 20);
-  private cButton btnMenuNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20);
-  private cButton btnTambahMakanan = new cButton("Tambah", 850, 480, 150, 30, 20);
-  private cButton btnKembaliMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
-  private cButton btnTambahCoffe = new cButton("Tambah", 850, 480, 150, 30, 20);
-  private cButton btnKembaliCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
-  private cButton btnTambahNonCoffe = new cButton("Tambah", 850, 480, 150, 30, 20);
-  private cButton btnKembaliNonCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cComboBox pilihDataMenu = new cComboBox(
+      new String[] { "Data Makanan", "Data Coffe", "Data Non Coffe" }, 100, 40, 200,
+      30);
 
   // component of data menu makanan
-  private cLabelInfo labelCariMenuMakanan = new cLabelInfo("Cari", 40, 35, 300, 40);
-  private cTextField txtCariMenuMakanan = new cTextField(100, 40, 300);
+  private cLabelInfo labelCariMenuMakanan = new cLabelInfo("Cari", 40, 90, 300, 40);
+  private cTextField txtCariMenuMakanan = new cTextField(100, 90, 300);
   private cTable tblMenuMakanan;
   private cScrollPane spMenuMakanan;
+  private cButton btnTambahMakanan = new cButton("Tambah", 440, 90, 150, 30, 20);
+  private cButton btnEditDataMakanan = new cButton("Edit", 630, 90, 150, 30, 20);
+  private cButton btnHapusDataMakanan = new cButton("Hapus", 820, 90, 150, 30, 20);
+  private cButton btnKembaliMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
 
   // component of data menu coffe
-  private cLabelInfo labelCariMenuCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
-  private cTextField txtCariMenuCoffe = new cTextField(100, 40, 300);
+  private cLabelInfo labelCariMenuCoffe = new cLabelInfo("Cari", 40, 90, 300, 40);
+  private cTextField txtCariMenuCoffe = new cTextField(100, 90, 300);
   private cTable tblMenuCoffe;
   private cScrollPane spMenuCoffe;
+  private cButton btnTambahCoffe = new cButton("Tambah", 440, 90, 150, 30, 20);
+  private cButton btnEditDataCoffe = new cButton("Edit", 630, 90, 150, 30, 20);
+  private cButton btnHapusDataCoffe = new cButton("Hapus", 820, 90, 150, 30, 20);
+  private cButton btnKembaliCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
 
   // component of data menu non coffe
-  private cLabelInfo labelCariMenuNonCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
-  private cTextField txtCariMenuNonCoffe = new cTextField(100, 40, 300);
+  private cLabelInfo labelCariMenuNonCoffe = new cLabelInfo("Cari", 40, 90, 300, 40);
+  private cTextField txtCariMenuNonCoffe = new cTextField(100, 90, 300);
   private cTable tblMenuNonCoffe;
   private cScrollPane spMenuNonCoffe;
+  private cButton btnTambahNonCoffe = new cButton("Tambah", 440, 90, 150, 30, 20);
+  private cButton btnEditDataNonCoffe = new cButton("Edit", 630, 90, 150, 30, 20);
+  private cButton btnHapusDataNonCoffe = new cButton("Hapus", 820, 90, 150, 30, 20);
+  private cButton btnKembaliNonCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
 
   // component of input data menu makanan
   private cLabelInfo labelInputMenuMakanan = new cLabelInfo("Masukan Data Menu Makanan!", 190, 40, 400, 40);
@@ -121,6 +127,64 @@ public class cDashboardMitraView extends cDashboardApp {
       300);
   private cButton btnHapusNonCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanNonCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
+
+  // component of input ubah menu makanan
+  private cLabelInfo labelInputMenuUbahMakanan = new cLabelInfo("Masukan Data Menu Makanan!", 190, 40, 400, 40);
+  private cLabelInfo labelNamaUbahMakanan = new cLabelInfo("Nama Makanan", 190, 90, 300, 40);
+  private cTextField txtNamaUbahMakanan = new cTextField(190, 120, 300);
+  private cErrorLabel errorNamaUbahMakanan = new cErrorLabel("Nama Makanan tidak boleh Kosong!", 190, 145, 400);
+  private cLabelInfo labelJumlahUbahMakanan = new cLabelInfo("Jumlah Makanan", 190, 180, 300, 40);
+  private cTextField txtJumlahUbahMakanan = new cTextField(190, 210, 300);
+  private cErrorLabel errorJumlahUbahMakanan = new cErrorLabel("Jumlah tidak boleh Kosong!", 190, 235, 400);
+  private cLabelInfo labelHargaUbahMakanan = new cLabelInfo("Harga Makanan", 190, 270, 300, 40);
+  private cTextField txtHargaUbahMakanan = new cTextField(190, 302, 300);
+  private cErrorLabel errorHargaUbahMakanan = new cErrorLabel("Harga Makanan tidak boleh Kosong!", 190, 327, 300);
+  private cLabelInfo labelDeskripsiUbahMakanan = new cLabelInfo("Deskripsi Makanan", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiUbahMakanan = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiUbahMakanan = new cErrorLabel("Deskripsi Makanan tidak boleh Kosong!", 580, 235,
+      300);
+  private cButton btnHapusUbahMakanan = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanUbahMakanan = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cButton btnKembaliUbahMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
+
+  // component of input ubah menu Coffe
+  private cLabelInfo labelInputMenuUbahCoffe = new cLabelInfo("Ubah Data Menu Coffe!", 190, 40, 400, 40);
+  private cLabelInfo labelNamaUbahCoffe = new cLabelInfo("Nama Coffe", 190, 90, 300, 40);
+  private cTextField txtNamaUbahCoffe = new cTextField(190, 120, 300);
+  private cErrorLabel errorNamaUbahCoffe = new cErrorLabel("Nama Coffe tidak boleh Kosong!", 190, 145, 400);
+  private cLabelInfo labelJumlahUbahCoffe = new cLabelInfo("Jumlah Coffe", 190, 180, 300, 40);
+  private cTextField txtJumlahUbahCoffe = new cTextField(190, 210, 300);
+  private cErrorLabel errorJumlahUbahCoffe = new cErrorLabel("Jumlah tidak boleh Kosong!", 190, 235, 400);
+  private cLabelInfo labelHargaUbahCoffe = new cLabelInfo("Harga Coffe", 190, 270, 300, 40);
+  private cTextField txtHargaUbahCoffe = new cTextField(190, 302, 300);
+  private cErrorLabel errorHargaUbahCoffe = new cErrorLabel("Harga Coffe tidak boleh Kosong!", 190, 327, 300);
+  private cLabelInfo labelDeskripsiUbahCoffe = new cLabelInfo("Deskripsi Coffe", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiUbahCoffe = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiUbahCoffe = new cErrorLabel("Deskripsi Coffe tidak boleh Kosong!", 580, 235,
+      300);
+  private cButton btnHapusUbahCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanUbahCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cButton btnKembaliUbahCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
+
+  // component of input ubah menu Non Coffe
+  private cLabelInfo labelInputMenuUbahNonCoffe = new cLabelInfo("Masukan Data Menu Non Coffe!", 190, 40, 400, 40);
+  private cLabelInfo labelNamaUbahNonCoffe = new cLabelInfo("Nama Non Coffe", 190, 90, 300, 40);
+  private cTextField txtNamaUbahNonCoffe = new cTextField(190, 120, 300);
+  private cErrorLabel errorNamaUbahNonCoffe = new cErrorLabel("Nama Non Coffe tidak boleh Kosong!", 190, 145, 400);
+  private cLabelInfo labelJumlahUbahNonCoffe = new cLabelInfo("Jumlah Non Coffe", 190, 180, 300, 40);
+  private cTextField txtJumlahUbahNonCoffe = new cTextField(190, 210, 300);
+  private cErrorLabel errorJumlahUbahNonCoffe = new cErrorLabel("Jumlah tidak boleh Kosong!", 190, 235, 400);
+  private cLabelInfo labelHargaUbahNonCoffe = new cLabelInfo("Harga Non Coffe", 190, 270, 300, 40);
+  private cTextField txtHargaUbahNonCoffe = new cTextField(190, 302, 300);
+  private cErrorLabel errorHargaUbahNonCoffe = new cErrorLabel("Harga Non Coffe tidak boleh Kosong!", 190, 327, 300);
+  private cLabelInfo labelDeskripsiUbahNonCoffe = new cLabelInfo("Deskripsi Non Coffe", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiUbahNonCoffe = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiUbahNonCoffe = new cErrorLabel("Deskripsi Non Coffe tidak boleh Kosong!", 580,
+      235,
+      300);
+  private cButton btnHapusUbahNonCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanUbahNonCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cButton btnKembaliUbahNonCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
 
   // component of data Promo
   private cLabelInfo labelPromo = new cLabelInfo("Data Promo Menu", 40, 40, 300, 40);
@@ -581,36 +645,21 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataMenu.setSidebarAktif();
     menuTitle.setText("Data Menu");
 
-    btnMenuMakanan.addActionListener(new java.awt.event.ActionListener() {
+    content.add(pilihDataMenu);
+
+    pilihDataMenu.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsMenuMakanan();
+        String selectedItem = (String) pilihDataMenu.getSelectedItem();
+        if (selectedItem.equals("Data Makanan")) {
+          initsMenuMakanan();
+        } else if (selectedItem.equals("Data Coffe")) {
+          initsMenuCoffe();
+        } else if (selectedItem.equals("Data Non Coffe")) {
+          initsMenuNonCoffe();
+        }
       }
     });
-
-    btnMenuCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsMenuCoffe();
-      }
-    });
-
-    btnMenuNonCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsMenuNonCoffe();
-      }
-    });
-
-    content.add(btnMenuMakanan);
-    content.add(btnMenuCoffe);
-    content.add(btnMenuNonCoffe);
-    content.add(btnTambahMakanan);
-    content.add(btnKembaliMakanan);
-    content.add(btnTambahCoffe);
-    content.add(btnKembaliCoffe);
-    content.add(btnTambahNonCoffe);
-    content.add(btnKembaliNonCoffe);
 
     initsMenuMakanan();
 
@@ -626,10 +675,55 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataMenu.setSidebarAktif();
     menuTitle.setText("Data Menu Makanan");
 
+    content.add(pilihDataMenu);
+
     btnTambahMakanan.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         initsInputMenuMakanan();
+      }
+    });
+
+    btnEditDataMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuMakanan.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuMakanan.getValueAt(selectedIndex, 0).toString());
+          initsUbahDataMakanan(idMenu);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih Menu Makanan yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnHapusDataMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuMakanan.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuMakanan.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataMenuMakanan(idMenu)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai berhasil dihapus!",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            initsMenuMakanan();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai gagal dihapus!",
+                "Gagal", JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          // kalo gak ada yang diseleksic
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
+              "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
       }
     });
 
@@ -654,14 +748,515 @@ public class cDashboardMitraView extends cDashboardApp {
     spMenuMakanan = new cScrollPane(tblMenuMakanan, 0, 140, 1100, 300);
 
     content.add(spMenuMakanan);
-
-    content.add(btnMenuMakanan);
-    content.add(btnMenuCoffe);
-    content.add(btnMenuNonCoffe);
     content.add(btnTambahMakanan);
-
+    content.add(btnEditDataMakanan);
+    content.add(btnHapusDataMakanan);
     content.add(labelCariMenuMakanan);
     content.add(txtCariMenuMakanan);
+    setVisible(true);
+  }
+
+  private void initsUbahDataMakanan(int idMenu) {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Ubah Menu Makanan");
+
+    // ini adalah cara untuk set text jadi yang relevan
+
+    Object[] detailMakanan = Model.getDetailMenuMakanan(idMenu);
+
+    txtNamaUbahMakanan.setText(detailMakanan[4].toString());
+    txtJumlahUbahMakanan.setText(detailMakanan[5].toString());
+    txtHargaUbahMakanan.setText(detailMakanan[6].toString());
+    txtDeskripsiUbahMakanan.setText(detailMakanan[7].toString());
+
+    btnSimpanUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaUbahMakanan.getText().trim().isEmpty()
+            || txtJumlahUbahMakanan.getText().trim().isEmpty()
+            || txtDeskripsiUbahMakanan.getText().trim().isEmpty()
+            || txtHargaUbahMakanan.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik textfield tidak boleh kosong
+          if (txtNamaUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorNamaUbahMakanan);
+          } else {
+            content.remove(errorNamaUbahMakanan);
+          }
+          if (txtJumlahUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorJumlahUbahMakanan);
+          } else {
+            content.remove(errorJumlahUbahMakanan);
+          }
+          if (txtDeskripsiUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiUbahMakanan);
+          } else {
+            content.remove(errorDeskripsiUbahMakanan);
+          }
+          if (txtHargaUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorHargaUbahMakanan);
+          } else {
+            content.remove(errorHargaUbahMakanan);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaMenu = txtNamaUbahMakanan.getText();
+          int jumlahMakanan = Integer.valueOf(txtJumlahUbahMakanan.getText());
+          int hargaMakanan = Integer.valueOf(txtHargaUbahMakanan.getText());
+          String deskripsiMakanan = txtDeskripsiUbahMakanan.getText();
+
+          if (Model.ubahMenuMakanan(idMenu, idMitra, namaMenu, jumlahMakanan, hargaMakanan,
+              deskripsiMakanan)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            txtNamaUbahMakanan.setText(null);
+            txtJumlahUbahMakanan.setText(null);
+            txtDeskripsiUbahMakanan.setText(null);
+            txtHargaUbahMakanan.setText(null);
+            initsMenuMakanan();
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
+    btnHapusUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtNamaUbahMakanan.setText(null);
+        txtJumlahUbahMakanan.setText(null);
+        txtDeskripsiUbahMakanan.setText(null);
+        txtHargaUbahMakanan.setText(null);
+      }
+    });
+
+    btnKembaliUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsMenuMakanan();
+      }
+    });
+
+    content.add(labelInputMenuUbahMakanan);
+    content.add(labelNamaUbahMakanan);
+    content.add(txtNamaUbahMakanan);
+    content.add(labelJumlahUbahMakanan);
+    content.add(txtJumlahUbahMakanan);
+    content.add(labelHargaUbahMakanan);
+    content.add(txtHargaUbahMakanan);
+    content.add(labelDeskripsiUbahMakanan);
+    content.add(txtDeskripsiUbahMakanan);
+    content.add(btnSimpanUbahMakanan);
+    content.add(btnHapusUbahMakanan);
+    content.add(btnKembaliUbahMakanan);
+
+    setVisible(true);
+  }
+
+  private void initsMenuCoffe() {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Data Menu Coffe");
+
+    content.add(pilihDataMenu);
+
+    btnTambahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsInputMenuCoffe();
+      }
+    });
+
+    btnEditDataCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuCoffe.getValueAt(selectedIndex, 0).toString());
+          initsUbahDataCoffe(idMenu);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih Menu Coffe yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnHapusDataCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuCoffe.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataMenuCoffe(idMenu)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai berhasil dihapus!",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            initsMenuCoffe();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai gagal dihapus!",
+                "Gagal", JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          // kalo gak ada yang diseleksic
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
+              "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
+
+    tblMenuCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(7).setWidth(0);
+
+    spMenuCoffe = new cScrollPane(tblMenuCoffe, 0, 140, 1100, 300);
+
+    content.add(spMenuCoffe);
+    content.add(btnTambahCoffe);
+    content.add(btnEditDataCoffe);
+    content.add(btnHapusDataCoffe);
+    content.add(labelCariMenuCoffe);
+    content.add(txtCariMenuCoffe);
+    setVisible(true);
+  }
+
+  private void initsUbahDataCoffe(int idMenu) {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Ubah Menu Coffe");
+
+    // ini adalah cara untuk set text jadi yang relevan
+
+    Object[] detailCoffe = Model.getDetailMenuCoffe(idMenu);
+
+    txtNamaUbahCoffe.setText(detailCoffe[4].toString());
+    txtJumlahUbahCoffe.setText(detailCoffe[5].toString());
+    txtHargaUbahCoffe.setText(detailCoffe[6].toString());
+    txtDeskripsiUbahCoffe.setText(detailCoffe[7].toString());
+
+    btnSimpanUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaUbahCoffe.getText().trim().isEmpty()
+            || txtJumlahUbahCoffe.getText().trim().isEmpty()
+            || txtDeskripsiUbahCoffe.getText().trim().isEmpty()
+            || txtHargaUbahCoffe.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik textfield tidak boleh kosong
+          if (txtNamaUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorNamaUbahCoffe);
+          } else {
+            content.remove(errorNamaUbahCoffe);
+          }
+          if (txtJumlahUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorJumlahUbahCoffe);
+          } else {
+            content.remove(errorJumlahUbahCoffe);
+          }
+          if (txtDeskripsiUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiUbahCoffe);
+          } else {
+            content.remove(errorDeskripsiUbahCoffe);
+          }
+          if (txtHargaUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorHargaUbahCoffe);
+          } else {
+            content.remove(errorHargaUbahCoffe);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaMenu = txtNamaUbahCoffe.getText();
+          int jumlahMenu = Integer.valueOf(txtJumlahUbahCoffe.getText());
+          int hargaMenu = Integer.valueOf(txtHargaUbahCoffe.getText());
+          String deskripsiMenu = txtDeskripsiUbahCoffe.getText();
+
+          if (Model.ubahMenuCoffe(idMenu, idMitra, namaMenu, jumlahMenu, hargaMenu,
+              deskripsiMenu)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            txtNamaUbahCoffe.setText(null);
+            txtJumlahUbahCoffe.setText(null);
+            txtDeskripsiUbahCoffe.setText(null);
+            txtHargaUbahCoffe.setText(null);
+            initsMenuCoffe();
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
+    btnHapusUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtNamaUbahCoffe.setText(null);
+        txtJumlahUbahCoffe.setText(null);
+        txtDeskripsiUbahCoffe.setText(null);
+        txtHargaUbahCoffe.setText(null);
+      }
+    });
+
+    btnKembaliUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsMenuCoffe();
+      }
+    });
+
+    content.add(labelInputMenuUbahCoffe);
+    content.add(labelNamaUbahCoffe);
+    content.add(txtNamaUbahCoffe);
+    content.add(labelJumlahUbahCoffe);
+    content.add(txtJumlahUbahCoffe);
+    content.add(labelHargaUbahCoffe);
+    content.add(txtHargaUbahCoffe);
+    content.add(labelDeskripsiUbahCoffe);
+    content.add(txtDeskripsiUbahCoffe);
+    content.add(btnSimpanUbahCoffe);
+    content.add(btnHapusUbahCoffe);
+    content.add(btnKembaliUbahCoffe);
+
+    setVisible(true);
+  }
+
+  private void initsUbahDataNonCoffe(int idMenu) {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Ubah Menu Non Coffe");
+
+    // ini adalah cara untuk set text jadi yang relevan
+
+    Object[] detailNonCoffe = Model.getDetailMenuNonCoffe(idMenu);
+
+    txtNamaUbahNonCoffe.setText(detailNonCoffe[4].toString());
+    txtJumlahUbahNonCoffe.setText(detailNonCoffe[5].toString());
+    txtHargaUbahNonCoffe.setText(detailNonCoffe[6].toString());
+    txtDeskripsiUbahNonCoffe.setText(detailNonCoffe[7].toString());
+
+    btnSimpanUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaUbahNonCoffe.getText().trim().isEmpty()
+            || txtJumlahUbahNonCoffe.getText().trim().isEmpty()
+            || txtDeskripsiUbahNonCoffe.getText().trim().isEmpty()
+            || txtHargaUbahNonCoffe.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik textfield tidak boleh kosong
+          if (txtNamaUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorNamaUbahNonCoffe);
+          } else {
+            content.remove(errorNamaUbahNonCoffe);
+          }
+          if (txtJumlahUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorJumlahUbahNonCoffe);
+          } else {
+            content.remove(errorJumlahUbahNonCoffe);
+          }
+          if (txtDeskripsiUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiUbahNonCoffe);
+          } else {
+            content.remove(errorDeskripsiUbahNonCoffe);
+          }
+          if (txtHargaUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorHargaUbahNonCoffe);
+          } else {
+            content.remove(errorHargaUbahNonCoffe);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaMenu = txtNamaUbahNonCoffe.getText();
+          int jumlahMenu = Integer.valueOf(txtJumlahUbahNonCoffe.getText());
+          int hargaMenu = Integer.valueOf(txtHargaUbahNonCoffe.getText());
+          String deskripsiMenu = txtDeskripsiUbahNonCoffe.getText();
+
+          if (Model.ubahMenuNonCoffe(idMenu, idMitra, namaMenu, jumlahMenu, hargaMenu,
+              deskripsiMenu)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            txtNamaUbahNonCoffe.setText(null);
+            txtJumlahUbahNonCoffe.setText(null);
+            txtDeskripsiUbahNonCoffe.setText(null);
+            txtHargaUbahNonCoffe.setText(null);
+            initsMenuNonCoffe();
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
+    btnHapusUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtNamaUbahNonCoffe.setText(null);
+        txtJumlahUbahNonCoffe.setText(null);
+        txtDeskripsiUbahNonCoffe.setText(null);
+        txtHargaUbahNonCoffe.setText(null);
+      }
+    });
+
+    btnKembaliUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsMenuNonCoffe();
+      }
+    });
+
+    content.add(labelInputMenuUbahNonCoffe);
+    content.add(labelNamaUbahNonCoffe);
+    content.add(txtNamaUbahNonCoffe);
+    content.add(labelJumlahUbahNonCoffe);
+    content.add(txtJumlahUbahNonCoffe);
+    content.add(labelHargaUbahNonCoffe);
+    content.add(txtHargaUbahNonCoffe);
+    content.add(labelDeskripsiUbahNonCoffe);
+    content.add(txtDeskripsiUbahNonCoffe);
+    content.add(btnSimpanUbahNonCoffe);
+    content.add(btnHapusUbahNonCoffe);
+    content.add(btnKembaliUbahNonCoffe);
+
+    setVisible(true);
+  }
+
+  private void initsMenuNonCoffe() {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Data Menu Non Coffe");
+
+    content.add(pilihDataMenu);
+
+    btnTambahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsInputMenuNonCoffe();
+      }
+    });
+
+    btnEditDataNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuNonCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuNonCoffe.getValueAt(selectedIndex, 0).toString());
+          initsUbahDataNonCoffe(idMenu);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih Menu NonCoffe yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnHapusDataNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuNonCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuNonCoffe.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataMenuNonCoffe(idMenu)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai berhasil dihapus!",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            initsMenuNonCoffe();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai gagal dihapus!",
+                "Gagal", JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          // kalo gak ada yang diseleksic
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
+              "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
+
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setWidth(0);
+
+    spMenuNonCoffe = new cScrollPane(tblMenuNonCoffe, 0, 140, 1100, 300);
+
+    content.add(spMenuNonCoffe);
+    content.add(btnTambahNonCoffe);
+    content.add(btnEditDataNonCoffe);
+    content.add(btnHapusDataNonCoffe);
+    content.add(labelCariMenuNonCoffe);
+    content.add(txtCariMenuNonCoffe);
     setVisible(true);
   }
 
@@ -768,54 +1363,6 @@ public class cDashboardMitraView extends cDashboardApp {
     setVisible(true);
   }
 
-  private void initsMenuCoffe() {
-    idSelected = null;
-    resetSidebar();
-    menuDataMenu.setBackground(cColor.WHITE);
-    menuDataMenu.setForeground(cColor.GREEN);
-    refreshContent();
-    menuDataMenu.setSidebarAktif();
-    menuTitle.setText("Data Menu Coffe");
-
-    btnTambahCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsInputMenuCoffe();
-      }
-    });
-
-    tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
-
-    tblMenuCoffe.getColumnModel().getColumn(0).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(0).setWidth(0);
-
-    tblMenuCoffe.getColumnModel().getColumn(1).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(1).setWidth(0);
-
-    tblMenuCoffe.getColumnModel().getColumn(2).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(2).setWidth(0);
-
-    tblMenuCoffe.getColumnModel().getColumn(7).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(7).setWidth(0);
-
-    spMenuCoffe = new cScrollPane(tblMenuCoffe, 0, 140, 1100, 300);
-
-    content.add(spMenuCoffe);
-
-    content.add(btnMenuMakanan);
-    content.add(btnMenuCoffe);
-    content.add(btnMenuNonCoffe);
-    content.add(btnTambahCoffe);
-
-    content.add(labelCariMenuCoffe);
-    content.add(txtCariMenuCoffe);
-    setVisible(true);
-  }
-
   private void initsInputMenuCoffe() {
     idSelected = null;
     resetSidebar();
@@ -915,54 +1462,6 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(btnHapusCoffe);
     content.add(btnKembaliCoffe);
 
-    setVisible(true);
-  }
-
-  private void initsMenuNonCoffe() {
-    idSelected = null;
-    resetSidebar();
-    menuDataMenu.setBackground(cColor.WHITE);
-    menuDataMenu.setForeground(cColor.GREEN);
-    refreshContent();
-    menuDataMenu.setSidebarAktif();
-    menuTitle.setText("Data Menu Non Coffe");
-
-    btnTambahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsInputMenuNonCoffe();
-      }
-    });
-
-    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
-
-    tblMenuNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(0).setWidth(0);
-
-    tblMenuNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(1).setWidth(0);
-
-    tblMenuNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(2).setWidth(0);
-
-    tblMenuNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(7).setWidth(0);
-
-    spMenuNonCoffe = new cScrollPane(tblMenuNonCoffe, 0, 140, 1100, 300);
-
-    content.add(spMenuNonCoffe);
-
-    content.add(btnMenuMakanan);
-    content.add(btnMenuCoffe);
-    content.add(btnMenuNonCoffe);
-    content.add(btnTambahNonCoffe);
-
-    content.add(labelCariMenuNonCoffe);
-    content.add(txtCariMenuNonCoffe);
     setVisible(true);
   }
 
