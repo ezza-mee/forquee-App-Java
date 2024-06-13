@@ -15,6 +15,8 @@ public class App {
 
         // Controller.showDashboardMitra(1);
         // Controller.showDashboardCustomer(1);
-        Controller.showDashboardAdmin(true);
+        // Controller.showDashboardAdmin(true);
+
+        Model.connection();
     }
 }
