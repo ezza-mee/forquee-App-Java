@@ -335,6 +335,47 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusTransaksiNonCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanTransaksiNonCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
 
+  // component of data OrderBahan
+  private cLabelInfo labelOrderBahan = new cLabelInfo("Data OrderBahan Menu", 40, 40, 300, 40);
+  private cLabelInfo labelCariOrderBahan = new cLabelInfo("Cari", 40, 95, 300, 40);
+  private cTextField txtCariOrderBahan = new cTextField(100, 100, 300);
+  private cButton btnTambahOrderBahan = new cButton("Tambah", 450, 100, 150, 30, 20);
+  private cButton btnHapusDataOrderBahan = new cButton("Hapus", 630, 100, 150, 30, 20);
+  private cButton btnEditDataOrderBahan = new cButton("Edit", 800, 100, 150, 30, 20);
+  private cButton btnKembaliOrderBahan = new cButton("Kembali", 190, 480, 150, 30, 20);
+
+  // component of input OrderBahan
+  private cLabelInfo labelInputOrderBahan = new cLabelInfo("Masukan Data Order Bahan!", 190, 40, 400, 40);
+  private cLabelInfo labelJumlahOrderBahan = new cLabelInfo("Jumlah Bahan", 190, 90, 300, 40);
+  private cTextField txtJumlahOrderBahan = new cTextField(190, 120, 300);
+  private cErrorLabel errorJumlahOrderBahan = new cErrorLabel("Jumlah Bahan tidak boleh Kosong!", 190, 145, 400);
+
+  private cLabelInfo labelPilihMenuOrderBahan = new cLabelInfo("Pilih Bahan", 190, 180, 300, 40);
+  private cComboBox pilihMenuOrderBahan = new cComboBox(new String[] { "Coffe", "Telur", "Beras" }, 190, 210, 300,
+      30);
+  private cErrorLabel errorMenuOrderBahan = new cErrorLabel("Menu Bahan tidak boleh Kosong!", 190, 235, 300);
+
+  private cLabelInfo labelPilihPTOrderBahan = new cLabelInfo("Pilih PT", 190, 270, 300, 40);
+  private cComboBox pilihPTOrderBahan = new cComboBox(new String[] { "PT JOMOK", "PT NGAWI", "PT RUSDI" }, 190, 302,
+      300,
+      30);
+  private cErrorLabel errorPTOrderBahan = new cErrorLabel("PT tidak boleh Kosong!", 190, 327, 300);
+
+  private cLabelInfo labelHargaOrderBahan = new cLabelInfo("Harga Bahan", 190, 360, 300, 40);
+  private cTextField txtHargaOrderBahan = new cTextField(190, 392, 300);
+
+  private cLabelInfo labelDeskripsiOrderBahan = new cLabelInfo("Deskripsi Bahan", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiOrderBahan = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiOrderBahan = new cErrorLabel("Deskripsi Order Bahan tidak boleh Kosong!", 580, 235,
+      300);
+
+  private cLabelInfo labelAlamatOrderBahan = new cLabelInfo("Alamat", 580, 270, 300, 40);
+  private cTextarea txtAlamatOrderBahan = new cTextarea(580, 300, 300, 120, true);
+  private cErrorLabel errorAlamatOrderBahan = new cErrorLabel("Alamat tidak boleh Kosong!", 580, 415, 400);
+
+  private cButton btnHapusOrderBahan = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanOrderBahan = new cButton("Simpan", 730, 480, 150, 30, 20);
+
   // method resetSidebar
   private void resetSidebar() {
     try {
@@ -448,6 +489,7 @@ public class cDashboardMitraView extends cDashboardApp {
         if (confirm == 0) {
           idMitra = null;
           idSelected = null;
+          initsLogout();
           com.main.Controller.showLoginMitra();
         }
       }
@@ -1313,7 +1355,82 @@ public class cDashboardMitraView extends cDashboardApp {
     refreshContent();
     menuOrderBahan.setSidebarAktif();
     menuTitle.setText("Data Oder Bahan");
+
+    btnTambahOrderBahan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsInputDataOrderBahan();
+      }
+    });
+
+    content.add(btnTambahOrderBahan);
+    content.add(btnHapusDataOrderBahan);
+    content.add(btnEditDataOrderBahan);
+    content.add(labelOrderBahan);
+    content.add(labelCariOrderBahan);
+    content.add(txtCariOrderBahan);
     setVisible(true);
   }
 
+  private void initsInputDataOrderBahan() {
+    idSelected = null;
+    resetSidebar();
+    menuOrderBahan.setBackground(cColor.WHITE);
+    menuOrderBahan.setForeground(cColor.GREEN);
+    refreshContent();
+    menuOrderBahan.setSidebarAktif();
+    menuTitle.setText("Input Oder Bahan");
+
+    btnHapusOrderBahan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtJumlahOrderBahan.setText(null);
+        txtDeskripsiOrderBahan.setText(null);
+        pilihMenuOrderBahan.setSelectedItem("Coffe");
+        pilihPTOrderBahan.setSelectedItem("PT JOMOK");
+        txtAlamatOrderBahan.setText(null);
+        txtHargaOrderBahan.setText(null);
+      }
+    });
+
+    btnKembaliOrderBahan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsOrderBahan();
+      }
+    });
+
+    content.add(labelInputOrderBahan);
+    content.add(labelJumlahOrderBahan);
+    content.add(txtJumlahOrderBahan);
+    content.add(errorJumlahOrderBahan);
+    content.add(labelHargaOrderBahan);
+    content.add(txtHargaOrderBahan);
+    content.add(labelDeskripsiOrderBahan);
+    content.add(txtDeskripsiOrderBahan);
+    content.add(errorDeskripsiOrderBahan);
+    content.add(labelAlamatOrderBahan);
+    content.add(txtAlamatOrderBahan);
+    content.add(errorAlamatOrderBahan);
+    content.add(labelPilihMenuOrderBahan);
+    content.add(pilihMenuOrderBahan);
+    content.add(errorMenuOrderBahan);
+    content.add(labelPilihPTOrderBahan);
+    content.add(pilihPTOrderBahan);
+    content.add(errorPTOrderBahan);
+    content.add(btnSimpanOrderBahan);
+    content.add(btnHapusOrderBahan);
+    content.add(btnKembaliOrderBahan);
+
+    setVisible(true);
+  }
+
+  private void initsLogout() {
+    resetSidebar();
+    menuLogout.setBackground(cColor.GREEN);
+    menuLogout.setForeground(cColor.WHITE);
+    menuLogout.setSidebarAktif();
+    refreshContent();
+    cDashboardMitraView.this.setVisible(false);
+  }
 }
