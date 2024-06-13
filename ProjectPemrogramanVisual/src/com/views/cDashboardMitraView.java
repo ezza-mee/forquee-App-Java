@@ -2,6 +2,7 @@ package com.views;
 
 import com.templates.cDashboardApp;
 import com.partials.*;
+import com.main.*;
 
 import javax.swing.JOptionPane;
 
@@ -54,14 +55,20 @@ public class cDashboardMitraView extends cDashboardApp {
   // component of data menu makanan
   private cLabelInfo labelCariMenuMakanan = new cLabelInfo("Cari", 40, 35, 300, 40);
   private cTextField txtCariMenuMakanan = new cTextField(100, 40, 300);
+  private cTable tblMenuMakanan;
+  private cScrollPane spMenuMakanan;
 
   // component of data menu coffe
   private cLabelInfo labelCariMenuCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
   private cTextField txtCariMenuCoffe = new cTextField(100, 40, 300);
+  private cTable tblMenuCoffe;
+  private cScrollPane spMenuCoffe;
 
   // component of data menu non coffe
   private cLabelInfo labelCariMenuNonCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
   private cTextField txtCariMenuNonCoffe = new cTextField(100, 40, 300);
+  private cTable tblMenuNonCoffe;
+  private cScrollPane spMenuNonCoffe;
 
   // component of input data menu makanan
   private cLabelInfo labelInputMenuMakanan = new cLabelInfo("Masukan Data Menu Makanan!", 190, 40, 400, 40);
@@ -173,6 +180,8 @@ public class cDashboardMitraView extends cDashboardApp {
   private cLabelInfo labelCustomer = new cLabelInfo("Data Customer Aktif", 40, 40, 300, 40);
   private cLabelInfo labelCariCustomer = new cLabelInfo("Cari", 40, 95, 300, 40);
   private cTextField txtCariCustomer = new cTextField(100, 100, 300);
+  private cTable tblDataCustomer;
+  private cScrollPane spDataCustomer;
 
   // component of data karyawan
   private cLabelInfo labelKaryawan = new cLabelInfo("Data Ready Karyawan", 40, 40, 300, 40);
@@ -592,6 +601,12 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    tblMenuMakanan = new cTable(Model.getAllMenuMakanan());
+
+    spMenuMakanan = new cScrollPane(tblMenuMakanan, 0, 140, 1100, 300);
+
+    content.add(spMenuMakanan);
+
     content.add(btnMenuMakanan);
     content.add(btnMenuCoffe);
     content.add(btnMenuNonCoffe);
@@ -664,6 +679,12 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
+
+    spMenuCoffe = new cScrollPane(tblMenuCoffe, 0, 140, 1100, 300);
+
+    content.add(spMenuCoffe);
+
     content.add(btnMenuMakanan);
     content.add(btnMenuCoffe);
     content.add(btnMenuNonCoffe);
@@ -735,6 +756,12 @@ public class cDashboardMitraView extends cDashboardApp {
         initsInputMenuNonCoffe();
       }
     });
+
+    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
+
+    spMenuNonCoffe = new cScrollPane(tblMenuNonCoffe, 0, 140, 1100, 300);
+
+    content.add(spMenuNonCoffe);
 
     content.add(btnMenuMakanan);
     content.add(btnMenuCoffe);
@@ -945,6 +972,19 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataCustomer.setSidebarAktif();
     menuTitle.setText("Data Customer");
 
+    tblDataCustomer = new cTable(Model.getAllCustomer());
+
+    tblDataCustomer.getColumnModel().getColumn(0).setMinWidth(0);
+    tblDataCustomer.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblDataCustomer.getColumnModel().getColumn(0).setWidth(0);
+
+    tblDataCustomer.getColumnModel().getColumn(5).setMinWidth(0);
+    tblDataCustomer.getColumnModel().getColumn(5).setMaxWidth(0);
+    tblDataCustomer.getColumnModel().getColumn(5).setWidth(0);
+
+    spDataCustomer = new cScrollPane(tblDataCustomer, 0, 150, 1080, 300);
+
+    content.add(spDataCustomer);
     content.add(labelCustomer);
     content.add(labelCariCustomer);
     content.add(txtCariCustomer);

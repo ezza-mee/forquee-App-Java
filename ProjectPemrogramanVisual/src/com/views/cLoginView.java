@@ -141,6 +141,7 @@ public class cLoginView extends cFrameLoginApp {
     }
 
     public void initsLoginCustomer() {
+        this.setVisible(false);
         this.setTitle("Login Customer");
         cardLogin.removeAll();
         titleLogin.setText("Login Customer");
@@ -162,6 +163,7 @@ public class cLoginView extends cFrameLoginApp {
     }
 
     public void initsLoginMitra() {
+        this.setVisible(false);
         this.setTitle("Login Mitra");
         cardLogin.removeAll();
         titleLogin.setText("Login Mitra");
@@ -183,6 +185,7 @@ public class cLoginView extends cFrameLoginApp {
     }
 
     public void initsLoginAdmin() {
+        this.setVisible(false);
         this.setTitle("Login Admin");
         cardLogin.removeAll();
         titleLogin.setText("Login Admin");
