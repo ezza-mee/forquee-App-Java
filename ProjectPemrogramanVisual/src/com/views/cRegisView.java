@@ -14,10 +14,10 @@ public class cRegisView extends cFrameRegisApp {
     private cTextField txtEmailDaftarCustomer = new cTextField(60, 290, 300);
     private cErrorLabel errorEmailDaftarCustomer = new cErrorLabel("Email tidak boleh Kosong!", 60, 315, 335);
     private cFormLabel labelNomorHpDaftarCustomer = new cFormLabel("Nomor Hp", 440, 165, 360);
-    private cPasswordField txtNomorHpDaftarCustomer = new cPasswordField(440, 190, 300);
+    private cTextField txtNomorHpDaftarCustomer = new cTextField(440, 190, 300);
     private cErrorLabel errorNomorHpDaftarCustomer = new cErrorLabel("NomorHp tidak boleh Kosong!", 440, 215, 335);
     private cFormLabel labelPasswordDaftarCustomer = new cFormLabel("Password", 440, 265, 360);
-    private cTextField txtPasswordDaftarCustomer = new cTextField(440, 290, 300);
+    private cPasswordField txtPasswordDaftarCustomer = new cPasswordField(440, 290, 300);
     private cErrorLabel errorPasswordDaftarCustomer = new cErrorLabel("Password tidak boleh Kosong!", 440, 315, 335);
     private cButtonLogin btnDaftarCustomer = new cButtonLogin("Daftar", 250, 380, 300, 40);
     private cLinkStart toLoginCustomerDaftarCustomer = new cLinkStart("sudah punya akun customer?", 50, 460);
@@ -33,10 +33,10 @@ public class cRegisView extends cFrameRegisApp {
     private cTextField txtEmailDaftarMitra = new cTextField(60, 290, 300);
     private cErrorLabel errorEmailDaftarMitra = new cErrorLabel("Email tidak boleh Kosong!", 60, 315, 335);
     private cFormLabel labelNomorHpDaftarMitra = new cFormLabel("Nomor Hp", 440, 165, 360);
-    private cPasswordField txtNomorHpDaftarMitra = new cPasswordField(440, 190, 300);
+    private cTextField txtNomorHpDaftarMitra = new cTextField(440, 190, 300);
     private cErrorLabel errorNomorHpDaftarMitra = new cErrorLabel("NomorHp tidak boleh Kosong!", 440, 215, 335);
     private cFormLabel labelPasswordDaftarMitra = new cFormLabel("Password", 440, 265, 360);
-    private cTextField txtPasswordDaftarMitra = new cTextField(440, 290, 300);
+    private cPasswordField txtPasswordDaftarMitra = new cPasswordField(440, 290, 300);
     private cErrorLabel errorPasswordDaftarMitra = new cErrorLabel("Password tidak boleh Kosong!", 440, 315, 335);
     private cButtonLogin btnDaftarMitra = new cButtonLogin("Daftar", 250, 380, 300, 40);
     private cLinkStart toLoginMitraDaftarMitra = new cLinkStart("sudah punya akun Mitra?", 50, 460);
@@ -109,6 +109,7 @@ public class cRegisView extends cFrameRegisApp {
     }
 
     public void initsDaftarCustomer() {
+        this.setVisible(false);
         this.setTitle("Daftar Customer");
         cardRegis.removeAll();
         titleRegis.setText("Daftar Customer");
@@ -134,6 +135,7 @@ public class cRegisView extends cFrameRegisApp {
     }
 
     public void initsDaftarMitra() {
+        this.setVisible(false);
         this.setTitle("Daftar Mitra");
         cardRegis.removeAll();
         titleRegis.setText("Daftar Mitra");
