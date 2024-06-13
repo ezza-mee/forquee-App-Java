@@ -95,7 +95,7 @@ public class Model {
         return tm;
     }
 
-    // get data all menu coffe
+    // get data all promo
     public static DefaultTableModel getAllMenuNonCoffe() {
 
         connection();
@@ -122,6 +122,41 @@ public class Model {
                         resultData.getInt("hargaMenu"),
                         resultData.getString("deskripsiMenu"),
                         resultData.getString("statusMenu") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all menu coffe
+    public static DefaultTableModel getAllPromo() {
+
+        connection();
+
+        String[] dataHeader = { "ID Menu", "ID Mitra", "Mitra", "Waktu", "Nama", "Menu", "harga", "Deskripsi",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallpromo";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idPromo"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuPromo"),
+                        resultData.getString("namaPromo"),
+                        resultData.getString("menuPromo"),
+                        resultData.getInt("hargaPromo"),
+                        resultData.getString("deskripsiPromo"),
+                        resultData.getString("statusPromo") };
                 tm.addRow(rowData);
             }
         } catch (Exception e) {
