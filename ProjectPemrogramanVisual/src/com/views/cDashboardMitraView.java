@@ -1174,7 +1174,7 @@ public class cDashboardMitraView extends cDashboardApp {
     promoTransaksiMakanan.setSelectedItem("Paket Normal");
     txtHargaTransaksiMakanan.setText(null);
 
-    btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
+    btnHapusTransaksiMakanan.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         txtNamaTransaksiMakanan.setText(null);
@@ -1237,7 +1237,7 @@ public class cDashboardMitraView extends cDashboardApp {
     promoTransaksiCoffe.setSelectedItem("Paket Normal");
     txtHargaTransaksiCoffe.setText(null);
 
-    btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
+    btnHapusTransaksiCoffe.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         txtNamaTransaksiCoffe.setText(null);
@@ -1301,7 +1301,7 @@ public class cDashboardMitraView extends cDashboardApp {
     promoTransaksiNonCoffe.setSelectedItem("Paket Normal");
     txtHargaTransaksiNonCoffe.setText(null);
 
-    btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
+    btnHapusTransaksiNonCoffe.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         txtNamaTransaksiNonCoffe.setText(null);
