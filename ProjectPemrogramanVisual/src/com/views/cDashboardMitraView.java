@@ -106,10 +106,10 @@ public class cDashboardMitraView extends cDashboardApp {
 
   // component of input data menu Non Coffe
   private cLabelInfo labelInputMenuNonCoffe = new cLabelInfo("Masukan Data Menu Non Coffe!", 190, 40, 400, 40);
-  private cLabelInfo labelNamaNonCoffe = new cLabelInfo("Nama Menu", 190, 90, 300, 40);
+  private cLabelInfo labelNamaNonCoffe = new cLabelInfo("Nama Non Coffe", 190, 90, 300, 40);
   private cTextField txtNamaNonCoffe = new cTextField(190, 120, 300);
   private cErrorLabel errorNamaNonCoffe = new cErrorLabel("Nama Non Coffe tidak boleh Kosong!", 190, 145, 400);
-  private cLabelInfo labelJumlahNonCoffe = new cLabelInfo("Jumlah NonCoffe", 190, 180, 300, 40);
+  private cLabelInfo labelJumlahNonCoffe = new cLabelInfo("Jumlah Non Coffe", 190, 180, 300, 40);
   private cTextField txtJumlahNonCoffe = new cTextField(190, 210, 300);
   private cErrorLabel errorJumlahNonCoffe = new cErrorLabel("Jumlah tidak boleh Kosong!", 190, 235, 400);
   private cLabelInfo labelHargaNonCoffe = new cLabelInfo("Harga Non Coffe", 190, 270, 300, 40);
@@ -162,6 +162,8 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusDataMeja = new cButton("Hapus", 630, 100, 150, 30, 20);
   private cButton btnEditDataMeja = new cButton("Edit", 800, 100, 150, 30, 20);
   private cButton btnKembaliMeja = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cTable tblDataMeja;
+  private cScrollPane spDataMeja;
 
   // component of input data meja
   private cLabelInfo labelInputMeja = new cLabelInfo("Masukan Data Meja!", 190, 40, 400, 40);
@@ -193,6 +195,8 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusDataKaryawan = new cButton("Hapus", 630, 100, 150, 30, 20);
   private cButton btnEditDataKaryawan = new cButton("Edit", 800, 100, 150, 30, 20);
   private cButton btnKembaliKaryawan = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cTable tblDataKaryawan;
+  private cScrollPane spDataKaryawan;
 
   // component of input data karyawan
   private cLabelInfo labelDataKaryawan = new cLabelInfo("Masukan Data Karyawan!", 190, 30, 400, 40);
@@ -231,14 +235,20 @@ public class cDashboardMitraView extends cDashboardApp {
   // component of data menu makanan
   private cLabelInfo labelCariTransaksiMakanan = new cLabelInfo("Cari", 40, 35, 300, 40);
   private cTextField txtCariTransaksiMakanan = new cTextField(100, 40, 300);
+  private cTable tblTransaksiMakanan;
+  private cScrollPane spTransaksiMakanan;
 
   // component of data menu coffe
   private cLabelInfo labelCariTransaksiCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
   private cTextField txtCariTransaksiCoffe = new cTextField(100, 40, 300);
+  private cTable tblTransaksiCoffe;
+  private cScrollPane spTransaksiCoffe;
 
   // component of data menu non coffe
   private cLabelInfo labelCariTransaksiNonCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
   private cTextField txtCariTransaksiNonCoffe = new cTextField(100, 40, 300);
+  private cTable tblTransaksiNonCoffe;
+  private cScrollPane spTransaksiNonCoffe;
 
   // component of input data Transaksi Makanan
   private cLabelInfo labelInputTransaksiMakanan = new cLabelInfo("Masukan Data Transaksi Makanan!", 190, 40, 400, 40);
@@ -348,6 +358,8 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusDataOrderBahan = new cButton("Hapus", 630, 100, 150, 30, 20);
   private cButton btnEditDataOrderBahan = new cButton("Edit", 800, 100, 150, 30, 20);
   private cButton btnKembaliOrderBahan = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cTable tblOrderBahan;
+  private cScrollPane spOrderBahan;
 
   // component of input OrderBahan
   private cLabelInfo labelInputOrderBahan = new cLabelInfo("Masukan Data Order Bahan!", 190, 40, 400, 40);
@@ -427,6 +439,7 @@ public class cDashboardMitraView extends cDashboardApp {
   // method refresh content
   private void refreshContent() {
     try {
+      roleText.setText("Mitra | " + Model.getDetailMitra(idMitra)[1].toString());
       content.removeAll();
     } catch (Exception e) {
     }
@@ -499,17 +512,25 @@ public class cDashboardMitraView extends cDashboardApp {
         }
       }
     });
+
+    if (Model.getDetailMitra(idMitra)[3].toString().equalsIgnoreCase("terverifikasi")) {
+      sidebar.add(menuBeranda);
+      sidebar.add(menuDataMenu);
+      sidebar.add(menuDataPromo);
+      sidebar.add(menuDataMeja);
+      sidebar.add(menuDataCustomer);
+      sidebar.add(menuDataKaryawan);
+      sidebar.add(menuTransaksi);
+      sidebar.add(menuOrderBahan);
+      sidebar.add(menuLogout);
+    } else {
+      sidebar.add(menuBeranda);
+
+      menuLogout.setLocation(menuLogout.getLocation().x, menuBeranda.getLocation().y + 50);
+      sidebar.add(menuLogout);
+    }
     // add component default
     main.add(labelDateTimeBeranda);
-    sidebar.add(menuBeranda);
-    sidebar.add(menuDataMenu);
-    sidebar.add(menuDataPromo);
-    sidebar.add(menuDataMeja);
-    sidebar.add(menuDataCustomer);
-    sidebar.add(menuDataKaryawan);
-    sidebar.add(menuTransaksi);
-    sidebar.add(menuOrderBahan);
-    sidebar.add(menuLogout);
     initsBeranda();
   }
 
@@ -522,23 +543,32 @@ public class cDashboardMitraView extends cDashboardApp {
     menuBeranda.setSidebarAktif();
     menuTitle.setText("Beranda");
 
-    content.add(labelInfoSaldoMitraBeranda);
-    content.add(valueInfoSaldoMitraBeranda);
-    content.add(labelJumlahMenuBeranda);
-    content.add(valueJumlahMenuBeranda);
-    content.add(labelJumlahMejaBeranda);
-    content.add(valueJumlahMejaBeranda);
-    content.add(labelJumlahPromoBeranda);
-    content.add(valueJumlahPromoBeranda);
-    content.add(labelTransaksiBeranda);
-    content.add(valueTransaksiBeranda);
-    content.add(labelCustomerBeranda);
-    content.add(valueCustomerBeranda);
-    content.add(labelKaryawanBeranda);
-    content.add(valueKaryawanBeranda);
-    content.add(labelOrderBahanBeranda);
-    content.add(valueOrderBahanBeranda);
+    if (Model.getDetailMitra(idMitra)[3].toString().equalsIgnoreCase("terverifikasi")) {
+      labelDateTimeBeranda.setVisible(true);
 
+      valueInfoSaldoMitraBeranda.setText(String.valueOf(Model.getDetailSaldoMitra(idMitra)));
+
+      content.add(valueInfoSaldoMitraBeranda);
+      content.add(labelJumlahMenuBeranda);
+      content.add(valueJumlahMenuBeranda);
+      content.add(labelJumlahMejaBeranda);
+      content.add(valueJumlahMejaBeranda);
+      content.add(labelJumlahPromoBeranda);
+      content.add(valueJumlahPromoBeranda);
+      content.add(labelTransaksiBeranda);
+      content.add(valueTransaksiBeranda);
+      content.add(labelCustomerBeranda);
+      content.add(valueCustomerBeranda);
+      content.add(labelKaryawanBeranda);
+      content.add(valueKaryawanBeranda);
+      content.add(labelOrderBahanBeranda);
+      content.add(valueOrderBahanBeranda);
+    } else {
+      labelInfoSaldoMitraBeranda.setText("Anda Belum Terverifikasi! Silahkan Tunggu respon dari Atmin!");
+      labelInfoSaldoMitraBeranda.setSize(labelInfoSaldoMitraBeranda.getWidth() + 500,
+          labelInfoSaldoMitraBeranda.getHeight());
+    }
+    content.add(labelInfoSaldoMitraBeranda);
     setVisible(true);
   }
 
@@ -644,7 +674,68 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataMenu.setSidebarAktif();
     menuTitle.setText("Tambah Menu Makanan");
 
+    // set textfield null
+    txtNamaMakanan.setText(null);
+    txtJumlahMakanan.setText(null);
+    txtDeskripsiMakanan.setText(null);
+    txtHargaMakanan.setText(null);
+
+    btnSimpanMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaMakanan.getText().trim().isEmpty()
+            || txtJumlahMakanan.getText().trim().isEmpty()
+            || txtDeskripsiMakanan.getText().trim().isEmpty()
+            || txtHargaMakanan.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik textfield tidak boleh kosong
+          if (txtNamaMakanan.getText().trim().isEmpty()) {
+            content.add(errorNamaMakanan);
+          } else {
+            content.remove(errorNamaMakanan);
+          }
+          if (txtJumlahMakanan.getText().trim().isEmpty()) {
+            content.add(errorJumlahMakanan);
+          } else {
+            content.remove(errorJumlahMakanan);
+          }
+          if (txtDeskripsiMakanan.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiMakanan);
+          } else {
+            content.remove(errorDeskripsiMakanan);
+          }
+          if (txtHargaMakanan.getText().trim().isEmpty()) {
+            content.add(errorHargaMakanan);
+          } else {
+            content.remove(errorHargaMakanan);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaMenu = txtNamaMakanan.getText();
+          int jumlahMakanan = Integer.valueOf(txtJumlahMakanan.getText());
+          int hargaMakanan = Integer.valueOf(txtHargaMakanan.getText());
+          String deskripsiMakanan = txtDeskripsiMakanan.getText();
+
+          if (Model.tambahMenuMakanan(idMitra, namaMenu, jumlahMakanan, hargaMakanan, deskripsiMakanan)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            txtNamaMakanan.setText(null);
+            txtJumlahMakanan.setText(null);
+            txtDeskripsiMakanan.setText(null);
+            txtHargaMakanan.setText(null);
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
     btnHapusMakanan.addActionListener(new java.awt.event.ActionListener() {
+
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         txtNamaMakanan.setText(null);
@@ -664,16 +755,12 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(labelInputMenuMakanan);
     content.add(labelNamaMakanan);
     content.add(txtNamaMakanan);
-    content.add(errorNamaMakanan);
     content.add(labelJumlahMakanan);
     content.add(txtJumlahMakanan);
-    content.add(errorJumlahMakanan);
     content.add(labelHargaMakanan);
     content.add(txtHargaMakanan);
-    content.add(errorHargaMakanan);
     content.add(labelDeskripsiMakanan);
     content.add(txtDeskripsiMakanan);
-    content.add(errorDeskripsiMakanan);
     content.add(btnSimpanMakanan);
     content.add(btnHapusMakanan);
     content.add(btnKembaliMakanan);
@@ -738,6 +825,66 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataMenu.setSidebarAktif();
     menuTitle.setText("Tambah Menu Coffe");
 
+    // set textfield null
+    txtNamaCoffe.setText(null);
+    txtJumlahCoffe.setText(null);
+    txtDeskripsiCoffe.setText(null);
+    txtHargaCoffe.setText(null);
+
+    btnSimpanCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaCoffe.getText().trim().isEmpty()
+            || txtJumlahCoffe.getText().trim().isEmpty()
+            || txtDeskripsiCoffe.getText().trim().isEmpty()
+            || txtHargaCoffe.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik textfield tidak boleh kosong
+          if (txtNamaCoffe.getText().trim().isEmpty()) {
+            content.add(errorNamaCoffe);
+          } else {
+            content.remove(errorNamaCoffe);
+          }
+          if (txtJumlahCoffe.getText().trim().isEmpty()) {
+            content.add(errorJumlahCoffe);
+          } else {
+            content.remove(errorJumlahCoffe);
+          }
+          if (txtDeskripsiCoffe.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiCoffe);
+          } else {
+            content.remove(errorDeskripsiCoffe);
+          }
+          if (txtHargaCoffe.getText().trim().isEmpty()) {
+            content.add(errorHargaCoffe);
+          } else {
+            content.remove(errorHargaCoffe);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaMenu = txtNamaCoffe.getText();
+          int jumlahCoffe = Integer.valueOf(txtJumlahCoffe.getText());
+          int hargaCoffe = Integer.valueOf(txtHargaCoffe.getText());
+          String deskripsiCoffe = txtDeskripsiCoffe.getText();
+
+          if (Model.tambahMenuCoffe(idMitra, namaMenu, jumlahCoffe, hargaCoffe, deskripsiCoffe)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            txtNamaCoffe.setText(null);
+            txtJumlahCoffe.setText(null);
+            txtDeskripsiCoffe.setText(null);
+            txtHargaCoffe.setText(null);
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
     btnHapusCoffe.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -758,16 +905,12 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(labelInputMenuCoffe);
     content.add(labelNamaCoffe);
     content.add(txtNamaCoffe);
-    content.add(errorNamaCoffe);
     content.add(labelJumlahCoffe);
     content.add(txtJumlahCoffe);
-    content.add(errorJumlahCoffe);
     content.add(labelHargaCoffe);
     content.add(txtHargaCoffe);
-    content.add(errorHargaCoffe);
     content.add(labelDeskripsiCoffe);
     content.add(txtDeskripsiCoffe);
-    content.add(errorDeskripsiCoffe);
     content.add(btnSimpanCoffe);
     content.add(btnHapusCoffe);
     content.add(btnKembaliCoffe);
@@ -832,6 +975,66 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataMenu.setSidebarAktif();
     menuTitle.setText("Tambah Menu Non Coffe");
 
+    // set textfield null
+    txtNamaNonCoffe.setText(null);
+    txtJumlahNonCoffe.setText(null);
+    txtDeskripsiNonCoffe.setText(null);
+    txtHargaNonCoffe.setText(null);
+
+    btnSimpanNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaNonCoffe.getText().trim().isEmpty()
+            || txtJumlahNonCoffe.getText().trim().isEmpty()
+            || txtDeskripsiNonCoffe.getText().trim().isEmpty()
+            || txtHargaNonCoffe.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik textfield tidak boleh kosong
+          if (txtNamaNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorNamaNonCoffe);
+          } else {
+            content.remove(errorNamaNonCoffe);
+          }
+          if (txtJumlahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorJumlahNonCoffe);
+          } else {
+            content.remove(errorJumlahNonCoffe);
+          }
+          if (txtDeskripsiNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiNonCoffe);
+          } else {
+            content.remove(errorDeskripsiNonCoffe);
+          }
+          if (txtHargaNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorHargaNonCoffe);
+          } else {
+            content.remove(errorHargaNonCoffe);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaMenu = txtNamaNonCoffe.getText();
+          int jumlahNonCoffe = Integer.valueOf(txtJumlahNonCoffe.getText());
+          int hargaNonCoffe = Integer.valueOf(txtHargaNonCoffe.getText());
+          String deskripsiNonCoffe = txtDeskripsiNonCoffe.getText();
+
+          if (Model.tambahMenuNonCoffe(idMitra, namaMenu, jumlahNonCoffe, hargaNonCoffe, deskripsiNonCoffe)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            txtNamaNonCoffe.setText(null);
+            txtJumlahNonCoffe.setText(null);
+            txtDeskripsiNonCoffe.setText(null);
+            txtHargaNonCoffe.setText(null);
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
     btnHapusNonCoffe.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -852,16 +1055,12 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(labelInputMenuNonCoffe);
     content.add(labelNamaNonCoffe);
     content.add(txtNamaNonCoffe);
-    content.add(errorNamaNonCoffe);
     content.add(labelJumlahNonCoffe);
     content.add(txtJumlahNonCoffe);
-    content.add(errorJumlahNonCoffe);
     content.add(labelHargaNonCoffe);
     content.add(txtHargaNonCoffe);
-    content.add(errorHargaNonCoffe);
     content.add(labelDeskripsiNonCoffe);
     content.add(txtDeskripsiNonCoffe);
-    content.add(errorDeskripsiNonCoffe);
     content.add(btnSimpanNonCoffe);
     content.add(btnHapusNonCoffe);
     content.add(btnKembaliNonCoffe);
@@ -983,6 +1182,28 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    tblDataMeja = new cTable(Model.getAllMeja());
+
+    tblDataMeja.getColumnModel().getColumn(0).setMinWidth(0);
+    tblDataMeja.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblDataMeja.getColumnModel().getColumn(0).setWidth(0);
+
+    tblDataMeja.getColumnModel().getColumn(1).setMinWidth(0);
+    tblDataMeja.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblDataMeja.getColumnModel().getColumn(1).setWidth(0);
+
+    tblDataMeja.getColumnModel().getColumn(2).setMinWidth(0);
+    tblDataMeja.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblDataMeja.getColumnModel().getColumn(2).setWidth(0);
+
+    tblDataMeja.getColumnModel().getColumn(6).setMinWidth(0);
+    tblDataMeja.getColumnModel().getColumn(6).setMaxWidth(0);
+    tblDataMeja.getColumnModel().getColumn(6).setWidth(0);
+
+    spDataMeja = new cScrollPane(tblDataMeja, 0, 140, 1100, 300);
+
+    content.add(spDataMeja);
+
     content.add(labelMeja);
     content.add(labelCariMeja);
     content.add(txtCariMeja);
@@ -1078,6 +1299,28 @@ public class cDashboardMitraView extends cDashboardApp {
         initsInputDataKaryawan();
       }
     });
+
+    tblDataKaryawan = new cTable(Model.getAllKaryawanVerified());
+
+    tblDataKaryawan.getColumnModel().getColumn(0).setMinWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(0).setWidth(0);
+
+    tblDataKaryawan.getColumnModel().getColumn(1).setMinWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(1).setWidth(0);
+
+    tblDataKaryawan.getColumnModel().getColumn(2).setMinWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(2).setWidth(0);
+
+    tblDataKaryawan.getColumnModel().getColumn(7).setMinWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblDataKaryawan.getColumnModel().getColumn(7).setWidth(0);
+
+    spDataKaryawan = new cScrollPane(tblDataKaryawan, 0, 140, 1100, 300);
+
+    content.add(spDataKaryawan);
 
     content.add(btnTambahKaryawan);
     content.add(btnHapusDataKaryawan);
@@ -1194,6 +1437,32 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    tblTransaksiMakanan = new cTable(Model.getAllTransaksiMakananDiproses());
+
+    tblTransaksiMakanan.getColumnModel().getColumn(0).setMinWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(0).setWidth(0);
+
+    tblTransaksiMakanan.getColumnModel().getColumn(1).setMinWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(1).setWidth(0);
+
+    tblTransaksiMakanan.getColumnModel().getColumn(2).setMinWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(2).setWidth(0);
+
+    tblTransaksiMakanan.getColumnModel().getColumn(7).setMinWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(7).setWidth(0);
+
+    tblTransaksiMakanan.getColumnModel().getColumn(8).setMinWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(8).setMaxWidth(0);
+    tblTransaksiMakanan.getColumnModel().getColumn(8).setWidth(0);
+
+    spTransaksiMakanan = new cScrollPane(tblTransaksiMakanan, 0, 140, 1100, 300);
+
+    content.add(spTransaksiMakanan);
+
     content.add(btnTransaksiMakanan);
     content.add(btnTransaksiCoffe);
     content.add(btnTransaksiNonCoffe);
@@ -1220,6 +1489,32 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    tblTransaksiCoffe = new cTable(Model.getAllTransaksiCoffeDiproses());
+
+    tblTransaksiCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblTransaksiCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblTransaksiCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblTransaksiCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(7).setWidth(0);
+
+    tblTransaksiCoffe.getColumnModel().getColumn(8).setMinWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(8).setMaxWidth(0);
+    tblTransaksiCoffe.getColumnModel().getColumn(8).setWidth(0);
+
+    spTransaksiCoffe = new cScrollPane(tblTransaksiCoffe, 0, 140, 1100, 300);
+
+    content.add(spTransaksiCoffe);
+
     content.add(btnTransaksiMakanan);
     content.add(btnTransaksiCoffe);
     content.add(btnTransaksiNonCoffe);
@@ -1244,6 +1539,32 @@ public class cDashboardMitraView extends cDashboardApp {
         initsInputTransaksiNonCoffe();
       }
     });
+
+    tblTransaksiNonCoffe = new cTable(Model.getAllTransaksiNonCoffeDiproses());
+
+    tblTransaksiNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblTransaksiNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblTransaksiNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblTransaksiNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(7).setWidth(0);
+
+    tblTransaksiNonCoffe.getColumnModel().getColumn(8).setMinWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(8).setMaxWidth(0);
+    tblTransaksiNonCoffe.getColumnModel().getColumn(8).setWidth(0);
+
+    spTransaksiNonCoffe = new cScrollPane(tblTransaksiNonCoffe, 0, 140, 1100, 300);
+
+    content.add(spTransaksiNonCoffe);
 
     content.add(btnTransaksiMakanan);
     content.add(btnTransaksiCoffe);
@@ -1459,6 +1780,32 @@ public class cDashboardMitraView extends cDashboardApp {
         initsInputDataOrderBahan();
       }
     });
+
+    tblOrderBahan = new cTable(Model.getAllOrderBahanDiproses());
+
+    tblOrderBahan.getColumnModel().getColumn(0).setMinWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(0).setWidth(0);
+
+    tblOrderBahan.getColumnModel().getColumn(1).setMinWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(1).setWidth(0);
+
+    tblOrderBahan.getColumnModel().getColumn(2).setMinWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(2).setWidth(0);
+
+    tblOrderBahan.getColumnModel().getColumn(6).setMinWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(6).setMaxWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(6).setWidth(0);
+
+    tblOrderBahan.getColumnModel().getColumn(7).setMinWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblOrderBahan.getColumnModel().getColumn(7).setWidth(0);
+
+    spOrderBahan = new cScrollPane(tblOrderBahan, 0, 140, 1100, 300);
+
+    content.add(spOrderBahan);
 
     content.add(btnTambahOrderBahan);
     content.add(btnHapusDataOrderBahan);
