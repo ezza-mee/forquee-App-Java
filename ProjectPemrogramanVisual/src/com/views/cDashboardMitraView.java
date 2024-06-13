@@ -130,6 +130,8 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusDataPromo = new cButton("Hapus", 630, 100, 150, 30, 20);
   private cButton btnEditDataPromo = new cButton("Edit", 800, 100, 150, 30, 20);
   private cButton btnKembaliPromo = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cTable tblDataPromo;
+  private cScrollPane spDataPromo;
 
   // component of input promo
   private cLabelInfo labelInputPromo = new cLabelInfo("Masukan Data Promo!", 190, 40, 400, 40);
@@ -603,6 +605,22 @@ public class cDashboardMitraView extends cDashboardApp {
 
     tblMenuMakanan = new cTable(Model.getAllMenuMakanan());
 
+    tblMenuMakanan.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuMakanan.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuMakanan.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuMakanan.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuMakanan.getColumnModel().getColumn(7).setWidth(0);
+
     spMenuMakanan = new cScrollPane(tblMenuMakanan, 0, 140, 1100, 300);
 
     content.add(spMenuMakanan);
@@ -680,6 +698,22 @@ public class cDashboardMitraView extends cDashboardApp {
     });
 
     tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
+
+    tblMenuCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(7).setWidth(0);
 
     spMenuCoffe = new cScrollPane(tblMenuCoffe, 0, 140, 1100, 300);
 
@@ -759,6 +793,22 @@ public class cDashboardMitraView extends cDashboardApp {
 
     tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
 
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setWidth(0);
+
     spMenuNonCoffe = new cScrollPane(tblMenuNonCoffe, 0, 140, 1100, 300);
 
     content.add(spMenuNonCoffe);
@@ -834,6 +884,28 @@ public class cDashboardMitraView extends cDashboardApp {
         initsInputDataPromo();
       }
     });
+
+    tblDataPromo = new cTable(Model.getAllPromo());
+
+    tblDataPromo.getColumnModel().getColumn(0).setMinWidth(0);
+    tblDataPromo.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblDataPromo.getColumnModel().getColumn(0).setWidth(0);
+
+    tblDataPromo.getColumnModel().getColumn(1).setMinWidth(0);
+    tblDataPromo.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblDataPromo.getColumnModel().getColumn(1).setWidth(0);
+
+    tblDataPromo.getColumnModel().getColumn(2).setMinWidth(0);
+    tblDataPromo.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblDataPromo.getColumnModel().getColumn(2).setWidth(0);
+
+    tblDataPromo.getColumnModel().getColumn(7).setMinWidth(0);
+    tblDataPromo.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblDataPromo.getColumnModel().getColumn(7).setWidth(0);
+
+    spDataPromo = new cScrollPane(tblDataPromo, 0, 140, 1100, 300);
+
+    content.add(spDataPromo);
 
     content.add(btnTambahPromo);
     content.add(btnHapusDataPromo);
