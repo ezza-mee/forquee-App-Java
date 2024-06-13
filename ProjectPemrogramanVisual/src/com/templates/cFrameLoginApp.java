@@ -36,11 +36,11 @@ public abstract class cFrameLoginApp extends JFrame {
         titleLogin.setVerticalAlignment(JLabel.CENTER);
 
         titleFrom.setFont(cFonts.TITLE_START_FONT);
-        titleFrom.setForeground(cColor.BLACK);
+        titleFrom.setForeground(cColor.WHITE);
         titleFrom.setBounds(770, 250, 550, 40);
 
         fromTitle.setFont(cFonts.TITLE_START_FONT);
-        fromTitle.setForeground(cColor.BLACK);
+        fromTitle.setForeground(cColor.WHITE);
         fromTitle.setBounds(770, 290, 550, 40);
 
         cardLogin.add(titleLogin);

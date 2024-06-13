@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class cDashboardCustomerView extends cDashboardApp {
 
-  Integer idMitra = null;
+  Integer idCustomer = null;
   Integer idSelected = null;
 
   // sidebar menu
@@ -61,7 +61,7 @@ public class cDashboardCustomerView extends cDashboardApp {
 
   public cDashboardCustomerView(Integer id) {
     super("Dashboard Customer");
-    idMitra = id;
+    idCustomer = id;
     roleText.setText("Customer | Nama Customer");
 
     menuBeranda.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,9 +184,9 @@ public class cDashboardCustomerView extends cDashboardApp {
         JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
         null, options, options[0]);
     if (confirm == 0) {
-      idMitra = null;
+      idCustomer = null;
       idSelected = null;
-      com.main.Controller.showLoginMitra();
+      com.main.Controller.showLoginCustomer();
     }
   }
 
