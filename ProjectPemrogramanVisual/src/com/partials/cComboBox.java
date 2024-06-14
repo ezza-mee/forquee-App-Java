@@ -10,5 +10,7 @@ public class cComboBox extends JComboBox<String> {
         setForeground(cColor.BLACK);
         setBackground(cColor.WHITE);
         setBorder(new javax.swing.border.LineBorder(cColor.GREEN, 1));
+        setMaximumRowCount(3);
     }
+
 }

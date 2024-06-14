@@ -4,7 +4,10 @@ import com.templates.cDashboardApp;
 import com.partials.*;
 import com.main.*;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 public class cDashboardMitraView extends cDashboardApp {
 
@@ -206,7 +209,6 @@ public class cDashboardMitraView extends cDashboardApp {
   private cTextField txtJumlahPromo = new cTextField(190, 210, 300);
   private cErrorLabel errorJumlahPromo = new cErrorLabel("Jumlah tidak boleh Kosong!", 190, 235, 400);
   private cLabelInfo labelPilihMenuPromo = new cLabelInfo("Menu Promo", 190, 270, 300, 40);
-  private cComboBox pilihMenuPromo = new cComboBox(new String[] { "Pilih Menu" }, 190, 302, 300, 30);
   private cErrorLabel errorMenuPromo = new cErrorLabel("Menu Promo tidak boleh Kosong!", 190, 327, 300);
   private cLabelInfo labelDeskripsiPromo = new cLabelInfo("Deskripsi Promo", 580, 90, 300, 40);
   private cTextarea txtDeskripsiPromo = new cTextarea(580, 120, 300, 120, true);
@@ -217,6 +219,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cErrorLabel errorHargaPromo = new cErrorLabel("Harga Promo tidak boleh Kosong!", 580, 327, 300);
   private cButton btnHapusPromo = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanPromo = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cComboBox pilihMenuPromo;
 
   // component of data meja
   private cLabelInfo labelMeja = new cLabelInfo("Data Ready Meja", 40, 40, 300, 40);
@@ -226,16 +229,18 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusDataMeja = new cButton("Hapus", 630, 100, 150, 30, 20);
   private cButton btnEditDataMeja = new cButton("Edit", 800, 100, 150, 30, 20);
   private cButton btnKembaliMeja = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cButton btnKembaliUbahMeja = new cButton("Kembali", 190, 480, 150, 30, 20);
   private cTable tblDataMeja;
   private cScrollPane spDataMeja;
 
   // component of input data meja
   private cLabelInfo labelInputMeja = new cLabelInfo("Masukan Data Meja!", 190, 40, 400, 40);
   private cLabelInfo labelNomorMeja = new cLabelInfo("Nomor Meja", 190, 90, 300, 40);
-  private cTextField txtNomorMeja = new cTextField(190, 120, 300);
+  private cComboBox pilihNomorMeja = new cComboBox(new String[] { "Nomor Meja", "a1", "a2", "a3" }, 190, 120, 300, 30);
   private cErrorLabel errorNomorMeja = new cErrorLabel("Nomor Meja tidak boleh Kosong!", 190, 145, 400);
   private cLabelInfo labelPilihMeja = new cLabelInfo("Jenis Meja", 190, 180, 300, 40);
-  private cComboBox pilihMeja = new cComboBox(new String[] { "VIP", "Reguler", "Non Reguler" }, 190, 210, 300, 30);
+  private cComboBox pilihMeja = new cComboBox(new String[] { "jenis Meja", "VIP", "Reguler", "Non Reguler" }, 190, 210,
+      300, 30);
   private cErrorLabel errorMeja = new cErrorLabel("Jenis Meja tidak boleh Kosong!", 190, 235, 300);
   private cLabelInfo labelDeskripsiMeja = new cLabelInfo("Deskripsi Meja", 580, 90, 300, 40);
   private cTextarea txtDeskripsiMeja = new cTextarea(580, 120, 300, 120, true);
@@ -243,6 +248,24 @@ public class cDashboardMitraView extends cDashboardApp {
       300);
   private cButton btnHapusMeja = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanMeja = new cButton("Simpan", 730, 480, 150, 30, 20);
+
+  // component of input Ubah meja
+  private cLabelInfo labelInputUbahMeja = new cLabelInfo("Masukan Data untuk ubah Data Meja!", 190, 40, 400, 40);
+  private cLabelInfo labelNomorUbahMeja = new cLabelInfo("Nomor Meja", 190, 90, 300, 40);
+  private cComboBox pilihNomorUbahMeja = new cComboBox(new String[] { "Nomor Meja", "a1", "a2", "a3" }, 190, 120, 300,
+      30);
+  private cErrorLabel errorNomorUbahMeja = new cErrorLabel("Nomor Meja tidak boleh Kosong!", 190, 145, 400);
+  private cLabelInfo labelPilihUbahMeja = new cLabelInfo("Jenis Meja", 190, 180, 300, 40);
+  private cComboBox pilihUbahMeja = new cComboBox(new String[] { "jenis Meja", "VIP", "Reguler", "Non Reguler" }, 190,
+      210,
+      300, 30);
+  private cErrorLabel errorUbahMeja = new cErrorLabel("Jenis Meja tidak boleh Kosong!", 190, 235, 300);
+  private cLabelInfo labelDeskripsiUbahMeja = new cLabelInfo("Deskripsi Meja", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiUbahMeja = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiUbahMeja = new cErrorLabel("Deskripsi Meja tidak boleh Kosong!", 580, 235,
+      300);
+  private cButton btnHapusUbahMeja = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanUbahMeja = new cButton("Simpan", 730, 480, 150, 30, 20);
 
   // componenet of data customer
   private cLabelInfo labelCustomer = new cLabelInfo("Data Customer Aktif", 40, 40, 300, 40);
@@ -380,7 +403,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusTransaksiCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanTransaksiCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
 
-  // component of input data Transaksi NonCoffe
+  // component of input data Transaksi Non Coffe
   private cLabelInfo labelInputTransaksiNonCoffe = new cLabelInfo("Masukan Data Transaksi NonCoffe!", 190, 40, 400, 40);
   private cLabelInfo labelNamaTransaksiNonCoffe = new cLabelInfo("Nama Pemesan", 190, 90, 300, 40);
   private cTextField txtNamaTransaksiNonCoffe = new cTextField(190, 120, 300);
@@ -712,11 +735,11 @@ public class cDashboardMitraView extends cDashboardApp {
               .valueOf(tblMenuMakanan.getValueAt(selectedIndex, 0).toString());
 
           if (Model.hapusDataMenuMakanan(idMenu)) {
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai berhasil dihapus!",
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja berhasil dihapus!",
                 "Berhasil", JOptionPane.INFORMATION_MESSAGE);
             initsMenuMakanan();
           } else {
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai gagal dihapus!",
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja gagal dihapus!",
                 "Gagal", JOptionPane.ERROR_MESSAGE);
           }
         } else {
@@ -753,6 +776,186 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(btnHapusDataMakanan);
     content.add(labelCariMenuMakanan);
     content.add(txtCariMenuMakanan);
+    setVisible(true);
+  }
+
+  private void initsMenuCoffe() {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Data Menu Coffe");
+
+    content.add(pilihDataMenu);
+
+    btnTambahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsInputMenuCoffe();
+      }
+    });
+
+    btnEditDataCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuCoffe.getValueAt(selectedIndex, 0).toString());
+          initsUbahDataCoffe(idMenu);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih Menu Coffe yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnHapusDataCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuCoffe.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataMenuCoffe(idMenu)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja berhasil dihapus!",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            initsMenuCoffe();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja gagal dihapus!",
+                "Gagal", JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          // kalo gak ada yang diseleksic
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
+              "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
+
+    tblMenuCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuCoffe.getColumnModel().getColumn(7).setWidth(0);
+
+    spMenuCoffe = new cScrollPane(tblMenuCoffe, 0, 140, 1100, 300);
+
+    content.add(spMenuCoffe);
+    content.add(btnTambahCoffe);
+    content.add(btnEditDataCoffe);
+    content.add(btnHapusDataCoffe);
+    content.add(labelCariMenuCoffe);
+    content.add(txtCariMenuCoffe);
+    setVisible(true);
+  }
+
+  private void initsMenuNonCoffe() {
+    idSelected = null;
+    resetSidebar();
+    menuDataMenu.setBackground(cColor.WHITE);
+    menuDataMenu.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMenu.setSidebarAktif();
+    menuTitle.setText("Data Menu Non Coffe");
+
+    content.add(pilihDataMenu);
+
+    btnTambahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsInputMenuNonCoffe();
+      }
+    });
+
+    btnEditDataNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuNonCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuNonCoffe.getValueAt(selectedIndex, 0).toString());
+          initsUbahDataNonCoffe(idMenu);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih Menu NonCoffe yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnHapusDataNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblMenuNonCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMenu = Integer
+              .valueOf(tblMenuNonCoffe.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataMenuNonCoffe(idMenu)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja berhasil dihapus!",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            initsMenuNonCoffe();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja gagal dihapus!",
+                "Gagal", JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          // kalo gak ada yang diseleksic
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
+              "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
+
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(0).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(1).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(2).setWidth(0);
+
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblMenuNonCoffe.getColumnModel().getColumn(7).setWidth(0);
+
+    spMenuNonCoffe = new cScrollPane(tblMenuNonCoffe, 0, 140, 1100, 300);
+
+    content.add(spMenuNonCoffe);
+    content.add(btnTambahNonCoffe);
+    content.add(btnEditDataNonCoffe);
+    content.add(btnHapusDataNonCoffe);
+    content.add(labelCariMenuNonCoffe);
+    content.add(txtCariMenuNonCoffe);
     setVisible(true);
   }
 
@@ -863,96 +1066,6 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(btnHapusUbahMakanan);
     content.add(btnKembaliUbahMakanan);
 
-    setVisible(true);
-  }
-
-  private void initsMenuCoffe() {
-    idSelected = null;
-    resetSidebar();
-    menuDataMenu.setBackground(cColor.WHITE);
-    menuDataMenu.setForeground(cColor.GREEN);
-    refreshContent();
-    menuDataMenu.setSidebarAktif();
-    menuTitle.setText("Data Menu Coffe");
-
-    content.add(pilihDataMenu);
-
-    btnTambahCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsInputMenuCoffe();
-      }
-    });
-
-    btnEditDataCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        int selectedIndex = tblMenuCoffe.getSelectedRow();
-
-        if (selectedIndex != -1) {
-          int idMenu = Integer
-              .valueOf(tblMenuCoffe.getValueAt(selectedIndex, 0).toString());
-          initsUbahDataCoffe(idMenu);
-        } else {
-          // kalo tidak ada yang diseleksi
-          JOptionPane.showMessageDialog(cDashboardMitraView.this,
-              "Pilih Menu Coffe yang akan diubah terlebih dahulu!", "Peringatan",
-              JOptionPane.WARNING_MESSAGE);
-        }
-      }
-    });
-
-    btnHapusDataCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        int selectedIndex = tblMenuCoffe.getSelectedRow();
-
-        if (selectedIndex != -1) {
-          int idMenu = Integer
-              .valueOf(tblMenuCoffe.getValueAt(selectedIndex, 0).toString());
-
-          if (Model.hapusDataMenuCoffe(idMenu)) {
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai berhasil dihapus!",
-                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
-            initsMenuCoffe();
-          } else {
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai gagal dihapus!",
-                "Gagal", JOptionPane.ERROR_MESSAGE);
-          }
-        } else {
-          // kalo gak ada yang diseleksic
-          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
-              "Peringatan", JOptionPane.WARNING_MESSAGE);
-        }
-      }
-    });
-
-    tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
-
-    tblMenuCoffe.getColumnModel().getColumn(0).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(0).setWidth(0);
-
-    tblMenuCoffe.getColumnModel().getColumn(1).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(1).setWidth(0);
-
-    tblMenuCoffe.getColumnModel().getColumn(2).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(2).setWidth(0);
-
-    tblMenuCoffe.getColumnModel().getColumn(7).setMinWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
-    tblMenuCoffe.getColumnModel().getColumn(7).setWidth(0);
-
-    spMenuCoffe = new cScrollPane(tblMenuCoffe, 0, 140, 1100, 300);
-
-    content.add(spMenuCoffe);
-    content.add(btnTambahCoffe);
-    content.add(btnEditDataCoffe);
-    content.add(btnHapusDataCoffe);
-    content.add(labelCariMenuCoffe);
-    content.add(txtCariMenuCoffe);
     setVisible(true);
   }
 
@@ -1169,96 +1282,6 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(btnHapusUbahNonCoffe);
     content.add(btnKembaliUbahNonCoffe);
 
-    setVisible(true);
-  }
-
-  private void initsMenuNonCoffe() {
-    idSelected = null;
-    resetSidebar();
-    menuDataMenu.setBackground(cColor.WHITE);
-    menuDataMenu.setForeground(cColor.GREEN);
-    refreshContent();
-    menuDataMenu.setSidebarAktif();
-    menuTitle.setText("Data Menu Non Coffe");
-
-    content.add(pilihDataMenu);
-
-    btnTambahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        initsInputMenuNonCoffe();
-      }
-    });
-
-    btnEditDataNonCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        int selectedIndex = tblMenuNonCoffe.getSelectedRow();
-
-        if (selectedIndex != -1) {
-          int idMenu = Integer
-              .valueOf(tblMenuNonCoffe.getValueAt(selectedIndex, 0).toString());
-          initsUbahDataNonCoffe(idMenu);
-        } else {
-          // kalo tidak ada yang diseleksi
-          JOptionPane.showMessageDialog(cDashboardMitraView.this,
-              "Pilih Menu NonCoffe yang akan diubah terlebih dahulu!", "Peringatan",
-              JOptionPane.WARNING_MESSAGE);
-        }
-      }
-    });
-
-    btnHapusDataNonCoffe.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(java.awt.event.ActionEvent ae) {
-        int selectedIndex = tblMenuNonCoffe.getSelectedRow();
-
-        if (selectedIndex != -1) {
-          int idMenu = Integer
-              .valueOf(tblMenuNonCoffe.getValueAt(selectedIndex, 0).toString());
-
-          if (Model.hapusDataMenuNonCoffe(idMenu)) {
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai berhasil dihapus!",
-                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
-            initsMenuNonCoffe();
-          } else {
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Pegawai gagal dihapus!",
-                "Gagal", JOptionPane.ERROR_MESSAGE);
-          }
-        } else {
-          // kalo gak ada yang diseleksic
-          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!",
-              "Peringatan", JOptionPane.WARNING_MESSAGE);
-        }
-      }
-    });
-
-    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
-
-    tblMenuNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(0).setWidth(0);
-
-    tblMenuNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(1).setWidth(0);
-
-    tblMenuNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(2).setWidth(0);
-
-    tblMenuNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
-    tblMenuNonCoffe.getColumnModel().getColumn(7).setWidth(0);
-
-    spMenuNonCoffe = new cScrollPane(tblMenuNonCoffe, 0, 140, 1100, 300);
-
-    content.add(spMenuNonCoffe);
-    content.add(btnTambahNonCoffe);
-    content.add(btnEditDataNonCoffe);
-    content.add(btnHapusDataNonCoffe);
-    content.add(labelCariMenuNonCoffe);
-    content.add(txtCariMenuNonCoffe);
     setVisible(true);
   }
 
@@ -1640,6 +1663,13 @@ public class cDashboardMitraView extends cDashboardApp {
     setVisible(true);
   }
 
+  private void initializePilihMenuPromo() {
+    ArrayList<String> menuNames = Model.getAllMenuPromo();
+    menuNames.add(0, "Pilih Menu"); // Add the default "Pilih Menu" option at the beginning
+
+    pilihMenuPromo = new cComboBox(menuNames.toArray(new String[0]), 190, 302, 300, 30);
+  }
+
   private void initsInputDataPromo() {
     idSelected = null;
     resetSidebar();
@@ -1649,12 +1679,71 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataPromo.setSidebarAktif();
     menuTitle.setText("Tambah Promo");
 
+    initializePilihMenuPromo();
+
     // set textfield null
     txtNamaPromo.setText(null);
     txtJumlahPromo.setText(null);
     pilihMenuPromo.setSelectedItem("Pilih Menu");
     txtDeskripsiPromo.setText(null);
     txtHargaPromo.setText(null);
+
+    btnSimpanPromo.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        // error textfield kosong
+        if (txtNamaPromo.getText().trim().isEmpty()
+            || txtJumlahPromo.getText().trim().isEmpty()
+            || pilihMenuPromo.getSelectedItem() == null
+            || txtDeskripsiPromo.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          if (txtNamaPromo.getText().trim().isEmpty()) {
+            content.add(errorNamaPromo);
+          } else {
+            content.remove(errorNamaPromo);
+          }
+          if (txtJumlahPromo.getText().trim().isEmpty()) {
+            content.add(errorJumlahPromo);
+          } else {
+            content.remove(errorJumlahPromo);
+          }
+          if (pilihMenuPromo.getSelectedItem() == null
+              || pilihMenuPromo.getSelectedItem().toString().trim().equals("Pilih Promo")) {
+            content.add(errorNamaPromo);
+          } else {
+            content.remove(errorNamaPromo);
+          }
+          if (txtDeskripsiPromo.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiPromo);
+          } else {
+            content.remove(errorDeskripsiPromo);
+          }
+          if (txtHargaPromo.getText().trim().isEmpty()) {
+            content.add(errorHargaPromo);
+          } else {
+            content.remove(errorHargaPromo);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaPromo = txtNamaPromo.getText();
+          String MenuPromo = (String) pilihMenuPromo.getSelectedItem();
+          int jumlahPromo = Integer.valueOf(txtJumlahPromo.getText());
+          int hargaPromo = Integer.valueOf(txtHargaPromo.getText());
+          String deskripsiPromo = txtDeskripsiPromo.getText();
+
+          if (Model.tambahPromo(idMitra, namaPromo, MenuPromo, jumlahPromo, hargaPromo, deskripsiPromo)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Promo Berhasil Disimpan.",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Promo Gagal Disimpan.", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
 
     btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
       @Override
@@ -1677,19 +1766,14 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(labelInputPromo);
     content.add(labelNamaPromo);
     content.add(txtNamaPromo);
-    content.add(errorNamaPromo);
     content.add(labelJumlahPromo);
     content.add(txtJumlahPromo);
-    content.add(errorJumlahPromo);
     content.add(labelHargaPromo);
     content.add(txtHargaPromo);
-    content.add(errorHargaPromo);
     content.add(labelDeskripsiPromo);
     content.add(txtDeskripsiPromo);
-    content.add(errorDeskripsiPromo);
     content.add(labelPilihMenuPromo);
     content.add(pilihMenuPromo);
-    content.add(errorMenuPromo);
     content.add(btnSimpanPromo);
     content.add(btnHapusPromo);
     content.add(btnKembaliPromo);
@@ -1710,6 +1794,67 @@ public class cDashboardMitraView extends cDashboardApp {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         initsInputDataMeja();
+      }
+    });
+
+    btnHapusDataMeja.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblDataMeja.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMeja = Integer.valueOf(tblDataMeja.getValueAt(selectedIndex, 0).toString());
+
+          Object[] options = { "IYA", "BATAL" };
+          int konfirmasi = JOptionPane.showOptionDialog(null,
+              "Yakin ingin menghapus data meja!",
+              "Konfirmasi Hapus Data Meja",
+              JOptionPane.DEFAULT_OPTION,
+              JOptionPane.QUESTION_MESSAGE,
+              null,
+              options,
+              options[0]);
+
+          if (konfirmasi == 0) {
+            boolean isDeleted = Model.hapusDataMeja(idMeja);
+            if (isDeleted) {
+              JOptionPane.showMessageDialog(cDashboardMitraView.this,
+                  "Data Meja berhasil dihapus!",
+                  "Berhasil",
+                  JOptionPane.INFORMATION_MESSAGE);
+              initsDataMeja();
+            } else {
+              JOptionPane.showMessageDialog(cDashboardMitraView.this,
+                  "Data Meja gagal dihapus!",
+                  "Gagal",
+                  JOptionPane.ERROR_MESSAGE);
+            }
+          }
+        } else {
+          // Jika tidak ada yang dipilih
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data terlebih dahulu!",
+              "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnEditDataMeja.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblDataMeja.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idMeja = Integer.valueOf(tblDataMeja.getValueAt(selectedIndex, 0).toString());
+          initsUbahDataMeja(idMeja);
+        } else {
+          // Jika tidak ada yang dipilih
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data Meja yang akan diubah terlebih dahulu!",
+              "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
       }
     });
 
@@ -1744,6 +1889,96 @@ public class cDashboardMitraView extends cDashboardApp {
     setVisible(true);
   }
 
+  private void initsUbahDataMeja(int idMeja) {
+    idSelected = null;
+    resetSidebar();
+    menuDataMeja.setBackground(cColor.WHITE);
+    menuDataMeja.setForeground(cColor.GREEN);
+    refreshContent();
+    menuDataMeja.setSidebarAktif();
+    menuTitle.setText("Ubah Data Meja");
+
+    Object[] detailMeja = Model.getDetailMeja(idMeja);
+
+    pilihNomorUbahMeja.setSelectedItem(detailMeja[4].toString());
+    pilihUbahMeja.setSelectedItem(detailMeja[5].toString());
+    txtDeskripsiUbahMeja.setText(detailMeja[6].toString());
+
+    btnSimpanUbahMeja.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        // error textfield tidak boleh kosong
+        if (pilihNomorUbahMeja.getSelectedItem() == null
+            || pilihUbahMeja.getSelectedItem() == null
+            || txtDeskripsiUbahMeja.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+          // spesifik textfield
+          if (pilihNomorUbahMeja.getSelectedItem() == null
+              || pilihNomorUbahMeja.getSelectedItem().toString().trim().equals("Nomor Meja")) {
+            content.add(errorNomorUbahMeja);
+          } else {
+            content.remove(errorNomorUbahMeja);
+          }
+          if (pilihUbahMeja.getSelectedItem() == null
+              || pilihUbahMeja.getSelectedItem().toString().trim().equals("Jenis Meja")) {
+            content.add(errorUbahMeja);
+          } else {
+            content.remove(errorUbahMeja);
+          }
+          if (txtDeskripsiUbahMeja.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiUbahMeja);
+          } else {
+            content.remove(errorDeskripsiUbahMeja);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String nomorMeja = (String) pilihNomorUbahMeja.getSelectedItem();
+          String jenisMeja = (String) pilihUbahMeja.getSelectedItem();
+          String deskripsiMeja = txtDeskripsiUbahMeja.getText();
+
+          if (Model.ubahDataMeja(idMeja, idMitra, nomorMeja, jenisMeja, deskripsiMeja)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data UbahMeja Berhasil Disimpan.",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data UbahMeja Gagal Disimpan.", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
+    btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        pilihNomorUbahMeja.setSelectedItem("Nomor Meja");
+        txtDeskripsiUbahMeja.setText(null);
+        pilihUbahMeja.setSelectedItem("Jenis Meja");
+      }
+    });
+
+    btnKembaliUbahMeja.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsDataMeja();
+      }
+    });
+
+    content.add(labelInputUbahMeja);
+    content.add(labelNomorUbahMeja);
+    content.add(pilihNomorUbahMeja);
+    content.add(labelDeskripsiUbahMeja);
+    content.add(txtDeskripsiUbahMeja);
+    content.add(labelPilihUbahMeja);
+    content.add(pilihUbahMeja);
+    content.add(btnSimpanUbahMeja);
+    content.add(btnHapusUbahMeja);
+    content.add(btnKembaliUbahMeja);
+
+    setVisible(true);
+  }
+
   private void initsInputDataMeja() {
     idSelected = null;
     resetSidebar();
@@ -1753,13 +1988,64 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataMeja.setSidebarAktif();
     menuTitle.setText("Data Meja");
 
+    pilihNomorMeja.setSelectedItem("Nomor Meja");
+    pilihMeja.setSelectedItem("Jenis Meja");
+    txtDeskripsiMeja.setText(null);
+
+    btnSimpanMeja.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        // error textfield tidak boleh kosong
+        if (pilihNomorMeja.getSelectedItem() == null
+            || pilihMeja.getSelectedItem() == null
+            || txtDeskripsiMeja.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+          // spesifik textfield
+          if (pilihNomorMeja.getSelectedItem() == null
+              || pilihNomorMeja.getSelectedItem().toString().trim().equals("Nomor Meja")) {
+            content.add(errorNomorMeja);
+          } else {
+            content.remove(errorNomorMeja);
+          }
+          if (pilihMeja.getSelectedItem() == null
+              || pilihMeja.getSelectedItem().toString().trim().equals("Jenis Meja")) {
+            content.add(errorMeja);
+          } else {
+            content.remove(errorMeja);
+          }
+          if (txtDeskripsiMeja.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiMeja);
+          } else {
+            content.remove(errorDeskripsiMeja);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String nomorMeja = (String) pilihNomorMeja.getSelectedItem();
+          String jenisMeja = (String) pilihMeja.getSelectedItem();
+          String deskripsiMeja = txtDeskripsiMeja.getText();
+
+          if (Model.tambahMeja(idMitra, nomorMeja, jenisMeja, deskripsiMeja)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja Berhasil Disimpan.",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            pilihNomorMeja.setSelectedItem("Nomor Meja");
+            pilihMeja.setSelectedItem("Jenis Meja");
+            txtDeskripsiMeja.setText(null);
+          } else {
+            // kalau tidak berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Meja Gagal Disimpan.", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+      }
+    });
+
     btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
-        txtNomorMeja.setText(null);
+        pilihNomorMeja.setSelectedItem("Nomor Meja");
         txtDeskripsiMeja.setText(null);
-        pilihMeja.setSelectedItem("Coffe");
-
+        pilihMeja.setSelectedItem("Jenis Meja");
       }
     });
 
@@ -1772,14 +2058,11 @@ public class cDashboardMitraView extends cDashboardApp {
 
     content.add(labelInputMeja);
     content.add(labelNomorMeja);
-    content.add(txtNomorMeja);
-    content.add(errorNomorMeja);
+    content.add(pilihNomorMeja);
     content.add(labelDeskripsiMeja);
     content.add(txtDeskripsiMeja);
-    content.add(errorDeskripsiMeja);
     content.add(labelPilihMeja);
     content.add(pilihMeja);
-    content.add(errorMeja);
     content.add(btnSimpanMeja);
     content.add(btnHapusMeja);
     content.add(btnKembaliMeja);
