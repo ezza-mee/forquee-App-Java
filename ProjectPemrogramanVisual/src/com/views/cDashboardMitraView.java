@@ -848,6 +848,8 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    System.out.println("hello word");
+
     content.add(labelInputMenuUbahMakanan);
     content.add(labelNamaUbahMakanan);
     content.add(txtNamaUbahMakanan);
@@ -1583,6 +1585,29 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    btnHapusDataPromo.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblDataPromo.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idPromo = Integer.valueOf(tblDataPromo.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataPromo(idPromo)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Promo berhasil dihapus!", "berhasil",
+                JOptionPane.INFORMATION_MESSAGE);
+            initsDataPromo();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Promo gagal dihapus!", "gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
     tblDataPromo = new cTable(Model.getAllPromo());
 
     tblDataPromo.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1806,7 +1831,38 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    
+    btnHapusDataKaryawan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblDataKaryawan.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idKaryawan = Integer.valueOf(tblDataKaryawan.getValueAt(selectedIndex, 0).toString());
+
+          if (Model.hapusDataKaryawan(idKaryawan)) {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Karyawan behasil dihapus!", "Berhasil",
+                JOptionPane.INFORMATION_MESSAGE);
+            initsDataKaryawan();
+
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Karyawan gagal dihapus!", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        } else {
+          // kalo gak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this, "Pilih data terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    btnEditDataKaryawan.addActionListener(new java.awt.event.ActionListener() {
+
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+
+      }
+    });
 
     tblDataKaryawan = new cTable(Model.getAllKaryawanVerified());
 

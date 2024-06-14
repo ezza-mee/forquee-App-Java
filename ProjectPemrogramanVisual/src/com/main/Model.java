@@ -1111,4 +1111,62 @@ public class Model {
         return data;
     }
 
+    // hapus data Karyawan
+    public static boolean hapusDataKaryawan(int idKaryawan) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "DELETE FROM tblkaryawan WHERE idKaryawan = " + idKaryawan;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    // hapus data Promo
+    public static boolean hapusDataPromo(int idPromo) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "DELETE FROM tblpromo WHERE idPromo = " + idPromo;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
 }
