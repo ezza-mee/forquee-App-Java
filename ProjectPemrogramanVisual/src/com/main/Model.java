@@ -266,6 +266,41 @@ public class Model {
         return tm;
     }
 
+     // detail data Menu Makanan
+     public static Object[] getDetailPromo(int idMenu) {
+
+        connection();
+
+        Object[] rowData = new Object[9];
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallpromo WHERE idMenu = " + idMenu;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            rowData[0] = resultData.getInt("idMenu");
+            rowData[1] = resultData.getInt("idMitra");
+            rowData[2] = resultData.getString("namaMitra");
+            rowData[3] = resultData.getString("waktuPromo");
+            rowData[4] = resultData.getString("namaPromo");
+            rowData[5] = resultData.getString("menuPromo");
+            rowData[6] = resultData.getInt("hargaPromo");
+            rowData[7] = resultData.getString("deskripsiPromo");
+            rowData[8] = resultData.getString("statusPromo");
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowData;
+    }
+
     // get data all menu non coffe
     public static DefaultTableModel getAllMenuNonCoffe() {
 

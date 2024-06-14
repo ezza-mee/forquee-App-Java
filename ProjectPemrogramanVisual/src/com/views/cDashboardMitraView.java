@@ -192,7 +192,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cTextField txtCariPromo = new cTextField(100, 100, 300);
   private cButton btnTambahPromo = new cButton("Tambah", 450, 100, 150, 30, 20);
   private cButton btnHapusDataPromo = new cButton("Hapus", 630, 100, 150, 30, 20);
-  private cButton btnEditDataPromo = new cButton("Edit", 800, 100, 150, 30, 20);
+  private cButton btnEditDataPromo = new cButton("Edit", 810, 100, 150, 30, 20);
   private cButton btnKembaliPromo = new cButton("Kembali", 190, 480, 150, 30, 20);
   private cTable tblDataPromo;
   private cScrollPane spDataPromo;
@@ -206,7 +206,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cTextField txtJumlahPromo = new cTextField(190, 210, 300);
   private cErrorLabel errorJumlahPromo = new cErrorLabel("Jumlah tidak boleh Kosong!", 190, 235, 400);
   private cLabelInfo labelPilihMenuPromo = new cLabelInfo("Menu Promo", 190, 270, 300, 40);
-  private cComboBox pilihMenuPromo = new cComboBox(new String[] { "Coffe", "Non Coffe", "Makanan" }, 190, 302, 300, 30);
+  private cComboBox pilihMenuPromo = new cComboBox(new String[] { "Pilih Menu" }, 190, 302, 300, 30);
   private cErrorLabel errorMenuPromo = new cErrorLabel("Menu Promo tidak boleh Kosong!", 190, 327, 300);
   private cLabelInfo labelDeskripsiPromo = new cLabelInfo("Deskripsi Promo", 580, 90, 300, 40);
   private cTextarea txtDeskripsiPromo = new cTextarea(580, 120, 300, 120, true);
@@ -1624,6 +1624,13 @@ public class cDashboardMitraView extends cDashboardApp {
     menuDataPromo.setSidebarAktif();
     menuTitle.setText("Tambah Promo");
 
+    // set textfield null
+    txtNamaPromo.setText(null);
+    txtJumlahPromo.setText(null);
+    pilihMenuPromo.setSelectedItem("Pilih Menu");
+    txtDeskripsiPromo.setText(null);
+    txtHargaPromo.setText(null);
+
     btnHapusPromo.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -1839,6 +1846,39 @@ public class cDashboardMitraView extends cDashboardApp {
     refreshContent();
     menuDataKaryawan.setSidebarAktif();
     menuTitle.setText("Data Karyawan");
+
+    // set textfield null
+    txtNamaKaryawan.setText(null);
+    txtNomorHpKaryawan.setText(null);
+    txtEmailKaryawan.setText(null);
+    jobdeskKaryawan.setSelectedItem("Pilih Jobdesk");
+    txtAlamatKaryawan.setText(null);
+
+    btnSimpanKaryawan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        // error textfield
+        if (txtNamaKaryawan.getText().trim().isEmpty()
+            || txtNomorHpKaryawan.getText().trim().isEmpty()
+            || txtEmailKaryawan.getText().trim().isEmpty()
+            || jobdeskKaryawan.getSelectedItem() == null
+            || txtAlamatKaryawan.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+
+          // spesifik error
+          if (txtNamaKaryawan.getText().trim().isEmpty()) {
+            content.add(errorNamaKaryawan);
+          } else {
+            content.remove(errorNamaKaryawan);
+          }
+          if (txtNomorHpKaryawan.getText().trim().isEmpty()) {
+            content.add(errorNomorHpKaryawan);
+          } else {
+            
+          }
+        }
+      }
+    });
 
     btnHapusKaryawan.addActionListener(new java.awt.event.ActionListener() {
       @Override
