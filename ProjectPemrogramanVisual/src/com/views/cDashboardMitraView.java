@@ -278,7 +278,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cTextField txtNomorHpKaryawan = new cTextField(190, 235, 300);
   private cTextField txtEmailKaryawan = new cTextField(190, 335, 300);
   private cTextarea txtAlamatKaryawan = new cTextarea(580, 235, 300, 150, true);
-  private cComboBox jobdeskKaryawan = new cComboBox(
+  private cComboBox pilihJobdeskKaryawan = new cComboBox(
       new String[] { "Operator Mesin", "Petugas Layanan", "Teknisi Mesin", "Administrasi",
           "Supervisor", "Staf", "Kasir" },
       580, 135, 300, 30);
@@ -1806,6 +1806,8 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    
+
     tblDataKaryawan = new cTable(Model.getAllKaryawanVerified());
 
     tblDataKaryawan.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1851,7 +1853,7 @@ public class cDashboardMitraView extends cDashboardApp {
     txtNamaKaryawan.setText(null);
     txtNomorHpKaryawan.setText(null);
     txtEmailKaryawan.setText(null);
-    jobdeskKaryawan.setSelectedItem("Pilih Jobdesk");
+    pilihJobdeskKaryawan.setSelectedItem("Operator Mesin");
     txtAlamatKaryawan.setText(null);
 
     btnSimpanKaryawan.addActionListener(new java.awt.event.ActionListener() {
@@ -1861,7 +1863,7 @@ public class cDashboardMitraView extends cDashboardApp {
         if (txtNamaKaryawan.getText().trim().isEmpty()
             || txtNomorHpKaryawan.getText().trim().isEmpty()
             || txtEmailKaryawan.getText().trim().isEmpty()
-            || jobdeskKaryawan.getSelectedItem() == null
+            || pilihJobdeskKaryawan.getSelectedItem() == null
             || txtAlamatKaryawan.getText().trim().isEmpty()) {
           cDashboardMitraView.this.setVisible(false);
 
@@ -1874,7 +1876,42 @@ public class cDashboardMitraView extends cDashboardApp {
           if (txtNomorHpKaryawan.getText().trim().isEmpty()) {
             content.add(errorNomorHpKaryawan);
           } else {
-            
+            content.remove(errorNomorHpKaryawan);
+          }
+          if (txtEmailKaryawan.getText().trim().isEmpty()) {
+            content.add(errorEmailKaryawan);
+          } else {
+            content.remove(errorEmailKaryawan);
+          }
+          if (pilihJobdeskKaryawan.getSelectedItem() == null
+              || pilihJobdeskKaryawan.getSelectedItem().toString().trim().equals("Pilih Jobdesk")) {
+            content.add(errorJobdeskKaryawan);
+          } else {
+            content.remove(errorJobdeskKaryawan);
+          }
+          if (txtAlamatKaryawan.getText().trim().isEmpty()) {
+            content.add(errorAlamatKaryawan);
+          } else {
+            content.remove(errorAlamatKaryawan);
+          }
+          cDashboardMitraView.this.setVisible(true);
+        } else {
+          String namaKaryawan = txtNamaKaryawan.getText();
+          String nomorHpKaryawan = txtNomorHpKaryawan.getText();
+          String emailKaryawan = txtEmailKaryawan.getText();
+          String jobdeskKaryawan = (String) pilihJobdeskKaryawan.getSelectedItem();
+          String alamatKaryawan = txtAlamatKaryawan.getText();
+
+          if (Model.tambahKaryawan(idMitra, namaKaryawan, nomorHpKaryawan, emailKaryawan, jobdeskKaryawan,
+              alamatKaryawan)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Karyawan Berhasil Disimpan",
+                "Berhasil",
+                JOptionPane.INFORMATION_MESSAGE);
+            initsInputDataKaryawan();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Gagal Input data Karyawan.", "Gagal",
+                JOptionPane.ERROR_MESSAGE);
           }
         }
       }
@@ -1887,7 +1924,7 @@ public class cDashboardMitraView extends cDashboardApp {
         txtNomorHpKaryawan.setText(null);
         txtEmailKaryawan.setText(null);
         txtAlamatKaryawan.setText(null);
-        jobdeskKaryawan.setSelectedItem("Operator Mesin");
+        pilihJobdeskKaryawan.setSelectedItem("Operator Mesin");
       }
     });
 
@@ -1901,19 +1938,14 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(labelDataKaryawan);
     content.add(labelNamaKaryawan);
     content.add(txtNamaKaryawan);
-    content.add(errorNamaKaryawan);
     content.add(labelNomorHpKaryawan);
     content.add(txtNomorHpKaryawan);
-    content.add(errorNomorHpKaryawan);
     content.add(labelEmailKaryawan);
     content.add(txtEmailKaryawan);
-    content.add(errorEmailKaryawan);
     content.add(labelAlamatKaryawan);
     content.add(txtAlamatKaryawan);
-    content.add(errorAlamatKaryawan);
     content.add(labelJobdeskKaryawan);
-    content.add(jobdeskKaryawan);
-    content.add(errorJobdeskKaryawan);
+    content.add(pilihJobdeskKaryawan);
     content.add(btnSimpanKaryawan);
     content.add(btnHapusKaryawan);
     content.add(btnKembaliKaryawan);
