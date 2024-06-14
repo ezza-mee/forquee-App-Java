@@ -266,8 +266,8 @@ public class Model {
         return tm;
     }
 
-     // detail data Menu Makanan
-     public static Object[] getDetailPromo(int idMenu) {
+    // detail data Menu Makanan
+    public static Object[] getDetailPromo(int idMenu) {
 
         connection();
 
@@ -898,6 +898,36 @@ public class Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return data;
+    }
+
+    // insert data karyawan
+    public static boolean tambahKaryawan(int idMitra, String namaKaryawan, String nomorHpKaryawan,
+            String emailKaryawan, String jobdeskKaryawan, String alamatKaryawan) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+            statement = connect.createStatement();
+
+            // Tambahkan tanda kutip untuk nilai string dan tambahkan koma antara nilai
+            String query = "INSERT INTO tblkaryawan VALUES (NULL, '" + idMitra + "', NOW(), '" + namaKaryawan + "', '"
+                    + nomorHpKaryawan + "', '" + emailKaryawan + "', '" + jobdeskKaryawan + "', '" + alamatKaryawan
+                    + "', 'Verified', 'Aktif')";
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return data;
     }
 
