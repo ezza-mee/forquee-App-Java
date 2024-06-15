@@ -1,7 +1,5 @@
 package com.main;
 
-import com.templates.*;
-
 public class App {
 
     public static void main(String[] args) {
