@@ -7,7 +7,6 @@ import com.main.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 
 public class cDashboardMitraView extends cDashboardApp {
 
@@ -314,8 +313,11 @@ public class cDashboardMitraView extends cDashboardApp {
 
   // component of data Transaksi
   private cButton btnKembaliTransaksiMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cButton btnKembaliTransaksiUbahMakanan = new cButton("Kembali", 190, 480, 150, 30, 20);
   private cButton btnKembaliTransaksiCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cButton btnKembaliTransaksiUbahCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
   private cButton btnKembaliTransaksiNonCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
+  private cButton btnKembaliTransaksiUbahNonCoffe = new cButton("Kembali", 190, 480, 150, 30, 20);
 
   // component of data menu makanan
   private cLabelInfo labelCariTransaksiMakanan = new cLabelInfo("Cari", 40, 90, 300, 40);
@@ -442,6 +444,117 @@ public class cDashboardMitraView extends cDashboardApp {
   private cComboBox pilihPromoNonCoffe;
   private cComboBox pilihMejaNonCoffe;
   private cTextarea txtTotalHargaNonCoffe = new cTextarea(40, 200, 200, 30, false);
+
+  // component of input data Transaksi UbahMakanan
+  private cLabelInfo labelInputTransaksiUbahMakanan = new cLabelInfo("Masukan Data Transaksi UbahMakanan!", 190, 40,
+      400, 40);
+  private cLabelInfo labelNamaTransaksiUbahMakanan = new cLabelInfo("Nama Pemesan", 190, 90, 300, 40);
+  private cTextField txtNamaTransaksiUbahMakanan = new cTextField(190, 120, 300);
+  private cErrorLabel errorNamaTransaksiUbahMakanan = new cErrorLabel("Nama Pemesan tidak boleh Kosong!", 190,
+      145, 400);
+  private cLabelInfo labelPilihTransaksiUbahMakanan = new cLabelInfo("Menu UbahMakanan", 190, 180, 300, 40);
+  private cErrorLabel errorTransaksiUbahMakanan = new cErrorLabel("Menu UbahMakanan tidak boleh Kosong!", 190,
+      235, 300);
+  private cLabelInfo labelDeskripsiTransaksiUbahMakanan = new cLabelInfo("Deskripsi UbahMakanan", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiTransaksiUbahMakanan = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiTransaksiUbahMakanan = new cErrorLabel(
+      "Deskripsi UbahMakanan tidak boleh Kosong!", 580, 235,
+      300);
+  private cLabelInfo labelMejaTransaksiUbahMakanan = new cLabelInfo("Pilih Meja", 190, 270, 300, 40);
+  private cErrorLabel errorMejaTransaksiUbahMakanan = new cErrorLabel("Pilih Meja tidak boleh Kosong!", 190,
+      327, 300);
+  private cLabelInfo labelJumlahTransaksiUbahMakanan = new cLabelInfo("Jumlah UbahMakanan", 580, 270, 300, 40);
+  private cTextField txtJumlahTransaksiUbahMakanan = new cTextField(580, 302, 300);
+  private cErrorLabel errorJumlahTransaksiUbahMakanan = new cErrorLabel("Jumlah UbahMakanan tidak boleh Kosong!", 580,
+      327,
+      400);
+  private cLabelInfo labelPembayaranUbahMakanan = new cLabelInfo("Pilih Promo", 190, 360, 300, 40);
+  private cLabelInfo labelHargaTransaksiUbahMakanan = new cLabelInfo("Harga Pemesan", 580, 360, 300, 40);
+  private cTextField txtHargaTransaksiUbahMakanan = new cTextField(580, 392, 300);
+  private cButton btnHapusTransaksiUbahMakanan = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanTransaksiUbahMakanan = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cComboBox pilihPembayaranUbahMakanan = new cComboBox(new String[] { "CASH", "OVO", "GOPAY" }, 190, 390, 300,
+      30);
+  private cErrorLabel errorPembayaranUbahMakanan = new cErrorLabel("Metode Pembayaran tidak boleh Kosong!", 190,
+      415, 300);
+  private cComboBox pilihTransaksiUbahMakanan;
+  private cComboBox pilihPromoUbahMakanan;
+  private cComboBox pilihMejaUbahMakanan;
+  private cTextarea txtTotalHargaUbahMakanan = new cTextarea(40, 8000, 200, 30, false);
+
+  // component of input data Transaksi UbahCoffe
+  private cLabelInfo labelInputTransaksiUbahCoffe = new cLabelInfo("Masukan Data Transaksi UbahCoffe!", 190, 40,
+      400, 40);
+  private cLabelInfo labelNamaTransaksiUbahCoffe = new cLabelInfo("Nama Pemesan", 190, 90, 300, 40);
+  private cTextField txtNamaTransaksiUbahCoffe = new cTextField(190, 120, 300);
+  private cErrorLabel errorNamaTransaksiUbahCoffe = new cErrorLabel("Nama Pemesan tidak boleh Kosong!", 190,
+      145, 400);
+  private cLabelInfo labelPilihTransaksiUbahCoffe = new cLabelInfo("Menu UbahCoffe", 190, 180, 300, 40);
+  private cErrorLabel errorTransaksiUbahCoffe = new cErrorLabel("Menu UbahCoffe tidak boleh Kosong!", 190,
+      235, 300);
+  private cLabelInfo labelDeskripsiTransaksiUbahCoffe = new cLabelInfo("Deskripsi UbahCoffe", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiTransaksiUbahCoffe = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiTransaksiUbahCoffe = new cErrorLabel(
+      "Deskripsi UbahCoffe tidak boleh Kosong!", 580, 235,
+      300);
+  private cLabelInfo labelMejaTransaksiUbahCoffe = new cLabelInfo("Pilih Meja", 190, 270, 300, 40);
+  private cErrorLabel errorMejaTransaksiUbahCoffe = new cErrorLabel("Pilih Meja tidak boleh Kosong!", 190,
+      327, 300);
+  private cLabelInfo labelJumlahTransaksiUbahCoffe = new cLabelInfo("Jumlah UbahCoffe", 580, 270, 300, 40);
+  private cTextField txtJumlahTransaksiUbahCoffe = new cTextField(580, 302, 300);
+  private cErrorLabel errorJumlahTransaksiUbahCoffe = new cErrorLabel("Jumlah UbahCoffe tidak boleh Kosong!", 580,
+      327,
+      400);
+  private cLabelInfo labelPembayaranUbahCoffe = new cLabelInfo("Pilih Promo", 190, 360, 300, 40);
+  private cLabelInfo labelHargaTransaksiUbahCoffe = new cLabelInfo("Harga Pemesan", 580, 360, 300, 40);
+  private cTextField txtHargaTransaksiUbahCoffe = new cTextField(580, 392, 300);
+  private cButton btnHapusTransaksiUbahCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanTransaksiUbahCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cComboBox pilihPembayaranUbahCoffe = new cComboBox(new String[] { "CASH", "OVO", "GOPAY" }, 190, 390, 300,
+      30);
+  private cErrorLabel errorPembayaranUbahCoffe = new cErrorLabel("Metode Pembayaran tidak boleh Kosong!", 190,
+      415, 300);
+  private cComboBox pilihTransaksiUbahCoffe;
+  private cComboBox pilihPromoUbahCoffe;
+  private cComboBox pilihMejaUbahCoffe;
+  private cTextarea txtTotalHargaUbahCoffe = new cTextarea(40, 8000, 200, 30, false);
+
+  // component of input data Transaksi UbahNonCoffe
+  private cLabelInfo labelInputTransaksiUbahNonCoffe = new cLabelInfo("Masukan Data Transaksi UbahNonCoffe!", 190, 40,
+      400, 40);
+  private cLabelInfo labelNamaTransaksiUbahNonCoffe = new cLabelInfo("Nama Pemesan", 190, 90, 300, 40);
+  private cTextField txtNamaTransaksiUbahNonCoffe = new cTextField(190, 120, 300);
+  private cErrorLabel errorNamaTransaksiUbahNonCoffe = new cErrorLabel("Nama Pemesan tidak boleh Kosong!", 190,
+      145, 400);
+  private cLabelInfo labelPilihTransaksiUbahNonCoffe = new cLabelInfo("Menu UbahNonCoffe", 190, 180, 300, 40);
+  private cErrorLabel errorTransaksiUbahNonCoffe = new cErrorLabel("Menu UbahNonCoffe tidak boleh Kosong!", 190,
+      235, 300);
+  private cLabelInfo labelDeskripsiTransaksiUbahNonCoffe = new cLabelInfo("Deskripsi UbahNonCoffe", 580, 90, 300, 40);
+  private cTextarea txtDeskripsiTransaksiUbahNonCoffe = new cTextarea(580, 120, 300, 120, true);
+  private cErrorLabel errorDeskripsiTransaksiUbahNonCoffe = new cErrorLabel(
+      "Deskripsi UbahNonCoffe tidak boleh Kosong!", 580, 235,
+      300);
+  private cLabelInfo labelMejaTransaksiUbahNonCoffe = new cLabelInfo("Pilih Meja", 190, 270, 300, 40);
+  private cErrorLabel errorMejaTransaksiUbahNonCoffe = new cErrorLabel("Pilih Meja tidak boleh Kosong!", 190,
+      327, 300);
+  private cLabelInfo labelJumlahTransaksiUbahNonCoffe = new cLabelInfo("Jumlah UbahNonCoffe", 580, 270, 300, 40);
+  private cTextField txtJumlahTransaksiUbahNonCoffe = new cTextField(580, 302, 300);
+  private cErrorLabel errorJumlahTransaksiUbahNonCoffe = new cErrorLabel("Jumlah UbahNonCoffe tidak boleh Kosong!", 580,
+      327,
+      400);
+  private cLabelInfo labelPembayaranUbahNonCoffe = new cLabelInfo("Pilih Promo", 190, 360, 300, 40);
+  private cLabelInfo labelHargaTransaksiUbahNonCoffe = new cLabelInfo("Harga Pemesan", 580, 360, 300, 40);
+  private cTextField txtHargaTransaksiUbahNonCoffe = new cTextField(580, 392, 300);
+  private cButton btnHapusTransaksiUbahNonCoffe = new cButton("Hapus", 540, 480, 150, 30, 20);
+  private cButton btnSimpanTransaksiUbahNonCoffe = new cButton("Simpan", 730, 480, 150, 30, 20);
+  private cComboBox pilihPembayaranUbahNonCoffe = new cComboBox(new String[] { "CASH", "OVO", "GOPAY" }, 190, 390, 300,
+      30);
+  private cErrorLabel errorPembayaranUbahNonCoffe = new cErrorLabel("Metode Pembayaran tidak boleh Kosong!", 190,
+      415, 300);
+  private cComboBox pilihTransaksiUbahNonCoffe;
+  private cComboBox pilihPromoUbahNonCoffe;
+  private cComboBox pilihMejaUbahNonCoffe;
+  private cTextarea txtTotalHargaUbahNonCoffe = new cTextarea(40, 8000, 200, 30, false);
 
   // component of data OrderBahan
   private cLabelInfo labelOrderBahan = new cLabelInfo("Data OrderBahan Menu", 40, 40, 300, 40);
@@ -2346,6 +2459,23 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    btnEditMakananTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblTransaksiMakanan.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idTransaksi = Integer.valueOf(tblTransaksiMakanan.getValueAt(selectedIndex, 0).toString());
+          initsUbahTransaksiMakanan(idTransaksi);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data Transaksi yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
     tblTransaksiMakanan = new cTable(Model.getAllTransaksiMakananDiproses());
 
     tblTransaksiMakanan.getColumnModel().getColumn(0).setMinWidth(0);
@@ -2397,6 +2527,23 @@ public class cDashboardMitraView extends cDashboardApp {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         initsInputTransaksiCoffe();
+      }
+    });
+
+    btnEditCoffeTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblTransaksiCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idTransaksi = Integer.valueOf(tblTransaksiCoffe.getValueAt(selectedIndex, 0).toString());
+          initsUbahTransaksiCoffe(idTransaksi);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data Transaksi yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
       }
     });
 
@@ -2453,6 +2600,23 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+    btnEditNonCoffeTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblTransaksiNonCoffe.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          int idTransaksi = Integer.valueOf(tblTransaksiNonCoffe.getValueAt(selectedIndex, 0).toString());
+          initsUbahTransaksiNonCoffe(idTransaksi);
+        } else {
+          // kalo tidak ada yang diseleksi
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data Transaksi yang akan diubah terlebih dahulu!", "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
     tblTransaksiNonCoffe = new cTable(Model.getAllTransaksiNonCoffeDiproses());
 
     tblTransaksiNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
@@ -2503,6 +2667,21 @@ public class cDashboardMitraView extends cDashboardApp {
     promoMakanan.add(0, "Promo Makanan");
 
     pilihPromoMakanan = new cComboBox(promoMakanan.toArray(new String[0]), 190, 390, 300, 20);
+
+    ArrayList<String> menuUbahMakanan = Model.getAllMenuTransaksiUbahMakanan();
+    menuUbahMakanan.add(0, "Menu Makanan");
+
+    pilihTransaksiUbahMakanan = new cComboBox(menuUbahMakanan.toArray(new String[0]), 190, 210, 300, 30);
+
+    ArrayList<String> mejaUbahMakanan = Model.getAllMejaTransaksiUbahMakanan();
+    mejaUbahMakanan.add(0, "Meja Makanan");
+
+    pilihMejaUbahMakanan = new cComboBox(mejaUbahMakanan.toArray(new String[0]), 190, 302, 300, 30);
+
+    ArrayList<String> promoUbahMakanan = Model.getAllPromoTransaksiUbahMakanan();
+    promoUbahMakanan.add(0, "Promo Makanan");
+
+    pilihPromoUbahMakanan = new cComboBox(promoUbahMakanan.toArray(new String[0]), 190, 390, 300, 20);
   }
 
   private void initializeTransaksiCoffe() {
@@ -2519,24 +2698,50 @@ public class cDashboardMitraView extends cDashboardApp {
     ArrayList<String> promoCoffe = Model.getAllPromoTransaksiCoffe();
     promoCoffe.add(0, "Promo Coffe");
 
-    pilihPromoCoffe = new cComboBox(promoCoffe.toArray(new String[0]), 190, 390, 300, 20);
+    ArrayList<String> menuUbahCoffe = Model.getAllMenuTransaksiUbahCoffe();
+    menuUbahCoffe.add(0, "Menu Coffe");
+
+    pilihTransaksiUbahCoffe = new cComboBox(menuUbahCoffe.toArray(new String[0]), 190, 210, 300, 30);
+
+    ArrayList<String> mejaUbahCoffe = Model.getAllMejaTransaksiUbahCoffe();
+    mejaUbahCoffe.add(0, "Meja Coffe");
+
+    pilihMejaUbahCoffe = new cComboBox(mejaUbahCoffe.toArray(new String[0]), 190, 302, 300, 30);
+
+    ArrayList<String> promoUbahCoffe = Model.getAllPromoTransaksiUbahCoffe();
+    promoUbahCoffe.add(0, "Promo Coffe");
+
+    pilihPromoUbahCoffe = new cComboBox(promoCoffe.toArray(new String[0]), 190, 390, 300, 20);
   }
 
   private void initializeTransaksiNonCoffe() {
     ArrayList<String> menuNonCoffe = Model.getAllMenuTransaksiNonCoffe();
-    menuNonCoffe.add(0, "Menu NonCoffe");
+    menuNonCoffe.add(0, "Menu Non Coffe");
 
     pilihTransaksiNonCoffe = new cComboBox(menuNonCoffe.toArray(new String[0]), 190, 210, 300, 30);
 
     ArrayList<String> mejaNonCoffe = Model.getAllMejaTransaksiNonCoffe();
-    mejaNonCoffe.add(0, "Meja NonCoffe");
+    mejaNonCoffe.add(0, "Meja Non Coffe");
 
     pilihMejaNonCoffe = new cComboBox(mejaNonCoffe.toArray(new String[0]), 190, 302, 300, 30);
 
     ArrayList<String> promoNonCoffe = Model.getAllPromoTransaksiNonCoffe();
-    promoNonCoffe.add(0, "Promo NonCoffe");
+    promoNonCoffe.add(0, "Promo Non Coffe");
 
-    pilihPromoNonCoffe = new cComboBox(promoNonCoffe.toArray(new String[0]), 190, 390, 300, 20);
+    ArrayList<String> menuUbahNonCoffe = Model.getAllMenuTransaksiUbahNonCoffe();
+    menuUbahNonCoffe.add(0, "Menu Non Coffe");
+
+    pilihTransaksiUbahNonCoffe = new cComboBox(menuUbahNonCoffe.toArray(new String[0]), 190, 210, 300, 30);
+
+    ArrayList<String> mejaUbahNonCoffe = Model.getAllMejaTransaksiUbahNonCoffe();
+    mejaUbahNonCoffe.add(0, "Meja Non Coffe");
+
+    pilihMejaUbahNonCoffe = new cComboBox(mejaUbahNonCoffe.toArray(new String[0]), 190, 302, 300, 30);
+
+    ArrayList<String> promoUbahNonCoffe = Model.getAllPromoTransaksiUbahNonCoffe();
+    promoUbahNonCoffe.add(0, "Promo Non Coffe");
+
+    pilihPromoUbahNonCoffe = new cComboBox(promoNonCoffe.toArray(new String[0]), 190, 390, 300, 20);
   }
 
   private void initsInputTransaksiMakanan() {
@@ -2722,6 +2927,552 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(btnSimpanTransaksiMakanan);
     content.add(btnHapusTransaksiMakanan);
     content.add(btnKembaliTransaksiMakanan);
+    setVisible(true);
+  }
+
+  private void initsUbahTransaksiMakanan(int idTransaksi) {
+    idSelected = null;
+    resetSidebar();
+    menuTransaksi.setBackground(cColor.WHITE);
+    menuTransaksi.setForeground(cColor.GREEN);
+    refreshContent();
+    menuTransaksi.setSidebarAktif();
+    menuTitle.setText("Ubah Transaksi Makanan");
+
+    initializeTransaksiMakanan();
+
+    Object[] detailTransaksiMakanan = Model.getDetailTransaksiMakananDiproses(idTransaksi);
+
+    txtNamaTransaksiUbahMakanan.setText(detailTransaksiMakanan[4].toString());
+    this.pilihTransaksiUbahMakanan.setSelectedItem(detailTransaksiMakanan[5].toString());
+    this.pilihMejaUbahMakanan.setSelectedItem(detailTransaksiMakanan[6].toString());
+    this.pilihPembayaranUbahMakanan.setSelectedItem(detailTransaksiMakanan[11].toString());
+    txtDeskripsiTransaksiUbahMakanan.setText(detailTransaksiMakanan[8].toString());
+    txtJumlahTransaksiUbahMakanan.setText(detailTransaksiMakanan[9].toString());
+    txtHargaTransaksiUbahMakanan.setText(detailTransaksiMakanan[10].toString());
+
+    pilihTransaksiUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String selectedMenu = (String) pilihTransaksiUbahMakanan.getSelectedItem();
+        if (!selectedMenu.equals("Menu UbahMakanan")) {
+          // Mengambil harga menu
+          int hargaMenu = Model.getHargaMenuUbahMakanan(selectedMenu);
+          txtHargaTransaksiUbahMakanan.setText(String.valueOf(hargaMenu));
+        }
+      }
+    });
+
+    btnSimpanTransaksiUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaTransaksiUbahMakanan.getText().trim().isEmpty()
+            || pilihTransaksiUbahMakanan.getSelectedItem() == null
+            || pilihMejaUbahMakanan.getSelectedItem() == null
+            || pilihPembayaranUbahMakanan.getSelectedItem() == null
+            || txtDeskripsiTransaksiUbahMakanan.getText().trim().isEmpty()
+            || txtJumlahTransaksiUbahMakanan.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+          if (txtNamaTransaksiUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorNamaTransaksiUbahMakanan);
+          } else {
+            content.remove(errorNamaTransaksiUbahMakanan);
+          }
+          if (pilihTransaksiUbahMakanan.getSelectedItem() == null
+              || pilihTransaksiUbahMakanan.getSelectedItem().toString().trim().equals("Menu UbahMakanan")) {
+            content.add(errorTransaksiUbahMakanan);
+          } else {
+            content.remove(errorTransaksiUbahMakanan);
+          }
+          if (pilihMejaUbahMakanan.getSelectedItem() == null
+              || pilihMejaUbahMakanan.getSelectedItem().toString().trim().equals("Menu UbahMakanan")) {
+            content.add(errorMejaTransaksiUbahMakanan);
+          } else {
+            content.remove(errorMejaTransaksiUbahMakanan);
+          }
+          if (pilihPembayaranUbahMakanan.getSelectedItem() == null
+              || pilihPembayaranUbahMakanan.getSelectedItem().toString().trim().equals("Menu UbahMakanan")) {
+            content.add(errorPembayaranUbahMakanan);
+          } else {
+            content.remove(errorPembayaranUbahMakanan);
+          }
+          if (txtDeskripsiTransaksiUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiTransaksiUbahMakanan);
+          } else {
+            content.remove(errorDeskripsiTransaksiUbahMakanan);
+          }
+          if (txtJumlahTransaksiUbahMakanan.getText().trim().isEmpty()) {
+            content.add(errorJumlahTransaksiUbahMakanan);
+          } else {
+            content.remove(errorJumlahTransaksiUbahMakanan);
+          }
+        } else {
+          String namaTransaksi = txtNamaTransaksiUbahMakanan.getText();
+          String menuTransaksi = (String) pilihTransaksiUbahMakanan.getSelectedItem();
+          String mejaTransaksi = (String) pilihMejaUbahMakanan.getSelectedItem();
+          String promoTransaksi = (String) pilihPromoUbahMakanan.getSelectedItem();
+          String bayarTransaksi = (String) pilihPembayaranUbahMakanan.getSelectedItem();
+          String deskripsiTransaksi = txtDeskripsiTransaksiUbahMakanan.getText();
+
+          int jumlahTransaksi = Integer.valueOf(txtJumlahTransaksiUbahMakanan.getText());
+          int hargaUbahMakanan = Integer.valueOf(txtHargaTransaksiUbahMakanan.getText());
+          int hargaTotalUbahMakanan = jumlahTransaksi * hargaUbahMakanan;
+          String TransaksiUbahMakanan = Integer.toString(hargaTotalUbahMakanan);
+          txtTotalHargaUbahMakanan.setText(TransaksiUbahMakanan);
+          int hargaTransaksi = Integer.parseInt(TransaksiUbahMakanan);
+
+          pilihPromoUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+              String selectedPromo = (String) pilihPromoUbahMakanan.getSelectedItem();
+              if (!selectedPromo.equals("Promo UbahMakanan")) {
+                int hargaPromo = Model.getPromoMenuUbahMakanan(selectedPromo);
+                int transaksiPromo = hargaTransaksi - hargaPromo;
+                String totalHargaPromo = Integer.toString(transaksiPromo);
+                txtTotalHargaUbahMakanan.setText(totalHargaPromo);
+              }
+            }
+          });
+
+          Object[] messagePromo = { "pilih Promo UbahMakanan", pilihPromoUbahMakanan };
+          JOptionPane.showMessageDialog(null, messagePromo, "Promo",
+              JOptionPane.PLAIN_MESSAGE);
+
+          String pembayaranUbahMakanan = "Data Transaksi UbahMakanan" + "\n\n"
+              + "nama Pemesan \n" + txtNamaTransaksiUbahMakanan.getText() + "\n"
+              + "menu UbahMakanan \n" + pilihTransaksiUbahMakanan.getSelectedItem() + "\n"
+              + "meja UbahMakanan \n" + pilihMejaUbahMakanan.getSelectedItem() + "\n"
+              + "promo UbahMakanan \n" + pilihPromoUbahMakanan.getSelectedItem() + "\n"
+              + "jumlah UbahMakanan \n" + txtJumlahTransaksiUbahMakanan.getText() + "\n"
+              + "harga UbahMakanan \n Rp. " + txtHargaTransaksiUbahMakanan.getText() + "\n"
+              + "harga Total \n Rp. " + txtTotalHargaUbahMakanan.getText() + "\n"
+              + "Masukan Uang";
+
+          String checkoutUbahMakanan = JOptionPane.showInputDialog(pembayaranUbahMakanan);
+          int uang = Integer.valueOf(checkoutUbahMakanan);
+          int kembalian = uang - hargaTotalUbahMakanan;
+
+          if (Model.ubahTransaksiMakanan(idTransaksi, idMitra, namaTransaksi, menuTransaksi,
+              mejaTransaksi, promoTransaksi, deskripsiTransaksi, jumlahTransaksi, hargaTransaksi, bayarTransaksi)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Berhasil",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Uang Kembalian Anda " + "Rp. " +
+                kembalian);
+            initsDataTransaksiMakanan();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Gagal!.",
+                "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+
+        }
+      }
+    });
+
+    btnHapusTransaksiUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtNamaTransaksiUbahMakanan.setText(null);
+        txtJumlahTransaksiUbahMakanan.setText(null);
+        txtDeskripsiTransaksiUbahMakanan.setText(null);
+        pilihTransaksiUbahMakanan.setSelectedItem("Pilih UbahMakanan");
+        pilihMejaUbahMakanan.setSelectedItem("Pilih Meja");
+        pilihPembayaranUbahMakanan.setSelectedItem("Pilih Pembayaran");
+        txtHargaTransaksiUbahMakanan.setText(null);
+      }
+    });
+
+    btnKembaliTransaksiUbahMakanan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsDataTransaksiMakanan();
+      }
+    });
+
+    content.add(labelInputTransaksiUbahMakanan);
+    content.add(labelNamaTransaksiUbahMakanan);
+    content.add(txtNamaTransaksiUbahMakanan);
+    content.add(labelJumlahTransaksiUbahMakanan);
+    content.add(txtJumlahTransaksiUbahMakanan);
+    content.add(labelMejaTransaksiUbahMakanan);
+    content.add(pilihMejaUbahMakanan);
+    content.add(labelDeskripsiTransaksiUbahMakanan);
+    content.add(txtDeskripsiTransaksiUbahMakanan);
+    content.add(labelPilihTransaksiUbahMakanan);
+    content.add(pilihTransaksiUbahMakanan);
+    content.add(labelPembayaranUbahMakanan);
+    content.add(pilihPembayaranUbahMakanan);
+    content.add(labelHargaTransaksiUbahMakanan);
+    content.add(txtHargaTransaksiUbahMakanan);
+    content.add(txtTotalHargaUbahMakanan);
+    content.add(btnSimpanTransaksiUbahMakanan);
+    content.add(btnHapusTransaksiUbahMakanan);
+    content.add(btnKembaliTransaksiUbahMakanan);
+    setVisible(true);
+  }
+
+  private void initsUbahTransaksiNonCoffe(int idTransaksi) {
+    idSelected = null;
+    resetSidebar();
+    menuTransaksi.setBackground(cColor.WHITE);
+    menuTransaksi.setForeground(cColor.GREEN);
+    refreshContent();
+    menuTransaksi.setSidebarAktif();
+    menuTitle.setText("Ubah Transaksi NonCoffe");
+
+    initializeTransaksiNonCoffe();
+
+    Object[] detailTransaksiNonCoffe = Model.getDetailTransaksiNonCoffeDiproses(idTransaksi);
+
+    txtNamaTransaksiUbahNonCoffe.setText(detailTransaksiNonCoffe[4].toString());
+    this.pilihTransaksiUbahNonCoffe.setSelectedItem(detailTransaksiNonCoffe[5].toString());
+    this.pilihMejaUbahNonCoffe.setSelectedItem(detailTransaksiNonCoffe[6].toString());
+    this.pilihPembayaranUbahNonCoffe.setSelectedItem(detailTransaksiNonCoffe[11].toString());
+    txtDeskripsiTransaksiUbahNonCoffe.setText(detailTransaksiNonCoffe[8].toString());
+    txtJumlahTransaksiUbahNonCoffe.setText(detailTransaksiNonCoffe[9].toString());
+    txtHargaTransaksiUbahNonCoffe.setText(detailTransaksiNonCoffe[10].toString());
+
+    pilihTransaksiUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String selectedMenu = (String) pilihTransaksiUbahNonCoffe.getSelectedItem();
+        if (!selectedMenu.equals("Menu UbahNonCoffe")) {
+          // Mengambil harga menu
+          int hargaMenu = Model.getHargaMenuUbahNonCoffe(selectedMenu);
+          txtHargaTransaksiUbahNonCoffe.setText(String.valueOf(hargaMenu));
+        }
+      }
+    });
+
+    btnSimpanTransaksiUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaTransaksiUbahNonCoffe.getText().trim().isEmpty()
+            || pilihTransaksiUbahNonCoffe.getSelectedItem() == null
+            || pilihMejaUbahNonCoffe.getSelectedItem() == null
+            || pilihPembayaranUbahNonCoffe.getSelectedItem() == null
+            || txtDeskripsiTransaksiUbahNonCoffe.getText().trim().isEmpty()
+            || txtJumlahTransaksiUbahNonCoffe.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+          if (txtNamaTransaksiUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorNamaTransaksiUbahNonCoffe);
+          } else {
+            content.remove(errorNamaTransaksiUbahNonCoffe);
+          }
+          if (pilihTransaksiUbahNonCoffe.getSelectedItem() == null
+              || pilihTransaksiUbahNonCoffe.getSelectedItem().toString().trim().equals("Menu UbahNonCoffe")) {
+            content.add(errorTransaksiUbahNonCoffe);
+          } else {
+            content.remove(errorTransaksiUbahNonCoffe);
+          }
+          if (pilihMejaUbahNonCoffe.getSelectedItem() == null
+              || pilihMejaUbahNonCoffe.getSelectedItem().toString().trim().equals("Menu UbahNonCoffe")) {
+            content.add(errorMejaTransaksiUbahNonCoffe);
+          } else {
+            content.remove(errorMejaTransaksiUbahNonCoffe);
+          }
+          if (pilihPembayaranUbahNonCoffe.getSelectedItem() == null
+              || pilihPembayaranUbahNonCoffe.getSelectedItem().toString().trim().equals("Menu UbahNonCoffe")) {
+            content.add(errorPembayaranUbahNonCoffe);
+          } else {
+            content.remove(errorPembayaranUbahNonCoffe);
+          }
+          if (txtDeskripsiTransaksiUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiTransaksiUbahNonCoffe);
+          } else {
+            content.remove(errorDeskripsiTransaksiUbahNonCoffe);
+          }
+          if (txtJumlahTransaksiUbahNonCoffe.getText().trim().isEmpty()) {
+            content.add(errorJumlahTransaksiUbahNonCoffe);
+          } else {
+            content.remove(errorJumlahTransaksiUbahNonCoffe);
+          }
+        } else {
+          String namaTransaksi = txtNamaTransaksiUbahNonCoffe.getText();
+          String menuTransaksi = (String) pilihTransaksiUbahNonCoffe.getSelectedItem();
+          String mejaTransaksi = (String) pilihMejaUbahNonCoffe.getSelectedItem();
+          String promoTransaksi = (String) pilihPromoUbahNonCoffe.getSelectedItem();
+          String bayarTransaksi = (String) pilihPembayaranUbahNonCoffe.getSelectedItem();
+          String deskripsiTransaksi = txtDeskripsiTransaksiUbahNonCoffe.getText();
+
+          int jumlahTransaksi = Integer.valueOf(txtJumlahTransaksiUbahNonCoffe.getText());
+          int hargaUbahNonCoffe = Integer.valueOf(txtHargaTransaksiUbahNonCoffe.getText());
+          int hargaTotalUbahNonCoffe = jumlahTransaksi * hargaUbahNonCoffe;
+          String TransaksiUbahNonCoffe = Integer.toString(hargaTotalUbahNonCoffe);
+          txtTotalHargaUbahNonCoffe.setText(TransaksiUbahNonCoffe);
+          int hargaTransaksi = Integer.parseInt(TransaksiUbahNonCoffe);
+
+          pilihPromoUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+              String selectedPromo = (String) pilihPromoUbahNonCoffe.getSelectedItem();
+              if (!selectedPromo.equals("Promo UbahNonCoffe")) {
+                int hargaPromo = Model.getPromoMenuUbahNonCoffe(selectedPromo);
+                int transaksiPromo = hargaTransaksi - hargaPromo;
+                String totalHargaPromo = Integer.toString(transaksiPromo);
+                txtTotalHargaUbahNonCoffe.setText(totalHargaPromo);
+              }
+            }
+          });
+
+          Object[] messagePromo = { "pilih Promo UbahNonCoffe", pilihPromoUbahNonCoffe };
+          JOptionPane.showMessageDialog(null, messagePromo, "Promo",
+              JOptionPane.PLAIN_MESSAGE);
+
+          String pembayaranUbahNonCoffe = "Data Transaksi UbahNonCoffe" + "\n\n"
+              + "nama Pemesan \n" + txtNamaTransaksiUbahNonCoffe.getText() + "\n"
+              + "menu UbahNonCoffe \n" + pilihTransaksiUbahNonCoffe.getSelectedItem() + "\n"
+              + "meja UbahNonCoffe \n" + pilihMejaUbahNonCoffe.getSelectedItem() + "\n"
+              + "promo UbahNonCoffe \n" + pilihPromoUbahNonCoffe.getSelectedItem() + "\n"
+              + "jumlah UbahNonCoffe \n" + txtJumlahTransaksiUbahNonCoffe.getText() + "\n"
+              + "harga UbahNonCoffe \n Rp. " + txtHargaTransaksiUbahNonCoffe.getText() + "\n"
+              + "harga Total \n Rp. " + txtTotalHargaUbahNonCoffe.getText() + "\n"
+              + "Masukan Uang";
+
+          String checkoutUbahNonCoffe = JOptionPane.showInputDialog(pembayaranUbahNonCoffe);
+          int uang = Integer.valueOf(checkoutUbahNonCoffe);
+          int kembalian = uang - hargaTotalUbahNonCoffe;
+
+          if (Model.ubahTransaksiNonCoffe(idTransaksi, idMitra, namaTransaksi, menuTransaksi,
+              mejaTransaksi, promoTransaksi, deskripsiTransaksi, jumlahTransaksi, hargaTransaksi, bayarTransaksi)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Berhasil",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Uang Kembalian Anda " + "Rp. " +
+                kembalian);
+            initsDataTransaksiNonCoffe();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Gagal!.",
+                "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+
+        }
+      }
+    });
+
+    btnHapusTransaksiUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtNamaTransaksiUbahNonCoffe.setText(null);
+        txtJumlahTransaksiUbahNonCoffe.setText(null);
+        txtDeskripsiTransaksiUbahNonCoffe.setText(null);
+        pilihTransaksiUbahNonCoffe.setSelectedItem("Pilih UbahNonCoffe");
+        pilihMejaUbahNonCoffe.setSelectedItem("Pilih Meja");
+        pilihPembayaranUbahNonCoffe.setSelectedItem("Pilih Pembayaran");
+        txtHargaTransaksiUbahNonCoffe.setText(null);
+      }
+    });
+
+    btnKembaliTransaksiUbahNonCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsDataTransaksiNonCoffe();
+      }
+    });
+
+    content.add(labelInputTransaksiUbahNonCoffe);
+    content.add(labelNamaTransaksiUbahNonCoffe);
+    content.add(txtNamaTransaksiUbahNonCoffe);
+    content.add(labelJumlahTransaksiUbahNonCoffe);
+    content.add(txtJumlahTransaksiUbahNonCoffe);
+    content.add(labelMejaTransaksiUbahNonCoffe);
+    content.add(pilihMejaUbahNonCoffe);
+    content.add(labelDeskripsiTransaksiUbahNonCoffe);
+    content.add(txtDeskripsiTransaksiUbahNonCoffe);
+    content.add(labelPilihTransaksiUbahNonCoffe);
+    content.add(pilihTransaksiUbahNonCoffe);
+    content.add(labelPembayaranUbahNonCoffe);
+    content.add(pilihPembayaranUbahNonCoffe);
+    content.add(labelHargaTransaksiUbahNonCoffe);
+    content.add(txtHargaTransaksiUbahNonCoffe);
+    content.add(txtTotalHargaUbahNonCoffe);
+    content.add(btnSimpanTransaksiUbahNonCoffe);
+    content.add(btnHapusTransaksiUbahNonCoffe);
+    content.add(btnKembaliTransaksiUbahNonCoffe);
+    setVisible(true);
+  }
+
+  private void initsUbahTransaksiCoffe(int idTransaksi) {
+    idSelected = null;
+    resetSidebar();
+    menuTransaksi.setBackground(cColor.WHITE);
+    menuTransaksi.setForeground(cColor.GREEN);
+    refreshContent();
+    menuTransaksi.setSidebarAktif();
+    menuTitle.setText("Ubah Transaksi Coffe");
+
+    initializeTransaksiCoffe();
+
+    Object[] detailTransaksiCoffe = Model.getDetailTransaksiCoffeDiproses(idTransaksi);
+
+    txtNamaTransaksiUbahCoffe.setText(detailTransaksiCoffe[4].toString());
+    this.pilihTransaksiUbahCoffe.setSelectedItem(detailTransaksiCoffe[5].toString());
+    this.pilihMejaUbahCoffe.setSelectedItem(detailTransaksiCoffe[6].toString());
+    this.pilihPembayaranUbahCoffe.setSelectedItem(detailTransaksiCoffe[11].toString());
+    txtDeskripsiTransaksiUbahCoffe.setText(detailTransaksiCoffe[8].toString());
+    txtJumlahTransaksiUbahCoffe.setText(detailTransaksiCoffe[9].toString());
+    txtHargaTransaksiUbahCoffe.setText(detailTransaksiCoffe[10].toString());
+
+    pilihTransaksiUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String selectedMenu = (String) pilihTransaksiUbahCoffe.getSelectedItem();
+        if (!selectedMenu.equals("Menu UbahCoffe")) {
+          // Mengambil harga menu
+          int hargaMenu = Model.getHargaMenuUbahCoffe(selectedMenu);
+          txtHargaTransaksiUbahCoffe.setText(String.valueOf(hargaMenu));
+        }
+      }
+    });
+
+    btnSimpanTransaksiUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        if (txtNamaTransaksiUbahCoffe.getText().trim().isEmpty()
+            || pilihTransaksiUbahCoffe.getSelectedItem() == null
+            || pilihMejaUbahCoffe.getSelectedItem() == null
+            || pilihPembayaranUbahCoffe.getSelectedItem() == null
+            || txtDeskripsiTransaksiUbahCoffe.getText().trim().isEmpty()
+            || txtJumlahTransaksiUbahCoffe.getText().trim().isEmpty()) {
+          cDashboardMitraView.this.setVisible(false);
+          if (txtNamaTransaksiUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorNamaTransaksiUbahCoffe);
+          } else {
+            content.remove(errorNamaTransaksiUbahCoffe);
+          }
+          if (pilihTransaksiUbahCoffe.getSelectedItem() == null
+              || pilihTransaksiUbahCoffe.getSelectedItem().toString().trim().equals("Menu Coffe")) {
+            content.add(errorTransaksiUbahCoffe);
+          } else {
+            content.remove(errorTransaksiUbahCoffe);
+          }
+          if (pilihMejaUbahCoffe.getSelectedItem() == null
+              || pilihMejaUbahCoffe.getSelectedItem().toString().trim().equals("Menu Coffe")) {
+            content.add(errorMejaTransaksiUbahCoffe);
+          } else {
+            content.remove(errorMejaTransaksiUbahCoffe);
+          }
+          if (pilihPembayaranUbahCoffe.getSelectedItem() == null
+              || pilihPembayaranUbahCoffe.getSelectedItem().toString().trim().equals("Menu Coffe")) {
+            content.add(errorPembayaranUbahCoffe);
+          } else {
+            content.remove(errorPembayaranUbahCoffe);
+          }
+          if (txtDeskripsiTransaksiUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorDeskripsiTransaksiUbahCoffe);
+          } else {
+            content.remove(errorDeskripsiTransaksiUbahCoffe);
+          }
+          if (txtJumlahTransaksiUbahCoffe.getText().trim().isEmpty()) {
+            content.add(errorJumlahTransaksiUbahCoffe);
+          } else {
+            content.remove(errorJumlahTransaksiUbahCoffe);
+          }
+        } else {
+          String namaTransaksi = txtNamaTransaksiUbahCoffe.getText();
+          String menuTransaksi = (String) pilihTransaksiUbahCoffe.getSelectedItem();
+          String mejaTransaksi = (String) pilihMejaUbahCoffe.getSelectedItem();
+          String promoTransaksi = (String) pilihPromoUbahCoffe.getSelectedItem();
+          String bayarTransaksi = (String) pilihPembayaranUbahCoffe.getSelectedItem();
+          String deskripsiTransaksi = txtDeskripsiTransaksiUbahCoffe.getText();
+
+          int jumlahTransaksi = Integer.valueOf(txtJumlahTransaksiUbahCoffe.getText());
+          int hargaUbahCoffe = Integer.valueOf(txtHargaTransaksiUbahCoffe.getText());
+          int hargaTotalUbahCoffe = jumlahTransaksi * hargaUbahCoffe;
+          String TransaksiUbahCoffe = Integer.toString(hargaTotalUbahCoffe);
+          txtTotalHargaUbahCoffe.setText(TransaksiUbahCoffe);
+          int hargaTransaksi = Integer.parseInt(TransaksiUbahCoffe);
+
+          pilihPromoUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+              String selectedPromo = (String) pilihPromoUbahCoffe.getSelectedItem();
+              if (!selectedPromo.equals("Promo Coffe")) {
+                int hargaPromo = Model.getPromoMenuUbahCoffe(selectedPromo);
+                int transaksiPromo = hargaTransaksi - hargaPromo;
+                String totalHargaPromo = Integer.toString(transaksiPromo);
+                txtTotalHargaUbahCoffe.setText(totalHargaPromo);
+              }
+            }
+          });
+
+          Object[] messagePromo = { "pilih Promo Coffe", pilihPromoUbahCoffe };
+          JOptionPane.showMessageDialog(null, messagePromo, "Promo",
+              JOptionPane.PLAIN_MESSAGE);
+
+          String pembayaranUbahCoffe = "Data Transaksi UbahCoffe" + "\n\n"
+              + "nama Pemesan \n" + txtNamaTransaksiUbahCoffe.getText() + "\n"
+              + "menu UbahCoffe \n" + pilihTransaksiUbahCoffe.getSelectedItem() + "\n"
+              + "meja UbahCoffe \n" + pilihMejaUbahCoffe.getSelectedItem() + "\n"
+              + "promo UbahCoffe \n" + pilihPromoUbahCoffe.getSelectedItem() + "\n"
+              + "jumlah UbahCoffe \n" + txtJumlahTransaksiUbahCoffe.getText() + "\n"
+              + "harga UbahCoffe \n Rp. " + txtHargaTransaksiUbahCoffe.getText() + "\n"
+              + "harga Total \n Rp. " + txtTotalHargaUbahCoffe.getText() + "\n"
+              + "Masukan Uang";
+
+          String checkoutUbahCoffe = JOptionPane.showInputDialog(pembayaranUbahCoffe);
+          int uang = Integer.valueOf(checkoutUbahCoffe);
+          int kembalian = uang - hargaTotalUbahCoffe;
+
+          if (Model.ubahTransaksiCoffe(idTransaksi, idMitra, namaTransaksi, menuTransaksi,
+              mejaTransaksi, promoTransaksi, deskripsiTransaksi, jumlahTransaksi, hargaTransaksi, bayarTransaksi)) {
+            // kalau berhasil
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Berhasil",
+                "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Uang Kembalian Anda " + "Rp. " +
+                kembalian);
+            initsDataTransaksiCoffe();
+          } else {
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Gagal!.",
+                "Gagal",
+                JOptionPane.ERROR_MESSAGE);
+          }
+
+        }
+      }
+    });
+
+    btnHapusTransaksiUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        txtNamaTransaksiUbahCoffe.setText(null);
+        txtJumlahTransaksiUbahCoffe.setText(null);
+        txtDeskripsiTransaksiUbahCoffe.setText(null);
+        pilihTransaksiUbahCoffe.setSelectedItem("Pilih Coffe");
+        pilihMejaUbahCoffe.setSelectedItem("Pilih Meja");
+        pilihPembayaranUbahCoffe.setSelectedItem("Pilih Pembayaran");
+        txtHargaTransaksiUbahCoffe.setText(null);
+      }
+    });
+
+    btnKembaliTransaksiUbahCoffe.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        initsDataTransaksiCoffe();
+      }
+    });
+
+    content.add(labelInputTransaksiUbahCoffe);
+    content.add(labelNamaTransaksiUbahCoffe);
+    content.add(txtNamaTransaksiUbahCoffe);
+    content.add(labelJumlahTransaksiUbahCoffe);
+    content.add(txtJumlahTransaksiUbahCoffe);
+    content.add(labelMejaTransaksiUbahCoffe);
+    content.add(pilihMejaUbahCoffe);
+    content.add(labelDeskripsiTransaksiUbahCoffe);
+    content.add(txtDeskripsiTransaksiUbahCoffe);
+    content.add(labelPilihTransaksiUbahCoffe);
+    content.add(pilihTransaksiUbahCoffe);
+    content.add(labelPembayaranUbahCoffe);
+    content.add(pilihPembayaranUbahCoffe);
+    content.add(labelHargaTransaksiUbahCoffe);
+    content.add(txtHargaTransaksiUbahCoffe);
+    content.add(txtTotalHargaUbahCoffe);
+    content.add(btnSimpanTransaksiUbahCoffe);
+    content.add(btnHapusTransaksiUbahCoffe);
+    content.add(btnKembaliTransaksiUbahCoffe);
     setVisible(true);
   }
 
