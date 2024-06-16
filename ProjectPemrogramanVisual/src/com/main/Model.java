@@ -26,6 +26,141 @@ public class Model {
         }
     }
 
+    // count All Data Meja
+    public static int getCountAllDataMeja() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwallmeja";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data promo
+    public static int getCountAllDataPromo() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwallpromo";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data Customer
+    public static int getCountAllDataCustomer() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwallcustomer";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data Karyawan
+    public static int getCountAllDataKaryawan() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwkaryawanverified";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data Order Bahan
+    public static int getCountAllDataOrderBahan() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vworderbahandiproses";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     // get Detail Data Mitra
     public static Object[] getDetailMitra(int idMitra) {
         connection();
@@ -268,7 +403,7 @@ public class Model {
     }
 
     // detail data Menu Makanan
-    public static Object[] getDetailPromo(int idMenu) {
+    public static Object[] getDetailPromo(int idPromo) {
 
         connection();
 
@@ -278,7 +413,7 @@ public class Model {
 
             statement = connect.createStatement();
 
-            String query = "SELECT * FROM vwallpromo WHERE idMenu = " + idMenu;
+            String query = "SELECT * FROM vwallpromo WHERE idPromo = " + idPromo;
 
             ResultSet resultData = statement.executeQuery(query);
 
@@ -327,6 +462,80 @@ public class Model {
             rowData[5] = resultData.getString("jenisMeja");
             rowData[6] = resultData.getString("deskripsiMeja");
             rowData[7] = resultData.getString("statusMeja");
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowData;
+    }
+
+    // detail data Menu Makanan
+    public static Object[] getDetailKaryawan(int idKaryawan) {
+
+        connection();
+
+        Object[] rowData = new Object[11];
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwkaryawanverified WHERE idKaryawan = " + idKaryawan;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            rowData[0] = resultData.getInt("idKaryawan");
+            rowData[1] = resultData.getInt("idMitra");
+            rowData[2] = resultData.getString("namaKaryawan");
+            rowData[3] = resultData.getString("waktuKaryawan");
+            rowData[4] = resultData.getString("namaKaryawan");
+            rowData[5] = resultData.getString("nomorHpKaryawan");
+            rowData[6] = resultData.getString("emailKaryawan");
+            rowData[7] = resultData.getString("jobdeskKaryawan");
+            rowData[8] = resultData.getString("alamatKaryawan");
+            rowData[9] = resultData.getString("statusTerverifikasi");
+            rowData[10] = resultData.getString("statusAktif");
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowData;
+    }
+
+    // detail data Menu Makanan
+    public static Object[] getDetailOrderBahanDiproses(int idOrder) {
+
+        connection();
+
+        Object[] rowData = new Object[11];
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vworderbahandiproses WHERE idOrder = " + idOrder;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            rowData[0] = resultData.getInt("idOrder");
+            rowData[1] = resultData.getInt("idMitra");
+            rowData[2] = resultData.getString("namaMitra");
+            rowData[3] = resultData.getString("waktuOrder");
+            rowData[4] = resultData.getString("bahanOrder");
+            rowData[5] = resultData.getString("ptOrder");
+            rowData[6] = resultData.getString("deskripsiOrder");
+            rowData[7] = resultData.getString("alamatOrder");
+            rowData[8] = resultData.getInt("jumlahOrder");
+            rowData[9] = resultData.getInt("hargaOrder");
+            rowData[10] = resultData.getString("statusOrder");
 
             statement.close();
             connect.close();
@@ -415,8 +624,8 @@ public class Model {
         return rowData;
     }
 
-     // detail data Meja
-     public static Object[] getDetailTransaksiNonCoffeDiproses(int idTransaksi) {
+    // detail data Meja
+    public static Object[] getDetailTransaksiNonCoffeDiproses(int idTransaksi) {
 
         connection();
 
@@ -597,6 +806,7 @@ public class Model {
         connection();
 
         String[] dataHeader = { "ID Karyawan", "ID Mitra", "Mitra", "waktu", "Nama", " Email", "Nomor Hp", "Alamat",
+                "Status",
                 "Status" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
@@ -633,6 +843,7 @@ public class Model {
         connection();
 
         String[] dataHeader = { "ID Karyawan", "ID Mitra", "Mitra", "waktu", "Nama", " Email", "Nomor Hp", "Alamat",
+                "Status",
                 "Status" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
@@ -1143,6 +1354,36 @@ public class Model {
         return data;
     }
 
+    // insert data karyawan
+    public static boolean tambahOrderBahan(int idMitra, String bahanOrder, String ptOrder, String deskripsiOrder,
+            String alamatOrder, int jumlahOrder, int hargaOrder) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+            statement = connect.createStatement();
+
+            // Tambahkan tanda kutip untuk nilai string dan tambahkan koma antara nilai
+            String query = "INSERT INTO tblorderbahan VALUES (NULL, '" + idMitra + "', NOW(), '" + bahanOrder + "', '"
+                    + ptOrder + "', '" + deskripsiOrder + "', '" + alamatOrder + "', '" + jumlahOrder + "', '"
+                    + hargaOrder + "', 'Diproses')";
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
     // insert transaksi makanan
     public static boolean tambahTransaksiMakanan(int idMitra, String namaTransaksi, String menuTransaksi,
             String mejaTransaksi, String promoTransaksi, String deskripsiTransaksi, int jumlahTransaksi,
@@ -1368,6 +1609,39 @@ public class Model {
         return data;
     }
 
+    // Ubah Data Meja
+    public static boolean ubahDataPromo(int idPromo, int idMitra, String namaPromo, String menuPromo,
+            int jumlahPromo, int hargaPromo,
+            String deskripsiPromo) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statemenet yang diambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "UPDATE tblpromo SET idMitra = '" + idMitra + "', namaPromo = '"
+                    + namaPromo + "', menuPromo = '" + menuPromo + "',  jumlahPromo = '" + jumlahPromo
+                    + "',  hargaPromo = '" + hargaPromo + "', deskripsiPromo = '" + deskripsiPromo
+                    + "' WHERE idPromo ='" + idPromo + "'";
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     // Ubah Data karyawan
     public static boolean ubahDataKaryawan(int idKaryawan, int idMitra, String namaKaryawan, String nomorHpKaryawan,
             String emailKaryawan, String jobdeskKaryawan,
@@ -1470,7 +1744,40 @@ public class Model {
     }
 
     // Ubah Data karyawan
-    public static boolean ubahTransaksiNonCoffe(int idTransaksi, int idMitra, String namaTransaksi, String menuTransaksi,
+    public static boolean ubahOrderBahan(int idOrder, int idMitra, String bahanOrder, String ptOrder,
+            String deskripsiOrder, String alamatOrder, int jumlahOrder, int hargaOrder) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statemenet yang diambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "UPDATE tblorderbahan SET idMitra = '" + idMitra + "', bahanOrder = '"
+                    + bahanOrder + "', ptOrder = '" + ptOrder + "', deskripsiOrder = '" + deskripsiOrder
+                    + "', alamatOrder = '" + alamatOrder + "', alamatOrder = '" + alamatOrder + "', jumlahOrder = '"
+                    + jumlahOrder + "', hargaOrder = '" + hargaOrder + "' WHERE idOrder ='" + idOrder + "'";
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    // Ubah Data karyawan
+    public static boolean ubahTransaksiNonCoffe(int idTransaksi, int idMitra, String namaTransaksi,
+            String menuTransaksi,
             String mejaTransaksi, String promoTransaksi, String deskripsiTransaksi, int jumlahTransaksi,
             int hargaTransaksi, String bayarTransaksi) {
 
@@ -1661,6 +1968,122 @@ public class Model {
 
             // query select
             String query = "DELETE FROM tblkaryawan WHERE idKaryawan = " + idKaryawan;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    // hapus data Karyawan
+    public static boolean hapusDataTransaksiMakanan(int idTransaksi) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "DELETE FROM tbltransaksimakanan WHERE idTransaksi = " + idTransaksi;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    // hapus data Karyawan
+    public static boolean hapusDataTransaksiCoffe(int idTransaksi) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "DELETE FROM tbltransaksicoffe WHERE idTransaksi = " + idTransaksi;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    // hapus data Karyawan
+    public static boolean hapusDataTransaksiNonCoffe(int idTransaksi) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "DELETE FROM tbltransaksiNonCoffe WHERE idTransaksi = " + idTransaksi;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    // hapus data Menu
+    public static boolean hapusDataOrderBahan(int idOrder) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "DELETE FROM tblorderbahan WHERE idOrder = " + idOrder;
 
             if (statement.executeUpdate(query) > 0) {
                 data = true;

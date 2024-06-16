@@ -5,6 +5,7 @@ import javax.swing.*;
 import com.partials.*;
 
 public abstract class cDashboardApp extends JFrame {
+    public JPanel bg = new JPanel();
     public JPanel sidebar = new JPanel();
     public JPanel header = new JPanel();
     public JPanel main = new JPanel();
@@ -15,8 +16,6 @@ public abstract class cDashboardApp extends JFrame {
     public JLabel menuTitle = new JLabel("Menu Title");
     public JLabel copyrightText = new JLabel("Copyright 2024. Jarmek.");
 
-    private cLogout exitLink = new cLogout(1020);
-
     public cDashboardApp() {
         super();
         setSize(1366, 768);
@@ -24,6 +23,10 @@ public abstract class cDashboardApp extends JFrame {
         setUndecorated(true);
         setLocationRelativeTo(null);
         setLayout(null);
+
+        bg.setBackground(cColor.GREEN);
+        bg.setBounds(0, 0, 1366, 768);
+        bg.setLayout(null);
 
         sidebar.setBackground(cColor.GREEN);
         sidebar.setBounds(0, 0, 230, 768);
@@ -63,16 +66,16 @@ public abstract class cDashboardApp extends JFrame {
         copyrightText.setVerticalAlignment(JLabel.CENTER);
         copyrightText.setForeground(cColor.BLACK);
 
-        header.add(exitLink);
         header.add(roleText);
         sidebar.add(appText);
 
         main.add(menuTitle);
         main.add(content);
         main.add(copyrightText);
-        add(sidebar);
-        add(header);
-        add(main);
+        bg.add(sidebar);
+        bg.add(header);
+        bg.add(main);
+        add(bg);
     }
 
     public cDashboardApp(String title) {
