@@ -11,8 +11,8 @@ public class App {
         // Controller.showDaftarMitra();
         // Controller.showDaftarAdmin();
 
-        Controller.showDashboardMitra(5);
-        // Controller.showDashboardCustomer(1);
+        // Controller.showDashboardMitra(5);
+        Controller.showDashboardCustomer(1);
         // Controller.showDashboardAdmin(true);
 
         // Model.connection();
