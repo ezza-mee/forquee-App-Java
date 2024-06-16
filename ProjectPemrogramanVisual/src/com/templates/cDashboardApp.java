@@ -72,10 +72,9 @@ public abstract class cDashboardApp extends JFrame {
         main.add(menuTitle);
         main.add(content);
         main.add(copyrightText);
-        bg.add(sidebar);
-        bg.add(header);
-        bg.add(main);
-        add(bg);
+        add(sidebar);
+        add(header);
+        add(main);
     }
 
     public cDashboardApp(String title) {
