@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Model {
@@ -24,6 +26,39 @@ public class Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Count All Data menu from 3 virtual tables
+    public static int getCountAllDataMenu() {
+        connection();
+
+        int count = 0;
+
+        try {
+            statement = connect.createStatement();
+
+            // Query untuk menghitung jumlah data dari masing-masing tabel virtual
+            String query = "(SELECT COUNT(*) FROM vwallmenumakanan) " +
+                    "UNION ALL " +
+                    "(SELECT COUNT(*) FROM vwallmenucoffe) " +
+                    "UNION ALL " +
+                    "(SELECT COUNT(*) FROM vwallmenunoncoffe)";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            // Mengakumulasi jumlah data dari setiap hasil query
+            while (resultData.next()) {
+                count += resultData.getInt(1);
+            }
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 
     // count All Data Meja
@@ -134,6 +169,39 @@ public class Model {
         return count;
     }
 
+    // Count All Data menu from 3 virtual tables
+    public static int getCountAllDataTransaksi() {
+        connection();
+
+        int count = 0;
+
+        try {
+            statement = connect.createStatement();
+
+            // Query untuk menghitung jumlah data dari masing-masing tabel virtual
+            String query = "(SELECT COUNT(*) FROM vwtransaksimakanandiproses) " +
+                    "UNION ALL " +
+                    "(SELECT COUNT(*) FROM vwtransaksicoffediproses) " +
+                    "UNION ALL " +
+                    "(SELECT COUNT(*) FROM vwtransaksinoncoffediproses)";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            // Mengakumulasi jumlah data dari setiap hasil query
+            while (resultData.next()) {
+                count += resultData.getInt(1);
+            }
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
     // count All Data Order Bahan
     public static int getCountAllDataOrderBahan() {
 
@@ -225,6 +293,198 @@ public class Model {
             e.printStackTrace();
         }
         return rowData;
+    }
+
+    public static Object[] getDetailMitraByEmail(String email) {
+        connection();
+
+        Object rowData[] = new Object[4];
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "SELECT * FROM vwallmitra WHERE emailMitra = '" + email + "'";
+
+            // eksekusi query-nya
+            ResultSet resultData = statement.executeQuery(query);
+
+            // looping pengisian DefaultTableModel
+            resultData.next();
+            rowData[0] = resultData.getInt("idMitra");
+            rowData[1] = resultData.getString("namaMitra");
+            rowData[2] = resultData.getString("nomorHpMitra");
+            rowData[3] = resultData.getString("emailMitra");
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rowData;
+
+    }
+
+    // data calon mitra static function
+    public static DefaultTableModel getAllMitraVerified() {
+
+        connection();
+
+        String[] dataHeader = { "ID", "Nama", "Nomor Hp", "Email", "Alamat", "Password", "Status Terverifikasi",
+                "Status" };
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwmitraverified";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("nomorHpMitra"),
+                        resultData.getString("emailMitra"),
+                        resultData.getString("alamatMitra"),
+                        resultData.getString("passwordMitra"),
+                        resultData.getString("statusTerverifikasi"),
+                        resultData.getString("statusAktif") };
+                tm.addRow(rowData);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    public static boolean verifyAkunMitra(String email, String password) {
+        connection();
+        boolean available = false;
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "SELECT COUNT(*) FROM vwallmitra WHERE emailMitra = '" + email
+                    + "' AND passwordMitra = '" + password + "'";
+
+            // eksekusi query-nya
+            ResultSet resultData = statement.executeQuery(query);
+
+            // looping pengisian DefaultTableModel
+            resultData.next();
+            if (resultData.getInt(1) == 1) {
+                available = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return available;
+    }
+
+    // daftar Customer
+    public static boolean daftarMitra(String nama, String nomorHp, String email, String password) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "INSERT INTO tblmitra VALUES (NULL, '" + nama + "', '" + nomorHp + "','"
+                    + email + "', '' ,'" + password
+                    + "', 'Verified', 'Aktif')";
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    public static boolean verifyEmailMitra(String email) {
+        connection();
+        boolean available = false;
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "SELECT COUNT(*) FROM vwallMitra WHERE emailMitra = '" + email + "'";
+
+            // eksekusi query-nya
+            ResultSet resultData = statement.executeQuery(query);
+
+            // looping pengisian DefaultTableModel
+            resultData.next();
+            if (resultData.getInt(1) == 0) {
+                available = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return available;
+    }
+
+    // selesai transaksi print
+    public static boolean adminVerifikasiCalonMitra(int idMitra) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "UPDATE tblmitra SET statusTerverifikasi = 'Terverifikasi' WHERE idMitra = " + idMitra;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     // detail data Menu Makanan
@@ -946,6 +1206,135 @@ public class Model {
         return tm;
     }
 
+    public static boolean verifyAkunCustomer(String email, String password) {
+        connection();
+        boolean available = false;
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "SELECT COUNT(*) FROM vwallcustomer WHERE emailCustomer = '" + email
+                    + "' AND passwordCustomer = '" + password + "'";
+
+            // eksekusi query-nya
+            ResultSet resultData = statement.executeQuery(query);
+
+            // looping pengisian DefaultTableModel
+            resultData.next();
+            if (resultData.getInt(1) == 1) {
+                available = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return available;
+    }
+
+    public static Object[] getDetailCustomerByEmail(String email) {
+        connection();
+
+        Object rowData[] = new Object[4];
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "SELECT * FROM vwallcustomer WHERE emailCustomer =  '" + email + "'";
+
+            // eksekusi query-nya
+            ResultSet resultData = statement.executeQuery(query);
+
+            // looping pengisian DefaultTableModel
+            resultData.next();
+            rowData[0] = resultData.getInt("idCustomer");
+            rowData[1] = resultData.getString("namaCustomer");
+            rowData[2] = resultData.getString("nomorHpCustomer");
+            rowData[3] = resultData.getString("emailCustomer");
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rowData;
+
+    }
+
+    public static boolean verifyEmailCustomer(String email) {
+        connection();
+        boolean available = false;
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "SELECT COUNT(*) FROM vwallcustomer WHERE emailCustomer = '" + email + "'";
+
+            // eksekusi query-nya
+            ResultSet resultData = statement.executeQuery(query);
+
+            // looping pengisian DefaultTableModel
+            resultData.next();
+            if (resultData.getInt(1) == 0) {
+                available = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return available;
+    }
+
+    // daftar Customer
+    public static boolean daftarCustomer(String nama, String nomorHp, String email, String password) {
+        boolean data = false;
+
+        connection();
+
+        try {
+
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "INSERT INTO tblcustomer VALUES (NULL, '" + nama + "', '" + nomorHp + "','"
+                    + email + "', '' ,'" + password
+                    + "', 'Aktif')";
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
     public static int getCountCustomerByEmail(String email) {
         connection();
         int count = 0;
@@ -1080,6 +1469,35 @@ public class Model {
             e.printStackTrace();
         }
         return tm;
+    }
+
+    // selesai transaksi print
+    public static boolean adminVerifikasiCalonKaryawan(int idKaryawan) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "UPDATE tblkaryawan SET statusTerverifikasi = 'Terverifikasi' WHERE idKaryawan = "
+                    + idKaryawan;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     // get data all Online Makanan Diproses
@@ -2448,6 +2866,34 @@ public class Model {
             // close statement dan connection
             statement.close();
             connect.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    // selesai transaksi print
+    public static boolean adminProsesBahan(int idOrder) {
+
+        boolean data = false;
+
+        connection();
+
+        try {
+            // buat object statement yang ambil dari koneksi
+            statement = connect.createStatement();
+
+            // query select
+            String query = "UPDATE tblorderbahan SET statusOrder = 'Selesai' WHERE idOrder = " + idOrder;
+
+            if (statement.executeUpdate(query) > 0) {
+                data = true;
+            }
+
+            // close statement dan connection
+            statement.close();
+            connect.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

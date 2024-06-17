@@ -4,7 +4,13 @@ import com.templates.cDashboardApp;
 import com.partials.*;
 import com.main.*;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -25,7 +31,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cSidebarMenu menuDataKaryawan = new cSidebarMenu("Data Karyawan", 70 + 50 + 50 + 50 + 50 + 50);
   private cSidebarMenu menuTransaksi = new cSidebarMenu("Transaksi", 70 + 50 + 50 + 50 + 50 + 50 + 50);
   private cSidebarMenu menuOrderBahan = new cSidebarMenu("Order Bahan", 70 + 50 + 50 + 50 + 50 + 50 + 50 + 50);
-  private cSidebarMenu menuReport = new cSidebarMenu("Data Report", 70 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50);
+  private cSidebarMenu menuReport = new cSidebarMenu("Data Laporan", 70 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50);
 
   // componetn of data beranda
   private cDateTime labelDateTimeBeranda = new cDateTime(720, 15, 300);
@@ -50,10 +56,15 @@ public class cDashboardMitraView extends cDashboardApp {
   private cComboBox pilihDataMenu = new cComboBox(
       new String[] { "Data Makanan", "Data Coffe", "Data Non Coffe" }, 100, 40, 200,
       30);
-  
+
   // component of data menu
   private cComboBox pilihTransaksiMenu = new cComboBox(
       new String[] { "Makanan", "Coffe", "Non Coffe" }, 100, 40, 200,
+      30);
+
+  // component of data menu
+  private cComboBox pilihDataLaporan = new cComboBox(
+      new String[] { "Data Customer", "Data Karyawan", "Data Promo", "Data Menu" }, 100, 40, 200,
       30);
 
   // component of data menu makanan
@@ -338,7 +349,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnHapusKaryawan = new cButton("Hapus", 540, 480, 150, 30, 20);
   private cButton btnSimpanKaryawan = new cButton("Simpan", 730, 480, 150, 30, 20);
 
-  // component of input data UbahKaryawan
+  // component of input data Ubah Karyawan
   private cLabelInfo labelDataUbahKaryawan = new cLabelInfo("Masukan Data UbahKaryawan!", 190, 30, 400, 40);
   private cLabelInfo labelNamaUbahKaryawan = new cLabelInfo("Nama", 190, 100, 100, 40);
   private cLabelInfo labelNomorHpUbahKaryawan = new cLabelInfo("Nomor Hp", 190, 200, 200, 40);
@@ -842,11 +853,13 @@ public class cDashboardMitraView extends cDashboardApp {
 
       valueInfoSaldoMitraBeranda.setText(String.valueOf(Model.getDetailSaldoMitra(idMitra)));
 
+      valueJumlahMenuBeranda.setText(String.valueOf(Model.getCountAllDataMenu()));
       valueCustomerBeranda.setText(String.valueOf(Model.getCountAllDataCustomer()));
       valueJumlahMejaBeranda.setText(String.valueOf(Model.getCountAllDataMeja()));
       valueKaryawanBeranda.setText(String.valueOf(Model.getCountAllDataKaryawan()));
       valueOrderBahanBeranda.setText(String.valueOf(Model.getCountAllDataOrderBahan()));
       valueJumlahPromoBeranda.setText(String.valueOf(Model.getCountAllDataPromo()));
+      valueTransaksiBeranda.setText(String.valueOf(Model.getCountAllDataTransaksi()));
 
       content.add(valueInfoSaldoMitraBeranda);
       content.add(labelJumlahMenuBeranda);
@@ -4711,10 +4724,10 @@ public class cDashboardMitraView extends cDashboardApp {
     refreshContent();
     menuTitle.setText("Data Report");
 
-    btnCetakReportCustomer.addActionListener(new java.awt.event.ActionListener(){
+    btnCetakReportCustomer.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
-        
+
       }
     });
 

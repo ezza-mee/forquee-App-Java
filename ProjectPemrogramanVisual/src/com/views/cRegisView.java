@@ -1,6 +1,9 @@
 package com.views;
 
+import javax.swing.JOptionPane;
+
 import com.main.Controller;
+import com.main.Model;
 import com.partials.*;
 import com.templates.cFrameRegisApp;
 
@@ -115,18 +118,81 @@ public class cRegisView extends cFrameRegisApp {
         titleRegis.setText("Daftar Customer");
         cardRegis.add(titleRegis);
 
+        btnDaftarCustomer.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                String nama = txtNamaDaftarCustomer.getText();
+                String email = txtEmailDaftarCustomer.getText();
+                String nomorHp = txtNomorHpDaftarCustomer.getText();
+                String password = String.valueOf(txtPasswordDaftarCustomer.getPassword());
+
+                if (nama.equalsIgnoreCase("") || nama.isEmpty() || email.equalsIgnoreCase("") || email.isEmpty()
+                        || password.equalsIgnoreCase("") || password.isEmpty()) {
+
+                    cRegisView.this.setVisible(false);
+
+                    // kalau namanya yang kosong
+                    if (nama.equalsIgnoreCase("") || nama.isEmpty())
+                        cardRegis.add(errorNamaDaftarCustomer);
+                    else
+                        cardRegis.remove(errorNamaDaftarCustomer);
+
+                    // kalau Nomornya yang kosong
+                    if (nomorHp.equalsIgnoreCase("") || nomorHp.isEmpty())
+                        cardRegis.add(errorNomorHpDaftarCustomer);
+                    else
+                        cardRegis.remove(errorNomorHpDaftarCustomer);
+
+                    // kalau Emailnya yang kosong
+                    if (email.equalsIgnoreCase("") || email.isEmpty())
+                        cardRegis.add(errorEmailDaftarCustomer);
+                    else
+                        cardRegis.remove(errorEmailDaftarCustomer);
+
+                    // kalau Passwordnya yang kosong
+                    if (password.equalsIgnoreCase("") || password.isEmpty())
+                        cardRegis.add(errorPasswordDaftarCustomer);
+                    else
+                        cardRegis.remove(errorPasswordDaftarCustomer);
+
+                    cRegisView.this.setVisible(true);
+
+                } else {
+                    // lolos validasi
+
+                    // cek apakah Email sudah terdaftar atau belum
+                    if (Model.verifyEmailMitra(email)) {
+                        // berarti Email belum terdaftar
+                        if (Model.daftarMitra(nama, nomorHp, email, password)) {
+                            // kalau berhasil daftar
+                            JOptionPane.showMessageDialog(cRegisView.this, "Daftar Berhasil!!", "Berhasil Daftar",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            cLoginView loginCustomer = new cLoginView();
+                            loginCustomer.setVisible(true);
+                            loginCustomer.initsLoginCustomer();
+                            cRegisView.this.setVisible(false);
+                        } else {
+                            // kalau gagal daftar
+                            JOptionPane.showMessageDialog(cRegisView.this, "Pendafaran gagal!!", "Gagal Daftar",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        // berarti noHp sudah terdaftar
+                        JOptionPane.showMessageDialog(cRegisView.this, "Silahkan cek kembali data anda!!",
+                                "Gagal Daftar", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
         cardRegis.add(labelNamaDaftarCustomer);
         cardRegis.add(txtNamaDaftarCustomer);
-        cardRegis.add(errorNamaDaftarCustomer);
         cardRegis.add(labelEmailDaftarCustomer);
         cardRegis.add(txtEmailDaftarCustomer);
-        cardRegis.add(errorEmailDaftarCustomer);
         cardRegis.add(labelNomorHpDaftarCustomer);
         cardRegis.add(txtNomorHpDaftarCustomer);
-        cardRegis.add(errorNomorHpDaftarCustomer);
         cardRegis.add(labelPasswordDaftarCustomer);
         cardRegis.add(txtPasswordDaftarCustomer);
-        cardRegis.add(errorPasswordDaftarCustomer);
         cardRegis.add(btnDaftarCustomer);
         cardRegis.add(toLoginCustomerDaftarCustomer);
         cardRegis.add(toDaftarMitraDaftarCustomer);
@@ -141,18 +207,82 @@ public class cRegisView extends cFrameRegisApp {
         titleRegis.setText("Daftar Mitra");
         cardRegis.add(titleRegis);
 
+        btnDaftarMitra.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                String nama = txtNamaDaftarMitra.getText();
+                String email = txtEmailDaftarMitra.getText();
+                String nomorHp = txtNomorHpDaftarMitra.getText();
+                String password = String.valueOf(txtPasswordDaftarMitra.getPassword());
+
+                if (nama.equalsIgnoreCase("") || nama.isEmpty() || email.equalsIgnoreCase("") || email.isEmpty()
+                        || password.equalsIgnoreCase("") || password.isEmpty()) {
+
+                    cRegisView.this.setVisible(false);
+
+                    // kalau namanya yang kosong
+                    if (nama.equalsIgnoreCase("") || nama.isEmpty())
+                        cardRegis.add(errorNamaDaftarMitra);
+                    else
+                        cardRegis.remove(errorNamaDaftarMitra);
+
+                    // kalau Nomornya yang kosong
+                    if (nomorHp.equalsIgnoreCase("") || nomorHp.isEmpty())
+                        cardRegis.add(errorNomorHpDaftarMitra);
+                    else
+                        cardRegis.remove(errorNomorHpDaftarMitra);
+
+                    // kalau Emailnya yang kosong
+                    if (email.equalsIgnoreCase("") || email.isEmpty())
+                        cardRegis.add(errorEmailDaftarMitra);
+                    else
+                        cardRegis.remove(errorEmailDaftarMitra);
+
+                    // kalau Passwordnya yang kosong
+                    if (password.equalsIgnoreCase("") || password.isEmpty())
+                        cardRegis.add(errorPasswordDaftarMitra);
+                    else
+                        cardRegis.remove(errorPasswordDaftarMitra);
+
+                    cRegisView.this.setVisible(true);
+
+                } else {
+                    // lolos validasi
+
+                    // cek apakah Email sudah terdaftar atau belum
+                    if (Model.verifyEmailMitra(email)) {
+                        // berarti Email belum terdaftar
+                        if (Model.daftarMitra(nama, nomorHp, email, password)) {
+                            // kalau berhasil daftar
+                            JOptionPane.showMessageDialog(cRegisView.this, "Daftar Berhasil!!", "Berhasil Daftar",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            cLoginView loginMitra = new cLoginView();
+                            loginMitra.setVisible(true);
+                            loginMitra.initsLoginMitra();
+                            cRegisView.this.setVisible(false);
+                        } else {
+                            // kalau gagal daftar
+                            JOptionPane.showMessageDialog(cRegisView.this, "Pendafaran gagal!!", "Gagal Daftar",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    } else {
+                        // berarti noHp sudah terdaftar
+                        JOptionPane.showMessageDialog(cRegisView.this, "Silahkan cek kembali data anda!!",
+                                "Gagal Daftar", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
         cardRegis.add(labelNamaDaftarMitra);
         cardRegis.add(txtNamaDaftarMitra);
-        cardRegis.add(errorNamaDaftarMitra);
         cardRegis.add(labelEmailDaftarMitra);
         cardRegis.add(txtEmailDaftarMitra);
-        cardRegis.add(errorEmailDaftarMitra);
         cardRegis.add(labelNomorHpDaftarMitra);
         cardRegis.add(txtNomorHpDaftarMitra);
-        cardRegis.add(errorNomorHpDaftarMitra);
         cardRegis.add(labelPasswordDaftarMitra);
         cardRegis.add(txtPasswordDaftarMitra);
-        cardRegis.add(errorPasswordDaftarMitra);
         cardRegis.add(btnDaftarMitra);
         cardRegis.add(toLoginMitraDaftarMitra);
         cardRegis.add(toDaftarCustomerDaftarMitra);

@@ -2,7 +2,11 @@ package com.views;
 
 import com.partials.*;
 import com.templates.cFrameLoginApp;
+
+import javax.swing.JOptionPane;
+
 import com.main.Controller;
+import com.main.Model;
 
 public class cLoginView extends cFrameLoginApp {
 
@@ -149,12 +153,53 @@ public class cLoginView extends cFrameLoginApp {
         fromTitle.setText("Friend");
         cardLogin.add(titleLogin);
 
+        btnLoginCustomer.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                String email = txtEmailLoginCustomer.getText();
+                String password = String.valueOf(txtPasswordLoginCustomer.getPassword());
+
+                // kalau salah satu datanya kosong
+                if (email.equalsIgnoreCase("") || email.isEmpty() || password.equalsIgnoreCase("")
+                        || password.isEmpty()) {
+
+                    cLoginView.this.setVisible(false);
+
+                    // masuk validasi
+                    if (email.equalsIgnoreCase("") || email.isEmpty()) {
+                        cardLogin.add(errorEmailLoginCustomer);
+                    } else {
+                        cardLogin.remove(errorEmailLoginCustomer);
+                    }
+
+                    if (password.equalsIgnoreCase("") || password.isEmpty())
+                        cardLogin.add(errorPasswordLoginCustomer);
+                    else
+                        cardLogin.remove(errorPasswordLoginCustomer);
+
+                    cLoginView.this.setVisible(true);
+                } else {
+                    // lolos validasi
+
+                    if (Model.verifyAkunCustomer(email, password)) {
+                        // kalo berhasil login
+                        Controller
+                                .showDashboardCustomer(
+                                        Integer.valueOf(Model.getDetailCustomerByEmail(email)[0].toString()));
+                        cLoginView.this.setVisible(false);
+                    } else {
+                        // kalo gagal login
+                        JOptionPane.showMessageDialog(cLoginView.this, "Silahkan periksa email dan password!!",
+                                "Gagal Login", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
         cardLogin.add(labelEmailLoginCustomer);
         cardLogin.add(txtEmailLoginCustomer);
-        cardLogin.add(errorEmailLoginCustomer);
         cardLogin.add(labelPasswordLoginCustomer);
         cardLogin.add(txtPasswordLoginCustomer);
-        cardLogin.add(errorPasswordLoginCustomer);
         cardLogin.add(btnLoginCustomer);
         cardLogin.add(toDaftarCustomerLoginCustomer);
         cardLogin.add(toDaftarMitraLoginCustomer);
@@ -171,12 +216,53 @@ public class cLoginView extends cFrameLoginApp {
         fromTitle.setText("Friend");
         cardLogin.add(titleLogin);
 
+        btnLoginMitra.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                String email = txtEmailLoginMitra.getText();
+                String password = String.valueOf(txtPasswordLoginMitra.getPassword());
+
+                // kalau salah satu datanya kosong
+                if (email.equalsIgnoreCase("") || email.isEmpty() || password.equalsIgnoreCase("")
+                        || password.isEmpty()) {
+
+                    cLoginView.this.setVisible(false);
+
+                    // masuk validasi
+                    if (email.equalsIgnoreCase("") || email.isEmpty()) {
+                        cardLogin.add(errorEmailLoginMitra);
+                    } else {
+                        cardLogin.remove(errorEmailLoginMitra);
+                    }
+
+                    if (password.equalsIgnoreCase("") || password.isEmpty())
+                        cardLogin.add(errorPasswordLoginMitra);
+                    else
+                        cardLogin.remove(errorPasswordLoginMitra);
+
+                    cLoginView.this.setVisible(true);
+                } else {
+                    // lolos validasi
+
+                    if (Model.verifyAkunMitra(email, password)) {
+                        // kalo berhasil login
+                        Controller
+                                .showDashboardMitra(
+                                        Integer.valueOf(Model.getDetailMitraByEmail(email)[0].toString()));
+                        cLoginView.this.setVisible(false);
+                    } else {
+                        // kalo gagal login
+                        JOptionPane.showMessageDialog(cLoginView.this, "Silahkan periksa email dan password!!",
+                                "Gagal Login", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
         cardLogin.add(labelEmailLoginMitra);
         cardLogin.add(txtEmailLoginMitra);
-        cardLogin.add(errorEmailLoginMitra);
         cardLogin.add(labelPasswordLoginMitra);
         cardLogin.add(txtPasswordLoginMitra);
-        cardLogin.add(errorPasswordLoginMitra);
         cardLogin.add(btnLoginMitra);
         cardLogin.add(toDaftarMitraLoginMitra);
         cardLogin.add(toDaftarCustomerLoginMitra);
@@ -193,12 +279,38 @@ public class cLoginView extends cFrameLoginApp {
         fromTitle.setText("Friend");
         cardLogin.add(titleLogin);
 
+        btnLoginAdmin.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                if (txtEmailLoginAdmin.getText().equalsIgnoreCase("")
+                        || String.valueOf(txtPasswordLoginAdmin.getPassword()).equalsIgnoreCase("")) {
+                    Controller.showLoginAdmin();
+                    if (txtEmailLoginAdmin.getText().equalsIgnoreCase("")) {
+                        cardLogin.add(errorEmailLoginAdmin);
+                    }
+                    if (String.valueOf(txtPasswordLoginAdmin.getPassword()).equalsIgnoreCase("")) {
+                        cardLogin.add(errorPasswordLoginAdmin);
+                    }
+                }
+                String Email = txtEmailLoginAdmin.getText();
+                String password = String.valueOf(txtPasswordLoginAdmin.getPassword());
+
+                if (Email.equals("admin") && password.equals("admin")) {
+                    // loginnya Berhasil
+                    Controller.showDashboardAdmin(true);
+                    cLoginView.this.setVisible(false);
+                } else {
+                    // loginnya gagal
+                    JOptionPane.showMessageDialog(cLoginView.this, "Silahkan periksa Username dan password!",
+                            "Gagal Login", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         cardLogin.add(labelEmailLoginAdmin);
         cardLogin.add(txtEmailLoginAdmin);
-        cardLogin.add(errorEmailLoginAdmin);
         cardLogin.add(labelPasswordLoginAdmin);
         cardLogin.add(txtPasswordLoginAdmin);
-        cardLogin.add(errorPasswordLoginAdmin);
         cardLogin.add(btnLoginAdmin);
         cardLogin.add(toDaftarMitraLoginAdmin);
         cardLogin.add(toDaftarCustomerLoginAdmin);
