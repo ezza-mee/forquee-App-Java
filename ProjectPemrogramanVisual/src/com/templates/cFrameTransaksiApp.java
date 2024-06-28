@@ -7,40 +7,38 @@ import com.partials.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public abstract class cFrameRegisApp extends JFrame {
+public abstract class cFrameTransaksiApp extends JFrame {
+
     private int mouseX, mouseY;
 
     public JPanel bg = new JPanel();
-    public JPanel cardRegis = new croundedPanel(30);
-    public JLabel titleRegis = new JLabel("Title Start");
+    public JPanel cardPembayaran = new JPanel();
+    public JLabel titlePembayaran = new JLabel("PEMBAYARAN");
 
-    public cLinkKeluar linkKeluar = new cLinkKeluar(990);
-
-    public cFrameRegisApp() {
+    public cFrameTransaksiApp() {
         super();
-        setSize(1100, 700);
+        setSize(400, 700);
         setLocationRelativeTo(null);
         setLayout(null);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        bg.setBackground(cColor.GREEN);
-        bg.setBounds(0, 0, 1100, 700);
+        bg.setBackground(cColor.WHITE);
+        bg.setBounds(0, 0, 400, 700);
         bg.setLayout(null);
 
-        cardRegis.setBackground(cColor.WHITE);
-        cardRegis.setBounds(130, 80, 800, 550);
-        cardRegis.setLayout(null);
+        cardPembayaran.setBackground(cColor.WHITE);
+        cardPembayaran.setBounds(0, 0, 400, 700);
+        cardPembayaran.setLayout(null);
 
-        titleRegis.setFont(cFonts.TITLE_START_FONT);
-        titleRegis.setForeground(cColor.BLACK);
-        titleRegis.setBounds(0, 60, 800, 40);
-        titleRegis.setHorizontalAlignment(JLabel.CENTER);
-        titleRegis.setVerticalAlignment(JLabel.CENTER);
+        titlePembayaran.setFont(cFonts.TITLE_START_FONT);
+        titlePembayaran.setForeground(cColor.BLACK);
+        titlePembayaran.setBounds(0, 50, 400, 40);
+        titlePembayaran.setHorizontalAlignment(JLabel.CENTER);
+        titlePembayaran.setVerticalAlignment(JLabel.CENTER);
 
-        cardRegis.add(titleRegis);
-        bg.add(linkKeluar);
-        bg.add(cardRegis);
+        cardPembayaran.add(titlePembayaran);
+        bg.add(cardPembayaran);
         add(bg);
 
         // Menambahkan listener untuk menggeser frame
@@ -61,9 +59,8 @@ public abstract class cFrameRegisApp extends JFrame {
         });
     }
 
-    public cFrameRegisApp(String title) {
+    public cFrameTransaksiApp(String title) {
         this();
         setTitle(title);
     }
-
 }

@@ -2,19 +2,26 @@ package com.templates;
 
 import javax.swing.*;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import com.partials.*;
 
 public abstract class cDashboardApp extends JFrame {
+    private int mouseX, mouseY;
+
     public JPanel bg = new JPanel();
     public JPanel sidebar = new JPanel();
     public JPanel header = new JPanel();
     public JPanel main = new JPanel();
     public JPanel content = new croundedPanel(20);
 
-    private JLabel appText = new JLabel("MitraKu");
+    private JLabel appText = new JLabel("Forque");
     public JLabel roleText = new JLabel("Role");
     public JLabel menuTitle = new JLabel("Menu Title");
     public JLabel copyrightText = new JLabel("Copyright 2024. Jarmek.");
+
+    public cLogoutDashboard logoutDashboard = new cLogoutDashboard(990);
 
     public cDashboardApp() {
         super();
@@ -67,14 +74,33 @@ public abstract class cDashboardApp extends JFrame {
         copyrightText.setForeground(cColor.BLACK);
 
         header.add(roleText);
+        header.add(logoutDashboard);
         sidebar.add(appText);
 
         main.add(menuTitle);
         main.add(content);
         main.add(copyrightText);
-        add(sidebar);
-        add(header);
-        add(main);
+        bg.add(sidebar);
+        bg.add(header);
+        bg.add(main);
+        add(bg);
+
+        // Menambahkan listener untuk menggeser frame
+        bg.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+
+        bg.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                // Menghitung posisi baru frame
+                int newX = e.getXOnScreen() - mouseX;
+                int newY = e.getYOnScreen() - mouseY;
+                setLocation(newX, newY);
+            }
+        });
     }
 
     public cDashboardApp(String title) {
