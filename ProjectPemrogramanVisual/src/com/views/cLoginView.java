@@ -18,7 +18,7 @@ public class cLoginView extends cFrameLoginApp {
     private cPasswordField txtPasswordLoginCustomer = new cPasswordField(125, 320, 300);
     private cErrorLabel errorPasswordLoginCustomer = new cErrorLabel("Password tidak boleh Kosong!", 125, 345, 335);
     private cButtonLogin btnLoginCustomer = new cButtonLogin("Login", 125, 400, 300, 40);
-    private cLinkStart toDaftarCustomerLoginCustomer = new cLinkStart("belum punya akun customer?", 120, 470);
+    private cLinkStart toDaftarCustomerLoginCustomer = new cLinkStart("belum punya akun customer?", 120, 465);
     private cLinkStart toDaftarMitraLoginCustomer = new cLinkStart("belum punya akun mitra?", 120, 490);
     private cLinkStart toLoginMitraLoginCustomer = new cLinkStart("sudah punya akun mitra?", 120, 515);
     private cLinkStart toLoginAdminLoginCustomer = new cLinkStart("login sebagai admin", 120, 540);
@@ -31,7 +31,7 @@ public class cLoginView extends cFrameLoginApp {
     private cPasswordField txtPasswordLoginMitra = new cPasswordField(125, 320, 300);
     private cErrorLabel errorPasswordLoginMitra = new cErrorLabel("Password tidak boleh Kosong!", 125, 345, 335);
     private cButtonLogin btnLoginMitra = new cButtonLogin("Login", 125, 400, 300, 40);
-    private cLinkStart toDaftarMitraLoginMitra = new cLinkStart("belum punya akun mitra?", 120, 470);
+    private cLinkStart toDaftarMitraLoginMitra = new cLinkStart("belum punya akun mitra?", 120, 465);
     private cLinkStart toDaftarCustomerLoginMitra = new cLinkStart("belum punya akun customer?", 120, 490);
     private cLinkStart toLoginCustomerLoginMitra = new cLinkStart("sudah punya akun customer?", 120, 515);
     private cLinkStart toLoginAdminLoginMitra = new cLinkStart("login sebagai admin", 120, 540);
@@ -44,7 +44,7 @@ public class cLoginView extends cFrameLoginApp {
     private cPasswordField txtPasswordLoginAdmin = new cPasswordField(125, 320, 300);
     private cErrorLabel errorPasswordLoginAdmin = new cErrorLabel("Password tidak boleh Kosong!", 125, 345, 335);
     private cButtonLogin btnLoginAdmin = new cButtonLogin("Login", 125, 400, 300, 40);
-    private cLinkStart toDaftarMitraLoginAdmin = new cLinkStart("belum punya akun mitra?", 120, 470);
+    private cLinkStart toDaftarMitraLoginAdmin = new cLinkStart("belum punya akun mitra?", 120, 465);
     private cLinkStart toDaftarCustomerLoginAdmin = new cLinkStart("belum punya akun customer?", 120, 490);
     private cLinkStart toLoginCustomerLoginAdmin = new cLinkStart("sudah punya akun customer?", 120, 515);
     private cLinkStart toLoginMitraLoginAdmin = new cLinkStart("sudah punya akun mitra?", 120, 540);
@@ -54,28 +54,26 @@ public class cLoginView extends cFrameLoginApp {
 
         // implement for link frame login Customer
         toDaftarCustomerLoginCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarCustomer();
+                cLoginView.this.setVisible(false);
             }
         });
         toDaftarMitraLoginCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarMitra();
+                cLoginView.this.setVisible(false);
             }
         });
         toLoginMitraLoginCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginMitra();
             }
         });
         toLoginAdminLoginCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginAdmin();
@@ -84,28 +82,25 @@ public class cLoginView extends cFrameLoginApp {
 
         // implement for link frame login mitra
         toDaftarMitraLoginMitra.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarMitra();
             }
         });
         toDaftarCustomerLoginMitra.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarCustomer();
+                cLoginView.this.setVisible(false);
             }
         });
         toLoginCustomerLoginMitra.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginCustomer();
             }
         });
         toLoginAdminLoginMitra.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginAdmin();
@@ -114,38 +109,36 @@ public class cLoginView extends cFrameLoginApp {
 
         // implement for link frame login admin
         toLoginCustomerLoginAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginCustomer();
             }
         });
-        toDaftarCustomerLoginCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
+        toDaftarCustomerLoginAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarCustomer();
+                cLoginView.this.setVisible(false);
             }
         });
         toLoginMitraLoginAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginMitra();
             }
         });
         toDaftarMitraLoginAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarMitra();
+                cLoginView.this.setVisible(false);
             }
         });
 
     }
 
     public void initsLoginCustomer() {
-        this.setVisible(false);
+        cLoginView.this.setVisible(false);
         this.setTitle("Login Customer");
         cardLogin.removeAll();
         titleLogin.setText("Login Customer");
@@ -180,7 +173,6 @@ public class cLoginView extends cFrameLoginApp {
                     cLoginView.this.setVisible(true);
                 } else {
                     // lolos validasi
-
                     if (Model.verifyAkunCustomer(email, password)) {
                         // kalo berhasil login
                         Controller
@@ -205,10 +197,12 @@ public class cLoginView extends cFrameLoginApp {
         cardLogin.add(toDaftarMitraLoginCustomer);
         cardLogin.add(toLoginMitraLoginCustomer);
         cardLogin.add(toLoginAdminLoginCustomer);
+
+        this.setVisible(true);
     }
 
     public void initsLoginMitra() {
-        this.setVisible(false);
+        cLoginView.this.setVisible(false);
         this.setTitle("Login Mitra");
         cardLogin.removeAll();
         titleLogin.setText("Login Mitra");
@@ -247,8 +241,7 @@ public class cLoginView extends cFrameLoginApp {
                     if (Model.verifyAkunMitra(email, password)) {
                         // kalo berhasil login
                         Controller
-                                .showDashboardMitra(
-                                        Integer.valueOf(Model.getDetailMitraByEmail(email)[0].toString()));
+                                .showDashboardMitra(Integer.valueOf(Model.getDetailMitraByEmail(email)[0].toString()));
                         cLoginView.this.setVisible(false);
                     } else {
                         // kalo gagal login
@@ -268,10 +261,12 @@ public class cLoginView extends cFrameLoginApp {
         cardLogin.add(toDaftarCustomerLoginMitra);
         cardLogin.add(toLoginCustomerLoginMitra);
         cardLogin.add(toLoginAdminLoginMitra);
+
+        this.setVisible(true);
     }
 
     public void initsLoginAdmin() {
-        this.setVisible(false);
+        cLoginView.this.setVisible(false);
         this.setTitle("Login Admin");
         cardLogin.removeAll();
         titleLogin.setText("Login Admin");
@@ -316,6 +311,8 @@ public class cLoginView extends cFrameLoginApp {
         cardLogin.add(toDaftarCustomerLoginAdmin);
         cardLogin.add(toLoginCustomerLoginAdmin);
         cardLogin.add(toLoginMitraLoginAdmin);
+
+        this.setVisible(true);
     }
 
 }

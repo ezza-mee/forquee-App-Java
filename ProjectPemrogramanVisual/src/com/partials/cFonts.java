@@ -22,4 +22,6 @@ public class cFonts {
     public static final Font LABEL_SIDEBAR_FONT = new Font("Poppins Semibold", Font.PLAIN, 20);
     public static final Font LABEL_TANGGAL_FONT = new Font("Poppins Semibold", Font.PLAIN, 18);
     public static final Font RADIO_BUTTON_FONT = new Font("Poppins Semibold", Font.PLAIN, 18);
+    public static final Font PEMBAYARAN_FONT = new Font("Poppins Semibold", Font.PLAIN, 9);
+    public static final Font CARI_FONT = new Font("Poppins Semibold", Font.PLAIN, 14);
 }
