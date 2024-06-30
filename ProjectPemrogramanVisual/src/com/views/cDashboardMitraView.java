@@ -6505,6 +6505,9 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
+
+    
+
     labelInfoDataAkun.setForeground(cColor.WHITE);
 
     content.add(labelInfoDataAkun);
