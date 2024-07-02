@@ -1,6 +1,7 @@
 package com.partials;
 
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class cTable extends JTable {
     public cTable(javax.swing.table.TableModel dm) {
@@ -19,11 +20,16 @@ public class cTable extends JTable {
         setDragEnabled(true);
         setSelectionBackground(cColor.GREY);
         setSelectionForeground(cColor.BLACK);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        for (int i = 0; i < getColumnCount(); i++) {
+            getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
     }
 
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;
     }
-
 }

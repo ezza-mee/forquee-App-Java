@@ -4,7 +4,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        // Controller.showLoginCustomer();
+        Controller.showLoginCustomer();
         // Controller.showLoginMitra();
         // Controller.showLoginAdmin();
 
@@ -13,7 +13,7 @@ public class App {
         // Controller.showDaftarAdmin();
 
         // Controller.showDashboardMitra(5);
-        Controller.showDashboardCustomer(1);
+        // Controller.showDashboardCustomer(1);
         // Controller.showDashboardAdmin(true);
 
         // Model.connection();
@@ -37,7 +37,7 @@ public class App {
         // default:
         // System.out.println("Tipe pengguna tidak dikenal.");
         // break;
-        // }
+        //}
 
     }
 }
