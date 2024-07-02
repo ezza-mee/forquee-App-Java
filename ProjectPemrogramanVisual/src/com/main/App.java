@@ -13,7 +13,7 @@ public class App {
         // Controller.showDaftarAdmin();
 
         // Controller.showDashboardMitra(5);
-        Controller.showDashboardCustomer(1);
+        // Controller.showDashboardCustomer(1);
         // Controller.showDashboardAdmin(true);
 
         // Model.connection();
@@ -22,22 +22,22 @@ public class App {
         // auth.initsLoginCustomer();
         // auth.setVisible(true);
 
-        // int userType = 1; // ganti nilai ini sesuai dengan login yang diinginkan
+        int userType = 1; // ganti nilai ini sesuai dengan login yang diinginkan
 
-        // switch (userType) {
-        // case 1:
-        // Controller.showLoginCustomer();
-        // break;
-        // case 2:
-        // Controller.showLoginMitra();
-        // break;
-        // case 3:
-        // Controller.showLoginAdmin();
-        // break;
-        // default:
-        // System.out.println("Tipe pengguna tidak dikenal.");
-        // break;
-        // }
+        switch (userType) {
+            case 1:
+                Controller.showLoginCustomer();
+                break;
+            case 2:
+                Controller.showLoginMitra();
+                break;
+            case 3:
+                Controller.showLoginAdmin();
+                break;
+            default:
+                System.out.println("Tipe pengguna tidak dikenal.");
+                break;
+        }
 
     }
 }

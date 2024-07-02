@@ -25,15 +25,15 @@ public class cDashboardCustomerView extends cDashboardApp {
   private cSidebarMenu menuAkun = new cSidebarMenu("Akun", 70 + 50 + 50 + 50 + 50 + 50 + 50);
 
   // component of datetime
-  private cDateTime labelDateTime = new cDateTime(700, 15, 300);
+  private cDateTime labelDateTimeBeranda = new cDateTime(840, 15, 300);
   private cLabelInfo labelJumlahMenuBeranda = new cLabelInfo("Jumlah Data Menu", 420, 40, 400, 40);
   private cBigFont valueJumlahMenuBeranda = new cBigFont("0", 420, 60);
-  private cLabelInfo labelJumlahMejaBeranda = new cLabelInfo("Jumlah Data Meja", 40, 180, 400, 40);
-  private cBigFont valueJumlahMejaBeranda = new cBigFont("0", 40, 205);
+  private cLabelInfo labelJumlahMejaBeranda = new cLabelInfo("Jumlah Data Meja", 40, 40, 400, 40);
+  private cBigFont valueJumlahMejaBeranda = new cBigFont("0", 40, 60);
   private cLabelInfo labelJumlahPromoBeranda = new cLabelInfo("Jumlah Data Promo", 420, 180, 400, 40);
   private cBigFont valueJumlahPromoBeranda = new cBigFont("0", 420, 205);
-  private cLabelInfo labelTransaksiBeranda = new cLabelInfo("Jumlah Data Transaksi ", 40, 280, 400, 40);
-  private cBigFont valueTransaksiBeranda = new cBigFont("0", 40, 305);
+  private cLabelInfo labelTransaksiBeranda = new cLabelInfo("Jumlah Data Transaksi ", 40, 180, 400, 40);
+  private cBigFont valueTransaksiBeranda = new cBigFont("0", 40, 205);
 
   // component of data menu
   private cLabelInfo labelPilihMenu = new cLabelInfo("Pilih Menu", 40, 20, 200, 40);
@@ -323,7 +323,7 @@ public class cDashboardCustomerView extends cDashboardApp {
     });
 
     // add component default
-    main.add(labelDateTime);
+    main.add(labelDateTimeBeranda);
     sidebar.add(menuBeranda);
     sidebar.add(menuDataMenu);
     sidebar.add(menuDataPromo);
@@ -349,12 +349,16 @@ public class cDashboardCustomerView extends cDashboardApp {
 
     valueJumlahPromoBeranda.setText(String.valueOf(Model.getCountAllDataPromo()));
 
+    valueTransaksiBeranda.setText(String.valueOf(Model.getCountAllDataTransaksiOnline(idCustomer)));
+
     content.add(labelJumlahMenuBeranda);
     content.add(valueJumlahMenuBeranda);
     content.add(labelJumlahMejaBeranda);
     content.add(valueJumlahMejaBeranda);
     content.add(labelJumlahPromoBeranda);
     content.add(valueJumlahPromoBeranda);
+    content.add(labelTransaksiBeranda);
+    content.add(valueTransaksiBeranda);
 
     setVisible(true);
   }
@@ -2522,6 +2526,10 @@ public class cDashboardCustomerView extends cDashboardApp {
 
     txtCariTransaksi.setBorder(titledBorder);
     txtCariTransaksi.setSize(300, 45);
+
+    btnDetailTransaksi.setBounds(400, 95, 150, 30);
+
+    content.add(btnDetailTransaksi);
 
     content.add(spDataTransaksi);
     content.add(labelPilihTransaksi);

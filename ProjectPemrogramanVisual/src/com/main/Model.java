@@ -195,6 +195,173 @@ public class Model {
         return count;
     }
 
+    // count All Data Order Offline
+    public static int getCountAllDataOrderOffline() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwtransaksiselesai";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data Order Online
+    public static int getCountAllDataOrderOnline() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwtransaksionlineselesai";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public static int getCountAllDataTransaksi() {
+
+        connection();
+
+        int countVwTransaksi = 0;
+        int countVwTransaksiOnline = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String queryVwTransaksi = "SELECT COUNT(*) FROM vwtransaksidiproses";
+            ResultSet resultDataVwTransaksi = statement.executeQuery(queryVwTransaksi);
+            if (resultDataVwTransaksi.next()) {
+                countVwTransaksi = resultDataVwTransaksi.getInt(1);
+            }
+
+            String queryVwTransaksiOnline = "SELECT COUNT(*) FROM vwtransaksionlinediproses";
+            ResultSet resultDataVwTransaksiOnline = statement.executeQuery(queryVwTransaksiOnline);
+            if (resultDataVwTransaksiOnline.next()) {
+                countVwTransaksiOnline = resultDataVwTransaksiOnline.getInt(1);
+            }
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return countVwTransaksi + countVwTransaksiOnline;
+    }
+
+    // count All Data calon mitra
+    public static int getCountAllDataTransaksiOnline(int idCustomer) {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwtransaksionlinediproses WHERE idCustomer = " + idCustomer;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data calon mitra
+    public static int getCountAllDataCalonMitra() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwmitraverified";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    // count All Data calon Karyawan
+    public static int getCountAllDataCalonKaryawan() {
+
+        connection();
+
+        int count = 0;
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT COUNT(*) FROM vwkaryawanverified";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            resultData.next();
+            count = resultData.getInt(1);
+
+            statement.close();
+            connect.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     // detail customer
     public static Object[] getDetailCustomer(int idCustomer) {
 
@@ -330,6 +497,41 @@ public class Model {
 
         return rowData;
 
+    }
+
+    // data calon mitra static function
+    public static DefaultTableModel getAllMitra() {
+
+        connection();
+
+        String[] dataHeader = { "ID", "Nama", "Nomor Hp", "Email", "Alamat", "Password", "Status Terverifikasi",
+                "Status" };
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallmitra";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("nomorHpMitra"),
+                        resultData.getString("emailMitra"),
+                        resultData.getString("alamatMitra"),
+                        resultData.getString("passwordMitra"),
+                        resultData.getString("statusTerverifikasi"),
+                        resultData.getString("statusAktif") };
+                tm.addRow(rowData);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
     }
 
     // data calon mitra static function
@@ -1677,6 +1879,7 @@ public class Model {
                         resultData.getString("mejaTransaksi"),
                         resultData.getString("deskripsiTransaksi"),
                         resultData.getInt("hargaTransaksi"),
+                        resultData.getInt("hargaPromo"),
                         resultData.getString("bayarTransaksi"),
                         resultData.getInt("uangTransaksi"),
                         resultData.getInt("kembalianTransaksi"),
@@ -1727,6 +1930,7 @@ public class Model {
                         resultData.getString("mejaTransaksi"),
                         resultData.getString("deskripsiTransaksi"),
                         resultData.getInt("hargaTransaksi"),
+                        resultData.getInt("hargaPromo"),
                         resultData.getString("bayarTransaksi"),
                         resultData.getInt("uangTransaksi"),
                         resultData.getInt("kembalianTransaksi"),
@@ -1868,7 +2072,7 @@ public class Model {
     }
 
     // selesai transaksi
-    public static boolean mitraProsesOnline(int idTransaksi) {
+    public static boolean mitraProsesTransaksiOnline(int idTransaksi) {
 
         boolean data = false;
 
