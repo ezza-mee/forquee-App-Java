@@ -32,8 +32,4 @@ public class cTable extends JTable {
     public boolean isCellEditable(int row, int column) {
         return false;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4f0345e24e04e01974af5794c62b485d89140340
