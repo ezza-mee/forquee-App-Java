@@ -11,21 +11,35 @@ public class cDashboardAdminView extends cDashboardApp {
     private boolean statusLogin = false;
     private Integer idSelected = null;
 
-    private cLogoutDashboard exitLink = new cLogoutDashboard(1020);
-
     // sidebar menu
     private cSidebarMenu menuBeranda = new cSidebarMenu("Beranda", 70);
-    private cSidebarMenu menuOrderBahan = new cSidebarMenu("Order Bahan", 70 + 50);
-    private cSidebarMenu menuCalonMitra = new cSidebarMenu("Calon Mitra", 70 + 50 + 50);
-    private cSidebarMenu menuKaryawan = new cSidebarMenu("Calon Karyawan", 70 + 50 + 50 + 50);
-    private cSidebarMenu menuHistory = new cSidebarMenu("History Transaksi", 70 + 50 + 50 + 50 + 50);
-    private cSidebarMenu menuHistoryBahan = new cSidebarMenu("History Bahan", 70 + 50 + 50 + 50 + 50 + 50);
+    private cSidebarMenu menuDataCustomer = new cSidebarMenu("Data Customer", 70 + 50);
+    private cSidebarMenu menuOrderBahan = new cSidebarMenu("Order Bahan", 70 + 50 + 50);
+    private cSidebarMenu menuCalonMitra = new cSidebarMenu("Calon Mitra", 70 + 50 + 50 + 50);
+    private cSidebarMenu menuKaryawan = new cSidebarMenu("Calon Karyawan", 70 + 50 + 50 + 50 + 50);
+    private cSidebarMenu menuHistory = new cSidebarMenu("History Transaksi", 70 + 50 + 50 + 50 + 50 + 50);
+    private cSidebarMenu menuHistoryBahan = new cSidebarMenu("History Bahan", 70 + 50 + 50 + 50 + 50 + 50 + 50);
 
     // component of date time
     private cDateTime labelDateTimeBeranda = new cDateTime(720, 15, 300);
+    private cLabelInfo labelCustomerBeranda = new cLabelInfo("Jumlah Data Customer", 420, 280, 400, 40);
+    private cBigFont valueCustomerBeranda = new cBigFont("0", 420, 305);
+    private cLabelInfo labelKaryawanBeranda = new cLabelInfo("Jumlah Data Karyawan", 40, 380, 400, 40);
+    private cBigFont valueKaryawanBeranda = new cBigFont("0", 40, 405);
+    private cLabelInfo labelOrderBahanBeranda = new cLabelInfo("Jumlah Data Order Bahan", 420, 380, 400, 40);
+    private cBigFont valueOrderBahanBeranda = new cBigFont("0", 420, 405);
+    private cLabelInfo labelTransaksiBeranda = new cLabelInfo("Jumlah Data Transaksi ", 40, 280, 400, 40);
+    private cBigFont valueTransaksiBeranda = new cBigFont("0", 40, 305);
 
     // component of Order Bahan
     private cButton btnOrderBahan = new cButton("Proses", 450, 40, 150, 30, 20);
+
+    // componenet of data customer
+    private cLabelInfo labelCustomer = new cLabelInfo("Data Customer Aktif", 40, 40, 300, 40);
+    private cLabelInfo labelCariCustomer = new cLabelInfo("Cari", 40, 95, 300, 40);
+    private cTextField txtCariCustomer = new cTextField(100, 100, 300);
+    private cTable tblDataCustomer;
+    private cScrollPane spDataCustomer;
 
     // component of Order Bahan
     private cLabelInfo labelCariOrderBahan = new cLabelInfo("Cari", 40, 35, 300, 40);
@@ -47,29 +61,6 @@ public class cDashboardAdminView extends cDashboardApp {
     private cTable tblDataKaryawan;
     private cScrollPane spDataKaryawan;
 
-    // component of data History
-    private cButton btnHistoryMakanan = new cButton("Makanan", 450, 40, 150, 30, 20);
-    private cButton btnHistoryCoffe = new cButton("Coffe", 650, 40, 150, 30, 20);
-    private cButton btnHistoryNonCoffe = new cButton("Non Coffe", 840, 40, 150, 30, 20);
-
-    // component of data History makanan
-    private cLabelInfo labelCariHistoryMakanan = new cLabelInfo("Cari", 40, 35, 300, 40);
-    private cTextField txtCariHistoryMakanan = new cTextField(100, 40, 300);
-    private cTable tblTransaksiMakanan;
-    private cScrollPane spTransaksiMakanan;
-
-    // component of data History coffe
-    private cLabelInfo labelCariHistoryCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
-    private cTextField txtCariHistoryCoffe = new cTextField(100, 40, 300);
-    private cTable tblTransaksiCoffe;
-    private cScrollPane spTransaksiCoffe;
-
-    // component of data History non coffe
-    private cLabelInfo labelCariHistoryNonCoffe = new cLabelInfo("Cari", 40, 35, 300, 40);
-    private cTextField txtCariHistoryNonCoffe = new cTextField(100, 40, 300);
-    private cTable tblTransaksiNonCoffe;
-    private cScrollPane spTransaksiNonCoffe;
-
     // method resetSidebar
     private void resetSidebar() {
         try {
@@ -78,6 +69,10 @@ public class cDashboardAdminView extends cDashboardApp {
             menuBeranda.setForeground(cColor.WHITE);
             menuBeranda.setBackground(cColor.GREEN);
             menuBeranda.setSidebarNonAktif();
+
+            menuDataCustomer.setForeground(cColor.WHITE);
+            menuDataCustomer.setBackground(cColor.GREEN);
+            menuDataCustomer.setSidebarNonAktif();
 
             menuOrderBahan.setForeground(cColor.WHITE);
             menuOrderBahan.setBackground(cColor.GREEN);
@@ -124,6 +119,12 @@ public class cDashboardAdminView extends cDashboardApp {
                 initsBeranda();
             }
         });
+        menuDataCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent me) {
+                initsDataCustomer();
+            }
+        });
         menuOrderBahan.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
@@ -154,21 +155,15 @@ public class cDashboardAdminView extends cDashboardApp {
                 initsHistoryBahan();
             }
         });
-        exitLink.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent me) {
-                cDashboardAdminView.this.setVisible(false);
-            }
-        });
         // add component default
         main.add(labelDateTimeBeranda);
         sidebar.add(menuBeranda);
+        sidebar.add(menuDataCustomer);
         sidebar.add(menuOrderBahan);
         sidebar.add(menuCalonMitra);
         sidebar.add(menuKaryawan);
         sidebar.add(menuHistory);
         sidebar.add(menuHistoryBahan);
-        header.add(exitLink);
         initsBeranda();
     }
 
@@ -180,6 +175,67 @@ public class cDashboardAdminView extends cDashboardApp {
         refreshContent();
         menuBeranda.setSidebarAktif();
         menuTitle.setText("Beranda");
+
+        valueCustomerBeranda.setText(String.valueOf(Model.getCountAllDataCustomer()));
+        valueKaryawanBeranda.setText(String.valueOf(Model.getCountAllDataKaryawan()));
+        valueOrderBahanBeranda.setText(String.valueOf(Model.getCountAllDataOrderBahan()));
+
+        content.add(labelTransaksiBeranda);
+        content.add(valueTransaksiBeranda);
+        content.add(labelCustomerBeranda);
+        content.add(valueCustomerBeranda);
+        content.add(labelKaryawanBeranda);
+        content.add(valueKaryawanBeranda);
+        content.add(labelOrderBahanBeranda);
+        content.add(valueOrderBahanBeranda);
+
+        setVisible(true);
+    }
+
+    private void initsDataCustomer() {
+        idSelected = null;
+        resetSidebar();
+        menuDataCustomer.setBackground(cColor.WHITE);
+        menuDataCustomer.setForeground(cColor.GREEN);
+        refreshContent();
+        menuDataCustomer.setSidebarAktif();
+        menuTitle.setText("Data Customer");
+
+        txtCariCustomer.setText(null);
+
+        txtCariCustomer.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                String keyword = txtCariCustomer.getText();
+
+                tblDataCustomer.setModel(Model.getCariDataCustomer(keyword));
+
+                tblDataCustomer.getColumnModel().getColumn(0).setMinWidth(0);
+                tblDataCustomer.getColumnModel().getColumn(0).setMaxWidth(0);
+                tblDataCustomer.getColumnModel().getColumn(0).setWidth(0);
+
+                tblDataCustomer.getColumnModel().getColumn(5).setMinWidth(0);
+                tblDataCustomer.getColumnModel().getColumn(5).setMaxWidth(0);
+                tblDataCustomer.getColumnModel().getColumn(5).setWidth(0);
+            }
+        });
+
+        tblDataCustomer = new cTable(Model.getAllCustomer());
+
+        tblDataCustomer.getColumnModel().getColumn(0).setMinWidth(0);
+        tblDataCustomer.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblDataCustomer.getColumnModel().getColumn(0).setWidth(0);
+
+        tblDataCustomer.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataCustomer.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataCustomer.getColumnModel().getColumn(5).setWidth(0);
+
+        spDataCustomer = new cScrollPane(tblDataCustomer, 0, 150, 1080, 300);
+
+        content.add(spDataCustomer);
+        content.add(labelCustomer);
+        content.add(labelCariCustomer);
+        content.add(txtCariCustomer);
         setVisible(true);
     }
 
@@ -368,167 +424,9 @@ public class cDashboardAdminView extends cDashboardApp {
         menuHistory.setSidebarAktif();
         menuTitle.setText("History Pemesanan");
 
-        btnHistoryMakanan.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent ae) {
-                initsHistoryMakanan();
-            }
-        });
-
-        btnHistoryCoffe.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent ae) {
-                initsHistoryCoffe();
-            }
-        });
-
-        btnHistoryNonCoffe.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent ae) {
-                initsHistoryNonCoffe();
-            }
-        });
-
-        content.add(btnHistoryMakanan);
-        content.add(btnHistoryCoffe);
-        content.add(btnHistoryNonCoffe);
-
-        initsHistoryMakanan();
-
         setVisible(true);
     }
 
-    private void initsHistoryMakanan() {
-        idSelected = null;
-        resetSidebar();
-        menuHistory.setBackground(cColor.WHITE);
-        menuHistory.setForeground(cColor.GREEN);
-        refreshContent();
-        menuHistory.setSidebarAktif();
-        menuTitle.setText("Data History Makanan");
-
-        tblTransaksiMakanan = new cTable(Model.getAllOnlineMakananSelesai());
-
-        tblTransaksiMakanan.getColumnModel().getColumn(0).setMinWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(0).setWidth(0);
-
-        tblTransaksiMakanan.getColumnModel().getColumn(1).setMinWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(1).setMaxWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(1).setWidth(0);
-
-        tblTransaksiMakanan.getColumnModel().getColumn(2).setMinWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(2).setMaxWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(2).setWidth(0);
-
-        tblTransaksiMakanan.getColumnModel().getColumn(7).setMinWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(7).setMaxWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(7).setWidth(0);
-
-        tblTransaksiMakanan.getColumnModel().getColumn(8).setMinWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(8).setMaxWidth(0);
-        tblTransaksiMakanan.getColumnModel().getColumn(8).setWidth(0);
-
-        spTransaksiMakanan = new cScrollPane(tblTransaksiMakanan, 0, 140, 1100, 300);
-
-        content.add(spTransaksiMakanan);
-
-        content.add(btnHistoryMakanan);
-        content.add(btnHistoryCoffe);
-        content.add(btnHistoryNonCoffe);
-
-        content.add(labelCariHistoryMakanan);
-        content.add(txtCariHistoryMakanan);
-        setVisible(true);
-    }
-
-    private void initsHistoryCoffe() {
-        idSelected = null;
-        resetSidebar();
-        menuHistory.setBackground(cColor.WHITE);
-        menuHistory.setForeground(cColor.GREEN);
-        refreshContent();
-        menuHistory.setSidebarAktif();
-        menuTitle.setText("Data History Coffe");
-
-        tblTransaksiCoffe = new cTable(Model.getAllOnlineCoffeSelesai());
-
-        tblTransaksiCoffe.getColumnModel().getColumn(0).setMinWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(0).setWidth(0);
-
-        tblTransaksiCoffe.getColumnModel().getColumn(1).setMinWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(1).setWidth(0);
-
-        tblTransaksiCoffe.getColumnModel().getColumn(2).setMinWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(2).setWidth(0);
-
-        tblTransaksiCoffe.getColumnModel().getColumn(7).setMinWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(7).setWidth(0);
-
-        tblTransaksiCoffe.getColumnModel().getColumn(8).setMinWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(8).setMaxWidth(0);
-        tblTransaksiCoffe.getColumnModel().getColumn(8).setWidth(0);
-
-        spTransaksiCoffe = new cScrollPane(tblTransaksiCoffe, 0, 140, 1100, 300);
-
-        content.add(spTransaksiCoffe);
-
-        content.add(btnHistoryMakanan);
-        content.add(btnHistoryCoffe);
-        content.add(btnHistoryNonCoffe);
-
-        content.add(labelCariHistoryCoffe);
-        content.add(txtCariHistoryCoffe);
-        setVisible(true);
-    }
-
-    private void initsHistoryNonCoffe() {
-        idSelected = null;
-        resetSidebar();
-        menuHistory.setBackground(cColor.WHITE);
-        menuHistory.setForeground(cColor.GREEN);
-        refreshContent();
-        menuHistory.setSidebarAktif();
-        menuTitle.setText("Data History Coffe");
-
-        tblTransaksiNonCoffe = new cTable(Model.getAllOnlineNonCoffeSelesai());
-
-        tblTransaksiNonCoffe.getColumnModel().getColumn(0).setMinWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(0).setWidth(0);
-
-        tblTransaksiNonCoffe.getColumnModel().getColumn(1).setMinWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(1).setMaxWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(1).setWidth(0);
-
-        tblTransaksiNonCoffe.getColumnModel().getColumn(2).setMinWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(2).setMaxWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(2).setWidth(0);
-
-        tblTransaksiNonCoffe.getColumnModel().getColumn(7).setMinWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(7).setMaxWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(7).setWidth(0);
-
-        tblTransaksiNonCoffe.getColumnModel().getColumn(8).setMinWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(8).setMaxWidth(0);
-        tblTransaksiNonCoffe.getColumnModel().getColumn(8).setWidth(0);
-
-        spTransaksiNonCoffe = new cScrollPane(tblTransaksiNonCoffe, 0, 140, 1100, 300);
-
-        content.add(spTransaksiNonCoffe);
-
-        content.add(btnHistoryMakanan);
-        content.add(btnHistoryCoffe);
-        content.add(btnHistoryNonCoffe);
-
-        content.add(labelCariHistoryNonCoffe);
-        content.add(txtCariHistoryNonCoffe);
-        setVisible(true);
-    }
 
     private void initsHistoryBahan() {
         idSelected = null;

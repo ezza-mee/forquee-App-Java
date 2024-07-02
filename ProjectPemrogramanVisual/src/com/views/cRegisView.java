@@ -52,61 +52,66 @@ public class cRegisView extends cFrameRegisApp {
 
         // implemnt for link frame daftar customer
         toLoginCustomerDaftarCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginCustomer();
+                cRegisView.this.setVisible(false);
             }
         });
         toDaftarMitraDaftarCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarMitra();
+                cRegisView.this.setVisible(false);
             }
         });
-        toLoginMitraDaftarCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
 
+        toLoginMitraDaftarCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginMitra();
+                cRegisView.this.setVisible(false);
             }
         });
-        toLoginAdminDaftarCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
 
+        toLoginAdminDaftarCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginAdmin();
+                cRegisView.this.setVisible(false);
             }
         });
 
         // implement for link frame daftar mitra
         toLoginMitraDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
-
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginMitra();
+                cRegisView.this.setVisible(false);
             }
         });
-        toDaftarCustomerDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
 
+        toDaftarCustomerDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showDaftarCustomer();
+                cRegisView.this.setVisible(false);
             }
         });
-        toLoginCustomerDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
 
+        toLoginCustomerDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginCustomer();
+                cRegisView.this.setVisible(false);
             }
         });
-        toLoginAdminDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
 
+        toLoginAdminDaftarMitra.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent me) {
                 Controller.showLoginAdmin();
+                cRegisView.this.setVisible(false);
             }
         });
     }
@@ -161,15 +166,12 @@ public class cRegisView extends cFrameRegisApp {
                     // lolos validasi
 
                     // cek apakah Email sudah terdaftar atau belum
-                    if (Model.verifyEmailMitra(email)) {
+                    if (Model.verifyEmailCustomer(email)) {
                         // berarti Email belum terdaftar
-                        if (Model.daftarMitra(nama, nomorHp, email, password)) {
+                        if (Model.daftarCustomer(nama, nomorHp, email, password)) {
                             // kalau berhasil daftar
                             JOptionPane.showMessageDialog(cRegisView.this, "Daftar Berhasil!!", "Berhasil Daftar",
                                     JOptionPane.INFORMATION_MESSAGE);
-                            cLoginView loginCustomer = new cLoginView();
-                            loginCustomer.setVisible(true);
-                            loginCustomer.initsLoginCustomer();
                             cRegisView.this.setVisible(false);
                         } else {
                             // kalau gagal daftar
@@ -198,6 +200,8 @@ public class cRegisView extends cFrameRegisApp {
         cardRegis.add(toDaftarMitraDaftarCustomer);
         cardRegis.add(toLoginMitraDaftarCustomer);
         cardRegis.add(toLoginAdminDaftarCustomer);
+
+        this.setVisible(true);
     }
 
     public void initsDaftarMitra() {
@@ -256,9 +260,6 @@ public class cRegisView extends cFrameRegisApp {
                             // kalau berhasil daftar
                             JOptionPane.showMessageDialog(cRegisView.this, "Daftar Berhasil!!", "Berhasil Daftar",
                                     JOptionPane.INFORMATION_MESSAGE);
-                            cLoginView loginMitra = new cLoginView();
-                            loginMitra.setVisible(true);
-                            loginMitra.initsLoginMitra();
                             cRegisView.this.setVisible(false);
                         } else {
                             // kalau gagal daftar
@@ -288,5 +289,7 @@ public class cRegisView extends cFrameRegisApp {
         cardRegis.add(toDaftarCustomerDaftarMitra);
         cardRegis.add(toLoginCustomerDaftarMitra);
         cardRegis.add(toLoginAdminDaftarMitra);
+
+        this.setVisible(true);
     }
 }

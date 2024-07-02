@@ -2,9 +2,15 @@ package com.templates;
 
 import javax.swing.*;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import com.partials.*;
 
 public abstract class cFrameLoginApp extends JFrame {
+
+    private int mouseX, mouseY;
+
     public JPanel bg = new JPanel();
     public JPanel cardLogin = new croundedPanel(30);
     public JLabel titleLogin = new JLabel("Title Login");
@@ -49,6 +55,23 @@ public abstract class cFrameLoginApp extends JFrame {
         bg.add(linkKeluar);
         bg.add(cardLogin);
         add(bg);
+
+        // Menambahkan listener untuk menggeser frame
+        bg.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+
+        bg.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                // Menghitung posisi baru frame
+                int newX = e.getXOnScreen() - mouseX;
+                int newY = e.getYOnScreen() - mouseY;
+                setLocation(newX, newY);
+            }
+        });
     }
 
     public cFrameLoginApp(String title) {

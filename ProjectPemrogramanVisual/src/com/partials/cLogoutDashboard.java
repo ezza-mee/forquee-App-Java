@@ -1,7 +1,5 @@
 package com.partials;
 
-import com.main.*;
-
 import javax.swing.*;
 
 public class cLogoutDashboard extends JLabel {
@@ -22,11 +20,12 @@ public class cLogoutDashboard extends JLabel {
             }
 
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                Object[] options = { "IYA", "KELUAR" };
-                int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin keluar aplikasi", "Kompirmasi Keluar",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                if (konfirmasi == 0) {
-                    Controller.showLoginCustomer();
+                Object[] options = { "YA", "BATAL" };
+                int confirm = JOptionPane.showOptionDialog(null, "Yakin ingin logout?", "Logout",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, options, options[0]);
+                if (confirm == 0) {
+                    com.main.Controller.logout();
                 }
             }
         });
