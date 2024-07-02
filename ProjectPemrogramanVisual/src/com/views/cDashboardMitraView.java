@@ -365,7 +365,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cErrorLabel errorNamaUbahTerverifikasi = new cErrorLabel("Nama tidak boleh kosong!", 190, 165, 300);
   private cErrorLabel errorNomorHpUbahTerverifikasi = new cErrorLabel("Nomor Hp tidak boleh Kosong!", 190, 265, 300);
   private cErrorLabel errorEmailUbahTerverifikasi = new cErrorLabel("Email tidak boleh Kosong!", 190, 365, 300);
-  private cErrorLabel errorJobdeskUbahTerverifikasi = new cErrorLabel("Jobdek tidak boleh Kosong!", 580, 165, 300);
+  private cErrorLabel errorJobdeskUbahTerverifikasi = new cErrorLabel("Jobdesk tidak boleh Kosong!", 580, 165, 300);
   private cErrorLabel errorAlamatUbahTerverifikasi = new cErrorLabel("Alamat tidak boleh Kosong!", 580, 380, 300);
   private cTextField txtNamaUbahTerverifikasi = new cTextField(190, 135, 300);
   private cTextField txtNomorHpUbahTerverifikasi = new cTextField(190, 235, 300);
@@ -403,7 +403,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cErrorLabel errorNamaKaryawan = new cErrorLabel("Nama tidak boleh kosong!", 190, 165, 300);
   private cErrorLabel errorNomorHpKaryawan = new cErrorLabel("Nomor Hp tidak boleh Kosong!", 190, 265, 300);
   private cErrorLabel errorEmailKaryawan = new cErrorLabel("Email tidak boleh Kosong!", 190, 365, 300);
-  private cErrorLabel errorJobdeskKaryawan = new cErrorLabel("Jobdek tidak boleh Kosong!", 580, 165, 300);
+  private cErrorLabel errorJobdeskKaryawan = new cErrorLabel("Jobdesk tidak boleh Kosong!", 580, 165, 300);
   private cErrorLabel errorAlamatKaryawan = new cErrorLabel("Alamat tidak boleh Kosong!", 580, 380, 300);
   private cTextField txtNamaKaryawan = new cTextField(190, 135, 300);
   private cTextField txtNomorHpKaryawan = new cTextField(190, 235, 300);
@@ -427,7 +427,7 @@ public class cDashboardMitraView extends cDashboardApp {
   private cErrorLabel errorNamaUbahKaryawan = new cErrorLabel("Nama tidak boleh kosong!", 190, 165, 300);
   private cErrorLabel errorNomorHpUbahKaryawan = new cErrorLabel("Nomor Hp tidak boleh Kosong!", 190, 265, 300);
   private cErrorLabel errorEmailUbahKaryawan = new cErrorLabel("Email tidak boleh Kosong!", 190, 365, 300);
-  private cErrorLabel errorJobdeskUbahKaryawan = new cErrorLabel("Jobdek tidak boleh Kosong!", 580, 165, 300);
+  private cErrorLabel errorJobdeskUbahKaryawan = new cErrorLabel("Jobdesk tidak boleh Kosong!", 580, 165, 300);
   private cErrorLabel errorAlamatUbahKaryawan = new cErrorLabel("Alamat tidak boleh Kosong!", 580, 380, 300);
   private cTextField txtNamaUbahKaryawan = new cTextField(190, 135, 300);
   private cTextField txtNomorHpUbahKaryawan = new cTextField(190, 235, 300);
@@ -897,7 +897,7 @@ public class cDashboardMitraView extends cDashboardApp {
       content.add(labelOrderBahanBeranda);
       content.add(valueOrderBahanBeranda);
     } else {
-      labelInfoSaldoMitraBeranda.setText("Anda Belum Terverifikasi! Silahkan Tunggu respon dari Atmin!");
+      labelInfoSaldoMitraBeranda.setText("Anda Belum Terverifikasi! Silahkan Tunggu respon dari Admin!");
       labelInfoSaldoMitraBeranda.setSize(labelInfoSaldoMitraBeranda.getWidth() + 500,
           labelInfoSaldoMitraBeranda.getHeight());
     }
@@ -1039,7 +1039,7 @@ public class cDashboardMitraView extends cDashboardApp {
           int idMenu = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Menu!",
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Menu?",
               "Konfirmasi ubah Data Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
@@ -1064,7 +1064,7 @@ public class cDashboardMitraView extends cDashboardApp {
           int idMenu = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin menghapus data Menu!",
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin menghapus data Menu?",
               "Konfirmasi Hapus Data Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
@@ -1232,7 +1232,7 @@ public class cDashboardMitraView extends cDashboardApp {
           int idMenu = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Menu!",
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Menu?",
               "Konfirmasi ubah Data Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
@@ -1258,7 +1258,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin menghapus data Menu!",
+              "Yakin ingin menghapus data Menu?",
               "Konfirmasi Hapus Data Menu",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -1433,7 +1433,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin mengubah data Menu!",
+              "Yakin ingin mengubah data Menu?",
               "Konfirmasi ubah Data Menu",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -1464,7 +1464,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin menghapus data Menu!",
+              "Yakin ingin menghapus data Menu?",
               "Konfirmasi Hapus Data Menu",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -2296,7 +2296,7 @@ public class cDashboardMitraView extends cDashboardApp {
           int idPromo = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin menghapus data Menu!",
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin menghapus data Menu?",
               "Konfirmasi Hapus Data Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
@@ -2330,7 +2330,7 @@ public class cDashboardMitraView extends cDashboardApp {
           int idPromo = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Promo!",
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Promo?",
               "Konfirmasi ubah Data Promo", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
@@ -2735,7 +2735,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin menghapus data meja!",
+              "Yakin ingin menghapus data meja?",
               "Konfirmasi Hapus Data Meja",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -2778,7 +2778,7 @@ public class cDashboardMitraView extends cDashboardApp {
           int idMeja = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Promo!",
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin mengubah data Promo?",
               "Konfirmasi ubah Data Promo", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
@@ -3196,7 +3196,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin menghapus data Karyawan!",
+              "Yakin ingin menghapus data Karyawan?",
               "Konfirmasi Hapus Data Karyawan",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -3239,7 +3239,7 @@ public class cDashboardMitraView extends cDashboardApp {
               .valueOf(tblDataKaryawan.getValueAt(selectedIndex, 0).toString());
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin mengubah data Karyawan!",
+              "Yakin ingin mengubah data Karyawan?",
               "Konfirmasi ubah Data Karyawan",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -3376,7 +3376,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin menghapus data Terverifikasi!",
+              "Yakin ingin menghapus data Terverifikasi?",
               "Konfirmasi Hapus Data Terverifikasi",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -3419,7 +3419,7 @@ public class cDashboardMitraView extends cDashboardApp {
               .valueOf(tblDataTerverifikasi.getValueAt(selectedIndex, 0).toString());
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin mengubah data Terverifikasi!",
+              "Yakin ingin mengubah data Terverifikasi?",
               "Konfirmasi ubah Data Terverifikasi",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -3932,7 +3932,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin mengubah data Transaksi!",
+              "Yakin ingin mengubah data Transaksi?",
               "Konfirmasi ubah Data Transaksi",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -3964,7 +3964,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
-              "Yakin ingin menghapus data Transaksi!",
+              "Yakin ingin menghapus data Transaksi?",
               "Konfirmasi Hapus Data Transaksi",
               JOptionPane.DEFAULT_OPTION,
               JOptionPane.QUESTION_MESSAGE,
@@ -4482,7 +4482,7 @@ public class cDashboardMitraView extends cDashboardApp {
           cDashboardMitraView.this.setVisible(true);
         } else {
           Object[] messagePembayaran = { "Pilih Pembayaran", pilihPembayaranUbahTransaksi };
-          JOptionPane.showMessageDialog(null, messagePembayaran, "PEMBAYRAN",
+          JOptionPane.showMessageDialog(null, messagePembayaran, "PEMBAYARAN",
               JOptionPane.PLAIN_MESSAGE);
 
           // Pertama, minta pengguna untuk memasukkan uang
@@ -4947,7 +4947,7 @@ public class cDashboardMitraView extends cDashboardApp {
           cDashboardMitraView.this.setVisible(true);
         } else {
           Object[] messagePembayaran = { "Pilih Pembayaran", pilihPembayaranTransaksi };
-          JOptionPane.showMessageDialog(null, messagePembayaran, "PEMBAYRAN",
+          JOptionPane.showMessageDialog(null, messagePembayaran, "PEMBAYARAN",
               JOptionPane.PLAIN_MESSAGE);
 
           // Pertama, minta pengguna untuk memasukkan uang

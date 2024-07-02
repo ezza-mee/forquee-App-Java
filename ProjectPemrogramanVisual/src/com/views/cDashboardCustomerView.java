@@ -199,7 +199,8 @@ public class cDashboardCustomerView extends cDashboardApp {
   private cButton btnKembaliUbahTransaksi = new cButton("Kembali", 80, 500, 150, 30, 20);
 
   // component of input data akun
-  private cLabelInfo labelInfoDataAkun = new cLabelInfo("Masukan Data Untuk Mengubah Data Akun!", 190, 30, 600, 40);
+  private cPanelRounded panelHeaderAkun = new cPanelRounded(0, 0, 1100, 75, 15);
+  private cLabelInfo labelInfoDataAkun = new cLabelInfo("Masukan Data Untuk Mengubah Data Akun!", 190, 20, 600, 40);
   private cLabelInfo labelNamaDataAkun = new cLabelInfo("Nama", 190, 80, 400, 40);
   private cLabelInfo labelEmailDataAkun = new cLabelInfo("Email", 190, 180, 400, 40);
   private cLabelInfo labelNomorHpDataAkun = new cLabelInfo("No Hp", 190, 290, 400, 40);
@@ -1604,9 +1605,16 @@ public class cDashboardCustomerView extends cDashboardApp {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         if (pilihMejaUbahTransaksi.getSelectedItem() == null
+            || pilihMejaUbahTransaksi.getSelectedItem() == null
             || txtDeskripsiUbahTransaksi.getText().trim().isEmpty()
             || pilihPembayaranUbahTransaksi.getSelectedItem() == null) {
           cDashboardCustomerView.this.setVisible(false);
+          if (pilihMitraUbahTransaksi.getSelectedItem() == null
+              || pilihMitraUbahTransaksi.getSelectedItem().toString().trim().equals("-")) {
+            content.add(errorMitraUbahTransaksi);
+          } else {
+            content.remove(errorMitraUbahTransaksi);
+          }
           if (pilihMejaUbahTransaksi.getSelectedItem() == null
               || pilihMejaUbahTransaksi.getSelectedItem().toString().trim().equals("-")) {
             content.add(errorMejaUbahTransaksi);
@@ -2515,11 +2523,6 @@ public class cDashboardCustomerView extends cDashboardApp {
     txtCariTransaksi.setBorder(titledBorder);
     txtCariTransaksi.setSize(300, 45);
 
-    content.add(btnTambahTransaksi);
-    content.add(btnEditTransaksi);
-    content.add(btnHapusTransaksi);
-    content.add(btnDetailTransaksi);
-
     content.add(spDataTransaksi);
     content.add(labelPilihTransaksi);
     content.add(txtCariTransaksi);
@@ -2606,6 +2609,8 @@ public class cDashboardCustomerView extends cDashboardApp {
       }
     });
 
+    labelInfoDataAkun.setForeground(cColor.WHITE);
+
     content.add(labelInfoDataAkun);
     content.add(labelNamaDataAkun);
     content.add(labelEmailDataAkun);
@@ -2619,6 +2624,8 @@ public class cDashboardCustomerView extends cDashboardApp {
     content.add(txtAlamatDataAkun);
     content.add(btnSimpanDataAkun);
     content.add(btnHapusDataAkun);
+
+    content.add(panelHeaderAkun);
 
     setVisible(true);
   }
