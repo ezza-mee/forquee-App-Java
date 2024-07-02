@@ -49,12 +49,10 @@ public class cDashboardMitraView extends cDashboardApp {
   private cLabelInfo labelOrderBahanBeranda = new cLabelInfo("Jumlah Data Order Bahan", 420, 380, 400, 40);
   private cBigFont valueOrderBahanBeranda = new cBigFont("0", 420, 405);
 
-  // component of data Promo
+  // component of data Menu
   private cLabelInfo labelPilihMenu = new cLabelInfo("Pilih Menu", 40, 20, 200, 40);
-
-  private cComboBox pilihDataMenu = new cComboBox(
-      new String[] { "Menu Makanan", "Menu Coffe", "Menu Non Coffe" }, 160, 25, 200,
-      30);
+  private cComboBox pilihDataMenu = new cComboBox(new String[] { "Menu Makanan", "Menu Coffe", "Menu Non Coffe" }, 160,
+      25, 200, 30);
 
   // component of data menu makanan
   private cPanelRounded panelHeaderMenuMakanan = new cPanelRounded(0, 0, 1100, 75, 15);
@@ -4026,8 +4024,11 @@ public class cDashboardMitraView extends cDashboardApp {
           String mejaTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[15].toString();
           String deskripsiTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[16].toString();
           String hargaTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[17].toString();
-          String bayarTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[18].toString();
-          String statusTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[19].toString();
+          String hargaPromo = Model.getDetailTransaksiDiproses(idTransaksi)[18].toString();
+          String bayarTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[19].toString();
+          String uangTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[20].toString();
+          String kembalianTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[21].toString();
+          String statusTransaksi = Model.getDetailTransaksiDiproses(idTransaksi)[22].toString();
 
           String detailTransaksi = "\tForque" + "\n\n"
               + "Jl. Jagal No.3A RT 007/004, Jl. Jagal, Rangkapan Jaya,\n"
@@ -4050,7 +4051,11 @@ public class cDashboardMitraView extends cDashboardApp {
               + String.format("%-60s %-30s %-10s", nonCoffeTransaksi, jumlahNonCoffe, hargaNonCoffe) + "\n"
               + "====================================================\n"
               + String.format("%-80s Harga Total   : %s", "", hargaTransaksi) + "\n"
+              + String.format("%-80s Harga Promo   : %s", "", hargaPromo) + "\n"
+              + String.format("%-80s uang          : %s", "", uangTransaksi) + "\n"
+              + String.format("%-80s Kembalian     : %s", "", kembalianTransaksi) + "\n"
               + "====================================================\n"
+              + "---------------TERIMAKASIH BY ARCOO NGAWI---------------\n"
               + "\n";
 
           Object[] options = { "KEMBALI" };
@@ -4199,7 +4204,6 @@ public class cDashboardMitraView extends cDashboardApp {
     txtHargaNonCoffeUbahTransaksi.setText(detailTransaksi[13].toString());
     txtHargaTotalUbahTransaksi.setText(detailTransaksi[17].toString());
 
-    // ActionListener untuk txtJumlahMakananTransaksi
     txtJumlahMakananUbahTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -4218,15 +4222,11 @@ public class cDashboardMitraView extends cDashboardApp {
           // Mengambil harga menu
           int hargaMenu = Model.getHargaMenuMakanan(selectedMenu);
           txtHargaMakananUbahTransaksi.setText(String.valueOf(hargaMenu));
-          int totalMakanan = jumlahMakanan * hargaMenu;
-          String makananTotal = Integer.toString(totalMakanan);
-          txtHargaMakananUbahTransaksi.setText(makananTotal);
-          updateTotalHarga();
         }
+        updateUbahTotalHarga();
       }
     });
 
-    // ActionListener untuk txtJumlahCoffeUbahTransaksi
     txtJumlahCoffeUbahTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -4245,15 +4245,11 @@ public class cDashboardMitraView extends cDashboardApp {
           // Mengambil harga menu
           int hargaMenu = Model.getHargaMenuCoffe(selectedMenu);
           txtHargaCoffeUbahTransaksi.setText(String.valueOf(hargaMenu));
-          int totalCoffe = jumlahCoffe * hargaMenu;
-          String coffeTotal = Integer.toString(totalCoffe);
-          txtHargaCoffeUbahTransaksi.setText(coffeTotal);
-          updateTotalHarga();
         }
+        updateUbahTotalHarga();
       }
     });
 
-    // ActionListener untuk txtJumlahNonCoffeUbahTransaksi
     txtJumlahNonCoffeUbahTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -4272,11 +4268,8 @@ public class cDashboardMitraView extends cDashboardApp {
           // Mengambil harga menu
           int hargaMenu = Model.getHargaMenuNonCoffe(selectedMenu);
           txtHargaNonCoffeUbahTransaksi.setText(String.valueOf(hargaMenu));
-          int totalNonCoffe = jumlahNonCoffe * hargaMenu;
-          String nonCoffeTotal = Integer.toString(totalNonCoffe);
-          txtHargaNonCoffeUbahTransaksi.setText(nonCoffeTotal);
         }
-        updateTotalHarga();
+        updateUbahTotalHarga();
       }
     });
 
@@ -4310,7 +4303,7 @@ public class cDashboardMitraView extends cDashboardApp {
             txtHargaTotalUbahTransaksi.setText(MakananTotal);
           }
         }
-        updateTotalHarga();
+        updateUbahTotalHarga();
       }
     });
 
@@ -4344,7 +4337,7 @@ public class cDashboardMitraView extends cDashboardApp {
             txtHargaTotalUbahTransaksi.setText(CoffeTotal);
           }
         }
-        updateTotalHarga();
+        updateUbahTotalHarga();
       }
     });
 
@@ -4378,7 +4371,7 @@ public class cDashboardMitraView extends cDashboardApp {
             txtHargaTotalUbahTransaksi.setText(nonCoffeTotal);
           }
         }
-        updateTotalHarga();
+        updateUbahTotalHarga();
       }
     });
 
@@ -4440,9 +4433,9 @@ public class cDashboardMitraView extends cDashboardApp {
         pilihCoffeUbahTransaksi.setSelectedItem("-");
         pilihNonCoffeUbahTransaksi.setSelectedItem("-");
         pilihPromoUbahTransaksi.setSelectedItem("-");
-        txtJumlahMakanan.setText(null);
-        txtJumlahCoffe.setText(null);
-        txtJumlahNonCoffe.setText(null);
+        txtJumlahMakananTransaksi.setText(null);
+        txtJumlahCoffeTransaksi.setText(null);
+        txtJumlahNonCoffeTransaksi.setText(null);
         txtHargaMakananUbahTransaksi.setText(null);
         txtHargaCoffeUbahTransaksi.setText(null);
         txtHargaNonCoffeUbahTransaksi.setText(null);
@@ -4513,10 +4506,29 @@ public class cDashboardMitraView extends cDashboardApp {
               int hargaCoffe = Integer.valueOf(txtHargaCoffeUbahTransaksi.getText());
               int hargaNonCoffe = Integer.valueOf(txtHargaNonCoffeUbahTransaksi.getText());
               int hargaUbahTransaksi = Integer.valueOf(txtHargaTotalUbahTransaksi.getText());
-              int uang = Integer.valueOf(checkoutUbahTransaksi.trim());
-              int kembalian = uang - hargaUbahTransaksi;
+              int uangTransaksi = Integer.valueOf(checkoutUbahTransaksi.trim());
+              int kembalianTransaksi = uangTransaksi - hargaUbahTransaksi;
+
+              int hargaPromo = 0; // Masukkan ke variable ini jika promo dipilih
+
+              if (promoUbahTransaksi != null && !promoUbahTransaksi.equals("-")) {
+                if (makananUbahTransaksi != null && !makananUbahTransaksi.equals("-")) {
+                  hargaPromo += Model.getPromoMakanan(makananUbahTransaksi, promoUbahTransaksi);
+                }
+                if (coffeUbahTransaksi != null && !coffeUbahTransaksi.equals("-")) {
+                  hargaPromo += Model.getPromoCoffe(coffeUbahTransaksi, promoUbahTransaksi);
+                }
+                if (nonCoffeUbahTransaksi != null && !nonCoffeUbahTransaksi.equals("-")) {
+                  hargaPromo += Model.getPromoNonCoffe(nonCoffeUbahTransaksi, promoUbahTransaksi);
+                }
+              } else {
+                hargaPromo = 0; 
+              }
 
               String pembayaranUbahTransaksi = "Forque\n\n"
+              + "======================================================\n"
+                  + "Jl. Jagal No.3A RT 007/004, Jl. Jagal, Rangkapan Jaya,\n"
+                  + "Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435\n"
                   + "======================================================\n"
                   + String.format("%-44s: %s", "Nomor Meja", pilihMejaUbahTransaksi.getSelectedItem()) + "\n"
                   + String.format("%-39s: %s", "Nama Pemesan", txtNamaUbahTransaksi.getText()) + "\n"
@@ -4535,7 +4547,11 @@ public class cDashboardMitraView extends cDashboardApp {
                   + "\n"
                   + "=======================================================\n"
                   + String.format("%-80s Harga Total          : %s", "", txtHargaTotalUbahTransaksi.getText()) + "\n"
-                  + String.format("%-80s Kembalian            : %s", "", kembalian) + "\n"
+                  + String.format("%-80s Harga Promo          : %s", "", hargaPromo) + "\n"
+                  + String.format("%-80s Uang                 : %s", "", uangTransaksi) + "\n"
+                  + String.format("%-80s Kembalian            : %s", "", kembalianTransaksi) + "\n"
+                  + "=======================================================\n"
+                  + "---------------TERIMAKASIH BY ARCOO NGAWI---------------\n"
                   + "=======================================================\n"
 
                   + "\n\n\n";
@@ -4567,19 +4583,20 @@ public class cDashboardMitraView extends cDashboardApp {
                   pilihCoffeUbahTransaksi.setSelectedItem("-");
                   pilihNonCoffeUbahTransaksi.setSelectedItem("-");
                   pilihPromoUbahTransaksi.setSelectedItem("-");
-                  txtJumlahMakanan.setText(null);
-                  txtJumlahCoffe.setText(null);
-                  txtJumlahNonCoffe.setText(null);
+                  txtJumlahMakananTransaksi.setText(null);
+                  txtJumlahCoffeTransaksi.setText(null);
+                  txtJumlahNonCoffeTransaksi.setText(null);
                   txtHargaMakananUbahTransaksi.setText(null);
                   txtHargaCoffeUbahTransaksi.setText(null);
                   txtHargaNonCoffeUbahTransaksi.setText(null);
+                  JOptionPane.showMessageDialog(null, "Pembayaran berhasil!", "Pembayaran",
+                      JOptionPane.INFORMATION_MESSAGE);
+                  initsDataTransaksi();
                 } else {
                   // kalau tidak berhasil
                   JOptionPane.showMessageDialog(cDashboardMitraView.this, "UbahTransaksi Gagal!", "Gagal",
                       JOptionPane.ERROR_MESSAGE);
                 }
-                JOptionPane.showMessageDialog(null, "Pembayaran berhasil!", "Pembayaran",
-                    JOptionPane.INFORMATION_MESSAGE);
               } else {
                 JOptionPane.showMessageDialog(null, "Pembayaran dibatalkan.", "Dibatalkan",
                     JOptionPane.WARNING_MESSAGE);
@@ -4643,11 +4660,10 @@ public class cDashboardMitraView extends cDashboardApp {
     menuTransaksi.setForeground(cColor.GREEN);
     refreshContent();
     menuTransaksi.setSidebarAktif();
-    menuTitle.setText("Data Input Transaksi");
+    menuTitle.setText("Input Transaksi");
 
     initializeTransaksi();
 
-    // ActionListener untuk txtJumlahMakananTransaksi
     txtJumlahMakananTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -4666,15 +4682,11 @@ public class cDashboardMitraView extends cDashboardApp {
           // Mengambil harga menu
           int hargaMenu = Model.getHargaMenuMakanan(selectedMenu);
           txtHargaMakananTransaksi.setText(String.valueOf(hargaMenu));
-          int totalMakanan = jumlahMakanan * hargaMenu;
-          String makananTotal = Integer.toString(totalMakanan);
-          txtHargaMakananTransaksi.setText(makananTotal);
-          updateTotalHarga();
         }
+        updateTotalHarga();
       }
     });
 
-    // ActionListener untuk txtJumlahCoffeTransaksi
     txtJumlahCoffeTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -4693,15 +4705,11 @@ public class cDashboardMitraView extends cDashboardApp {
           // Mengambil harga menu
           int hargaMenu = Model.getHargaMenuCoffe(selectedMenu);
           txtHargaCoffeTransaksi.setText(String.valueOf(hargaMenu));
-          int totalCoffe = jumlahCoffe * hargaMenu;
-          String coffeTotal = Integer.toString(totalCoffe);
-          txtHargaCoffeTransaksi.setText(coffeTotal);
-          updateTotalHarga();
         }
+        updateTotalHarga();
       }
     });
 
-    // ActionListener untuk txtJumlahNonCoffeTransaksi
     txtJumlahNonCoffeTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -4720,9 +4728,6 @@ public class cDashboardMitraView extends cDashboardApp {
           // Mengambil harga menu
           int hargaMenu = Model.getHargaMenuNonCoffe(selectedMenu);
           txtHargaNonCoffeTransaksi.setText(String.valueOf(hargaMenu));
-          int totalNonCoffe = jumlahNonCoffe * hargaMenu;
-          String nonCoffeTotal = Integer.toString(totalNonCoffe);
-          txtHargaNonCoffeTransaksi.setText(nonCoffeTotal);
         }
         updateTotalHarga();
       }
@@ -4966,10 +4971,29 @@ public class cDashboardMitraView extends cDashboardApp {
               int hargaCoffe = Integer.valueOf(txtHargaCoffeTransaksi.getText());
               int hargaNonCoffe = Integer.valueOf(txtHargaNonCoffeTransaksi.getText());
               int hargaTransaksi = Integer.valueOf(txtHargaTotalTransaksi.getText());
-              int uang = Integer.valueOf(checkoutTransaksi.trim());
-              int kembalian = uang - hargaTransaksi;
+              int uangTransaksi = Integer.valueOf(checkoutTransaksi.trim());
+              int kembalianTransaksi = uangTransaksi - hargaTransaksi;
+
+              int hargaPromo = 0; // Masukkan ke variable ini jika promo dipilih
+
+              if (promoTransaksi != null && !promoTransaksi.equals("-")) {
+                if (makananTransaksi != null && !makananTransaksi.equals("-")) {
+                  hargaPromo += Model.getPromoMakanan(makananTransaksi, promoTransaksi);
+                }
+                if (coffeTransaksi != null && !coffeTransaksi.equals("-")) {
+                  hargaPromo += Model.getPromoCoffe(coffeTransaksi, promoTransaksi);
+                }
+                if (nonCoffeTransaksi != null && !nonCoffeTransaksi.equals("-")) {
+                  hargaPromo += Model.getPromoNonCoffe(nonCoffeTransaksi, promoTransaksi);
+                }
+              } else {
+                hargaPromo = 0;
+              }
 
               String pembayaranTransaksi = "Forque\n\n"
+                  + "======================================================\n"
+                  + "Jl. Jagal No.3A RT 007/004, Jl. Jagal, Rangkapan Jaya,\n"
+                  + "Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435\n"
                   + "======================================================\n"
                   + String.format("%-44s: %s", "Nomor Meja", pilihMejaTransaksi.getSelectedItem()) + "\n"
                   + String.format("%-39s: %s", "Nama Pemesan", txtNamaTransaksi.getText()) + "\n"
@@ -4988,7 +5012,11 @@ public class cDashboardMitraView extends cDashboardApp {
                   + "\n"
                   + "=======================================================\n"
                   + String.format("%-80s Harga Total          : %s", "", txtHargaTotalTransaksi.getText()) + "\n"
-                  + String.format("%-80s Kembalian            : %s", "", kembalian) + "\n"
+                  + String.format("%-80s Harga Promo          : %s", "", hargaPromo) + "\n"
+                  + String.format("%-80s Uang                 : %s", "", uangTransaksi) + "\n"
+                  + String.format("%-80s Kembalian            : %s", "", kembalianTransaksi) + "\n"
+                  + "=======================================================\n"
+                  + "---------------TERIMAKASIH BY ARCOO NGAWI---------------\n"
                   + "=======================================================\n"
 
                   + "\n\n\n";
@@ -5008,7 +5036,8 @@ public class cDashboardMitraView extends cDashboardApp {
               if (konfirmasi == 0) {
                 if (Model.tambahTransaksi(idMitra, namaTransaksi, makananTransaksi, coffeTransaksi, nonCoffeTransaksi,
                     jumlahMakanan, jumlahCoffe, jumlahNonCoffe, hargaMakanan, hargaCoffe, hargaNonCoffe, promoTransaksi,
-                    mejaTransaksi, deskripsiTransaksi, hargaTransaksi, bayarTransaksi)) {
+                    mejaTransaksi, deskripsiTransaksi, hargaTransaksi, hargaPromo, bayarTransaksi, uangTransaksi,
+                    kembalianTransaksi)) {
                   // kalau berhasil
                   JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi berhasil",
                       "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -5025,13 +5054,13 @@ public class cDashboardMitraView extends cDashboardApp {
                   txtHargaMakananTransaksi.setText(null);
                   txtHargaCoffeTransaksi.setText(null);
                   txtHargaNonCoffeTransaksi.setText(null);
+                  JOptionPane.showMessageDialog(null, "Pembayaran berhasil!", "Pembayaran",
+                      JOptionPane.INFORMATION_MESSAGE);
                 } else {
                   // kalau tidak berhasil
                   JOptionPane.showMessageDialog(cDashboardMitraView.this, "Transaksi Gagal!", "Gagal",
                       JOptionPane.ERROR_MESSAGE);
                 }
-                JOptionPane.showMessageDialog(null, "Pembayaran berhasil!", "Pembayaran",
-                    JOptionPane.INFORMATION_MESSAGE);
               } else {
                 JOptionPane.showMessageDialog(null, "Pembayaran dibatalkan.", "Dibatalkan",
                     JOptionPane.WARNING_MESSAGE);
@@ -5089,25 +5118,64 @@ public class cDashboardMitraView extends cDashboardApp {
     setVisible(true);
   }
 
+  private void updateUbahTotalHarga() {
+    int makananTotal = 0;
+    int coffeTotal = 0;
+    int nonCoffeTotal = 0;
+
+    try {
+      int jumlahMakanan = Integer.parseInt(txtJumlahMakananUbahTransaksi.getText());
+      int hargaMakanan = Integer.parseInt(txtHargaMakananUbahTransaksi.getText());
+      makananTotal = jumlahMakanan * hargaMakanan;
+    } catch (NumberFormatException e) {
+      // handle error
+    }
+
+    try {
+      int jumlahCoffe = Integer.parseInt(txtJumlahCoffeUbahTransaksi.getText());
+      int hargaCoffe = Integer.parseInt(txtHargaCoffeUbahTransaksi.getText());
+      coffeTotal = jumlahCoffe * hargaCoffe;
+    } catch (NumberFormatException e) {
+      // handle error
+    }
+
+    try {
+      int jumlahNonCoffe = Integer.parseInt(txtJumlahNonCoffeUbahTransaksi.getText());
+      int hargaNonCoffe = Integer.parseInt(txtHargaNonCoffeUbahTransaksi.getText());
+      nonCoffeTotal = jumlahNonCoffe * hargaNonCoffe;
+    } catch (NumberFormatException e) {
+      // handle error
+    }
+
+    int totalHarga = makananTotal + coffeTotal + nonCoffeTotal;
+    txtHargaTotalUbahTransaksi.setText(String.valueOf(totalHarga));
+  }
+
   private void updateTotalHarga() {
     int makananTotal = 0;
     int coffeTotal = 0;
     int nonCoffeTotal = 0;
 
     try {
-      makananTotal = Integer.parseInt(txtHargaMakananTransaksi.getText());
+      int jumlahMakanan = Integer.parseInt(txtJumlahMakananTransaksi.getText());
+      int hargaMakanan = Integer.parseInt(txtHargaMakananTransaksi.getText());
+      makananTotal = jumlahMakanan * hargaMakanan;
     } catch (NumberFormatException e) {
       // handle error
     }
 
     try {
-      coffeTotal = Integer.parseInt(txtHargaCoffeTransaksi.getText());
+      int jumlahCoffe = Integer.parseInt(txtJumlahCoffeTransaksi.getText());
+      int hargaCoffe = Integer.parseInt(txtHargaCoffeTransaksi.getText());
+      coffeTotal = jumlahCoffe * hargaCoffe;
     } catch (NumberFormatException e) {
       // handle error
     }
 
     try {
-      nonCoffeTotal = Integer.parseInt(txtHargaNonCoffeTransaksi.getText());
+      int jumlahNonCoffe = Integer.parseInt(txtJumlahNonCoffeTransaksi.getText());
+      int hargaNonCoffe = Integer.parseInt(txtHargaNonCoffeTransaksi.getText());
+      nonCoffeTotal = jumlahNonCoffe * hargaNonCoffe;
     } catch (NumberFormatException e) {
       // handle error
     }
@@ -6504,9 +6572,6 @@ public class cDashboardMitraView extends cDashboardApp {
         }
       }
     });
-
-
-    
 
     labelInfoDataAkun.setForeground(cColor.WHITE);
 
