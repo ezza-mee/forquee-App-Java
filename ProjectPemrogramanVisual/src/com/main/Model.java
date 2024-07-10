@@ -602,7 +602,7 @@ public class Model {
     }
 
     // daftar Customer
-    public static boolean daftarMitra(String nama, String nomorHp, String email, String password) {
+    public static boolean daftarMitra(String namaMitra, String nomorHpMitra, String emailMitra, String passwordMitra) {
         boolean data = false;
 
         connection();
@@ -613,8 +613,8 @@ public class Model {
             statement = connect.createStatement();
 
             // query select
-            String query = "INSERT INTO tblmitra VALUES (NULL, '" + nama + "', '" + nomorHp + "','"
-                    + email + "', '' ,'" + password
+            String query = "INSERT INTO tblmitra VALUES (NULL, '" + namaMitra + "', '" + nomorHpMitra + "','"
+                    + emailMitra + "', '' ,'" + passwordMitra
                     + "', 'Verified', 'Aktif')";
 
             if (statement.executeUpdate(query) > 0) {
@@ -829,7 +829,42 @@ public class Model {
     }
 
     // get data all menu makanan
-    public static DefaultTableModel getAllMenuMakanan() {
+    public static DefaultTableModel getAllMenuMakanan(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Menu", "ID Mitra", "Mitra", "Waktu", "Menu", "Jumlah", "Harga", "Deskripsi",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallmenumakanan WHERE idMitra =" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "FM" + resultData.getInt("idMenu"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuMenu"),
+                        resultData.getString("namaMenu"),
+                        resultData.getInt("jumlahMenu"),
+                        "Rp. " + resultData.getInt("hargaMenu"),
+                        resultData.getString("deskripsiMenu"),
+                        resultData.getString("statusMenu") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all menu makanan
+    public static DefaultTableModel getAllMenuMakananCustomer() {
 
         connection();
 
@@ -864,7 +899,42 @@ public class Model {
     }
 
     // get data all menu coffe
-    public static DefaultTableModel getAllMenuCoffe() {
+    public static DefaultTableModel getAllMenuCoffe(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Menu", "ID Mitra", "Mitra", "Waktu", "Menu", "Jumlah", "Harga", "Deskripsi",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallmenucoffe WHERE idMitra =" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "FM" + resultData.getInt("idMenu"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuMenu"),
+                        resultData.getString("namaMenu"),
+                        resultData.getInt("jumlahMenu"),
+                        "Rp. " + resultData.getInt("hargaMenu"),
+                        resultData.getString("deskripsiMenu"),
+                        resultData.getString("statusMenu") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all menu coffe
+    public static DefaultTableModel getAllMenuCoffeCustomer() {
 
         connection();
 
@@ -899,7 +969,42 @@ public class Model {
     }
 
     // get data all menu non coffe
-    public static DefaultTableModel getAllMenuNonCoffe() {
+    public static DefaultTableModel getAllMenuNonCoffe(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Menu", "ID Mitra", "Mitra", "Waktu", "Menu", "Jumlah", "Harga", "Deskripsi",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallmenuNoncoffe WHERE idMitra =" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "FM" + resultData.getInt("idMenu"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuMenu"),
+                        resultData.getString("namaMenu"),
+                        resultData.getInt("jumlahMenu"),
+                        "Rp. " + resultData.getInt("hargaMenu"),
+                        resultData.getString("deskripsiMenu"),
+                        resultData.getString("statusMenu") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all menu non coffe
+    public static DefaultTableModel getAllMenuNonCoffeCustomer() {
 
         connection();
 
@@ -1350,7 +1455,43 @@ public class Model {
     }
 
     // get data all Promo
-    public static DefaultTableModel getAllPromo() {
+    public static DefaultTableModel getAllPromo(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "Mitra", "Waktu", "Nama", "Menu", "Jumlah", "harga", "Deskripsi",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallpromo WHERE idMitra=" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "FP" + resultData.getInt("idPromo"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuPromo"),
+                        resultData.getString("namaPromo"),
+                        resultData.getString("namaMenu"),
+                        resultData.getInt("jumlahPromo"),
+                        resultData.getInt("hargaPromo"),
+                        resultData.getString("deskripsiPromo"),
+                        resultData.getString("statusPromo") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all Promo
+    public static DefaultTableModel getAllPromoCustomer() {
 
         connection();
 
@@ -1386,7 +1527,41 @@ public class Model {
     }
 
     // get data all Meja
-    public static DefaultTableModel getAllMeja() {
+    public static DefaultTableModel getAllMeja(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Meja", "ID Mitra", "Mitra", "Waktu", "Nomor", "Jenis", "Deskripsi",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwallmeja WHERE idMitra =" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "FN" + resultData.getInt("idMeja"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuMeja"),
+                        resultData.getString("nomorMeja"),
+                        resultData.getString("jenisMeja"),
+                        resultData.getString("deskripsiMeja"),
+                        resultData.getString("statusMeja") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all Meja
+    public static DefaultTableModel getAllMejaCustomer() {
 
         connection();
 
@@ -1584,7 +1759,8 @@ public class Model {
     }
 
     // daftar Customer
-    public static boolean daftarCustomer(String nama, String nomorHp, String email, String password) {
+    public static boolean daftarCustomer(String namaCustomer, String nomorHpCustomer, String emailCustomer,
+            String passwordCustomer) {
         boolean data = false;
 
         connection();
@@ -1595,8 +1771,8 @@ public class Model {
             statement = connect.createStatement();
 
             // query select
-            String query = "INSERT INTO tblcustomer VALUES (NULL, '" + nama + "', '" + nomorHp + "','"
-                    + email + "', '' ,'" + password
+            String query = "INSERT INTO tblcustomer VALUES (NULL, '" + namaCustomer + "', '" + nomorHpCustomer + "','"
+                    + emailCustomer + "', '' ,'" + passwordCustomer
                     + "', 'Aktif')";
 
             if (statement.executeUpdate(query) > 0) {
@@ -1739,7 +1915,44 @@ public class Model {
     }
 
     // get data all karyawan verified
-    public static DefaultTableModel getAllKaryawanVerified() {
+    public static DefaultTableModel getAllKaryawanVerified(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Karyawan", "ID Mitra", "Mitra", "waktu", "Nama", " Email", "Nomor Hp", "Alamat",
+                "Status",
+                "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwkaryawanverified WHERE idMitra =" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idKaryawan"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuKaryawan"),
+                        resultData.getString("namaKaryawan"),
+                        resultData.getString("emailKaryawan"),
+                        resultData.getString("nomorHpKaryawan"),
+                        resultData.getString("alamatKaryawan"),
+                        resultData.getString("statusTerverifikasi"),
+                        resultData.getString("statusAktif") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all karyawan verified
+    public static DefaultTableModel getAllKaryawanAdminVerified() {
 
         connection();
 
@@ -1776,7 +1989,7 @@ public class Model {
     }
 
     // get data all karyawan terverified
-    public static DefaultTableModel getAllKaryawantTerverifikasi() {
+    public static DefaultTableModel getAllKaryawantTerverifikasi(int idMitra) {
 
         connection();
 
@@ -1789,7 +2002,7 @@ public class Model {
         try {
             statement = connect.createStatement();
 
-            String query = "SELECT * FROM vwkaryawanterverifikasi";
+            String query = "SELECT * FROM vwkaryawanterverifikasi WHERE idMitra =" + idMitra;
 
             ResultSet resultData = statement.executeQuery(query);
 
@@ -1841,8 +2054,7 @@ public class Model {
         return data;
     }
 
-    // get data all Transaksi Diproses
-    public static DefaultTableModel getAllTransaksiDiproses() {
+    public static DefaultTableModel getAllTransaksiDiproses(int idMitra) {
 
         connection();
 
@@ -1856,7 +2068,8 @@ public class Model {
         try {
             statement = connect.createStatement();
 
-            String query = "SELECT * FROM vwtransaksidiproses ORDER BY idTransaksi DESC";
+            String query = "SELECT * FROM vwtransaksidiproses WHERE idMitra = " + idMitra
+                    + " ORDER BY idTransaksi DESC";
 
             ResultSet resultData = statement.executeQuery(query);
 
@@ -1893,7 +2106,59 @@ public class Model {
     }
 
     // get data all Transaksi Selesai
-    public static DefaultTableModel getAllTransaksiSelesai() {
+    public static DefaultTableModel getAllTransaksiSelesai(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "Mitra", "waktu", "Nama Pemesan", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga",
+                "Harga", "Harga", "Promo", "Nomor Meja", "Deskripsi", "Total Harga", "Harga Promo", "Pembayaran",
+                "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksiselesai WHERE idMitra = " + idMitra
+                    + " ORDER BY idTransaksi DESC";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("namaTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getInt("hargaPromo"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all Transaksi Selesai
+    public static DefaultTableModel getAllTransaksiAdminSelesai() {
 
         connection();
 
@@ -1944,7 +2209,7 @@ public class Model {
     }
 
     // get data all Transaksi Selesai
-    public static DefaultTableModel getAllOnlineDiproses() {
+    public static DefaultTableModel getAllOnlineDiproses(int idCustomer) {
 
         connection();
 
@@ -1957,7 +2222,8 @@ public class Model {
         try {
             statement = connect.createStatement();
 
-            String query = "SELECT * FROM vwtransaksionlinediproses ORDER BY idTransaksi DESC";
+            String query = "SELECT * FROM vwtransaksionlinediproses WHERE idCustomer = " + idCustomer
+                    + " ORDER BY idTransaksi DESC";
 
             ResultSet resultData = statement.executeQuery(query);
 
@@ -1994,7 +2260,58 @@ public class Model {
     }
 
     // get data all Transaksi Selesai
-    public static DefaultTableModel getAllOnlineSelesai() {
+    public static DefaultTableModel getAllOnlineSelesai(int idCustomer) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "ID Customer", "Mitra", "Nama Pemesan", "waktu", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga", "Harga", "Harga", "Promo", "Nomor Meja",
+                "Deskripsi", "Total Harga", "Pembayaran", "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksionlineselesai WHERE idCustomer = " + idCustomer
+                    + " ORDER BY idTransaksi DESC";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getInt("idCustomer"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("namaCustomer"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all Transaksi Selesai
+    public static DefaultTableModel getAllOnlineAdminSelesai() {
 
         connection();
 
@@ -2043,9 +2360,57 @@ public class Model {
         return tm;
     }
 
-    // selesai transaksi
-    public static boolean mitraProsesTransaksi(int idTransaksi) {
+    // get data all Transaksi diproses
+    public static DefaultTableModel getAllOnlineAdminDiproses() {
 
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "ID Customer", "Mitra", "Nama Pemesan", "waktu", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga", "Harga", "Harga", "Promo", "Nomor Meja",
+                "Deskripsi", "Total Harga", "Pembayaran", "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksionlinediproses ORDER BY idTransaksi DESC";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getInt("idCustomer"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("namaCustomer"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    public static boolean mitraProsesTransaksi(int idTransaksi) {
         boolean data = false;
 
         connection();
@@ -2054,14 +2419,89 @@ public class Model {
             // buat object statement yang ambil dari koneksi
             statement = connect.createStatement();
 
-            // query select
-            String query = "UPDATE tbltransaksi SET statusTransaksi = 'Selesai' WHERE idTransaksi = " + idTransaksi;
+            String selectTransaksiQuery = "SELECT makananTransaksi, coffeTransaksi, nonCoffeTransaksi, jumlahMakanan, jumlahCoffe, jumlahNonCoffe FROM tbltransaksi WHERE idTransaksi = "
+                    + idTransaksi;
+            ResultSet rs = statement.executeQuery(selectTransaksiQuery);
 
-            if (statement.executeUpdate(query) > 0) {
-                data = true;
+            if (rs.next()) {
+                int jumlahMakanan = rs.getInt("jumlahMakanan");
+                int jumlahCoffe = rs.getInt("jumlahCoffe");
+                int jumlahNonCoffe = rs.getInt("jumlahNonCoffe");
+
+                // Hanya eksekusi query jika jumlahMakanan > 0
+                if (jumlahMakanan > 0) {
+                    String updateJumlahMakananQuery = "UPDATE tblmenumakanan m " +
+                            "JOIN tbltransaksi t ON m.namaMenu = t.makananTransaksi " +
+                            "SET m.jumlahMenu = m.jumlahMenu - t.jumlahMakanan " +
+                            "WHERE t.idTransaksi = " + idTransaksi;
+                    statement.executeUpdate(updateJumlahMakananQuery);
+                }
+
+                // Hanya eksekusi query jika jumlahCoffe > 0
+                if (jumlahCoffe > 0) {
+                    String updateJumlahCoffeQuery = "UPDATE tblmenucoffe c " +
+                            "JOIN tbltransaksi t ON c.namaMenu = t.coffeTransaksi " +
+                            "SET c.jumlahMenu = c.jumlahMenu - t.jumlahCoffe " +
+                            "WHERE t.idTransaksi = " + idTransaksi;
+                    statement.executeUpdate(updateJumlahCoffeQuery);
+                }
+
+                // Hanya eksekusi query jika jumlahNonCoffe > 0
+                if (jumlahNonCoffe > 0) {
+                    String updateJumlahNonCoffeQuery = "UPDATE tblmenunoncoffe n " +
+                            "JOIN tbltransaksi t ON n.namaMenu = t.nonCoffeTransaksi " +
+                            "SET n.jumlahMenu = n.jumlahMenu - t.jumlahNonCoffe " +
+                            "WHERE t.idTransaksi = " + idTransaksi;
+                    statement.executeUpdate(updateJumlahNonCoffeQuery);
+                }
+
+                // cek apakah ada baris yang diperbarui
+                boolean updated = false;
+
+                // query untuk memperbarui status menu menjadi 'Sold' jika jumlahnya 0 di tabel
+                // menuMakanan
+                String updateStatusMakananQuery = "UPDATE tblmenumakanan " +
+                        "SET statusMenu = 'Sold' " +
+                        "WHERE jumlahMenu = 0 AND namaMenu = " +
+                        "(SELECT makananTransaksi FROM tbltransaksi WHERE idTransaksi = " + idTransaksi + ")";
+                updated |= (statement.executeUpdate(updateStatusMakananQuery) > 0);
+
+                // query untuk memperbarui status menu menjadi 'Sold' jika jumlahnya 0 di tabel
+                // menuCoffe
+                String updateStatusCoffeQuery = "UPDATE tblmenucoffe " +
+                        "SET statusMenu = 'Sold' " +
+                        "WHERE jumlahMenu = 0 AND namaMenu = " +
+                        "(SELECT makananTransaksi FROM tbltransaksi WHERE idTransaksi = " + idTransaksi + ")";
+                updated |= (statement.executeUpdate(updateStatusCoffeQuery) > 0);
+
+                // query untuk memperbarui status menu menjadi 'Sold' jika jumlahnya 0 di tabel
+                // menuNonCoffe
+                String updateStatusNonCoffeQuery = "UPDATE tblmenunoncoffe " +
+                        "SET statusMenu = 'Sold' " +
+                        "WHERE jumlahMenu = 0 AND namaMenu = " +
+                        "(SELECT makananTransaksi FROM tbltransaksi WHERE idTransaksi = " + idTransaksi + ")";
+                updated |= (statement.executeUpdate(updateStatusNonCoffeQuery) > 0);
+
+                // query untuk memperbarui status transaksi menjadi 'Selesai'
+                String updateTransaksiQuery = "UPDATE tbltransaksi " +
+                        "SET statusTransaksi = 'Selesai' " +
+                        "WHERE idTransaksi = " + idTransaksi;
+                updated |= (statement.executeUpdate(updateTransaksiQuery) > 0);
+
+                // query untuk memperbarui status meja menjadi 'Kosong' berdasarkan nomorMeja
+                String updateStatusMejaQuery = "UPDATE tblmeja " +
+                        "SET statusMeja = 'Used' " +
+                        "WHERE nomorMeja = " +
+                        "(SELECT nomorMeja FROM tbltransaksi WHERE idTransaksi = " + idTransaksi + ")";
+                updated |= (statement.executeUpdate(updateStatusMejaQuery) > 0);
+
+                data = updated;
+            } else {
+                System.out.println("Transaksi dengan ID " + idTransaksi + " tidak ditemukan.");
             }
 
             // close statement dan connection
+            rs.close();
             statement.close();
             connect.close();
 
@@ -2143,6 +2583,80 @@ public class Model {
             statement = connect.createStatement();
 
             String query = "SELECT * FROM vworderbahandiproses";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idOrder"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuOrder"),
+                        resultData.getString("bahanOrder"),
+                        resultData.getString("ptOrder"),
+                        resultData.getString("deskripsiOrder"),
+                        resultData.getString("alamatOrder"),
+                        resultData.getInt("jumlahOrder"),
+                        resultData.getInt("hargaOrder"),
+                        resultData.getString("statusOrder") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all Order Bahan Diproses
+    public static DefaultTableModel getAllOrderBahanMitraDiproses(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Order", "ID Mitra", "Mitra", "waktu", "Bahan", "PT", "Deskripsi", "Alamat",
+                "Jumlah", "Harga", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vworderbahandiproses WHERE idMitra =" + idMitra;
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idOrder"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuOrder"),
+                        resultData.getString("bahanOrder"),
+                        resultData.getString("ptOrder"),
+                        resultData.getString("deskripsiOrder"),
+                        resultData.getString("alamatOrder"),
+                        resultData.getInt("jumlahOrder"),
+                        resultData.getInt("hargaOrder"),
+                        resultData.getString("statusOrder") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // get data all Order Bahan Diproses
+    public static DefaultTableModel getAllOrderBahanMitraSelesai(int idMitra) {
+
+        connection();
+
+        String[] dataHeader = { "ID Order", "ID Mitra", "Mitra", "waktu", "Bahan", "PT", "Deskripsi", "Alamat",
+                "Jumlah", "Harga", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vworderbahanselesai WHERE idMitra =" + idMitra;
 
             ResultSet resultData = statement.executeQuery(query);
 
@@ -3201,7 +3715,7 @@ public class Model {
             statement = connect.createStatement();
 
             // Query to get menu names from vwallmenumakanan
-            String queryMakanan = "SELECT namaMenu FROM vwallmenumakanan";
+            String queryMakanan = "SELECT namaMenu FROM vwallmenumakanan WHERE statusMenu = 'Ready' ";
             ResultSet resultDataMakanan = statement.executeQuery(queryMakanan);
             while (resultDataMakanan.next()) {
                 menuMakanan.add(resultDataMakanan.getString("namaMenu"));
@@ -3224,7 +3738,7 @@ public class Model {
             statement = connect.createStatement();
 
             // Query to get menu names from vwallmenumakanan
-            String queryMakanan = "SELECT namaMenu FROM vwallmenumakanan";
+            String queryMakanan = "SELECT namaMenu FROM vwallmenumakanan WHERE statusMenu = 'Ready' ";
             ResultSet resultDataMakanan = statement.executeQuery(queryMakanan);
             while (resultDataMakanan.next()) {
                 menuMakanan.add(resultDataMakanan.getString("namaMenu"));
@@ -3247,7 +3761,7 @@ public class Model {
             statement = connect.createStatement();
 
             // Query to get menu names from vwallmenuCoffe
-            String queryCoffe = "SELECT namaMenu FROM vwallmenuCoffe";
+            String queryCoffe = "SELECT namaMenu FROM vwallmenuCoffe WHERE statusMenu = 'Ready' ";
             ResultSet resultDataCoffe = statement.executeQuery(queryCoffe);
             while (resultDataCoffe.next()) {
                 menuCoffe.add(resultDataCoffe.getString("namaMenu"));
@@ -3270,7 +3784,7 @@ public class Model {
             statement = connect.createStatement();
 
             // Query to get menu names from vwallmenuCoffe
-            String queryCoffe = "SELECT namaMenu FROM vwallmenuCoffe";
+            String queryCoffe = "SELECT namaMenu FROM vwallmenuCoffe WHERE statusMenu = 'Ready' ";
             ResultSet resultDataCoffe = statement.executeQuery(queryCoffe);
             while (resultDataCoffe.next()) {
                 menuCoffe.add(resultDataCoffe.getString("namaMenu"));
@@ -3293,7 +3807,7 @@ public class Model {
             statement = connect.createStatement();
 
             // Query to get menu names from vwallmenuCoffe
-            String queryCoffe = "SELECT namaMenu FROM vwallmenunoncoffe";
+            String queryCoffe = "SELECT namaMenu FROM vwallmenunoncoffe WHERE statusMenu = 'Ready' ";
             ResultSet resultDataCoffe = statement.executeQuery(queryCoffe);
             while (resultDataCoffe.next()) {
                 menuCoffe.add(resultDataCoffe.getString("namaMenu"));
@@ -3316,7 +3830,7 @@ public class Model {
             statement = connect.createStatement();
 
             // Query to get menu names from vwallmenuCoffe
-            String queryCoffe = "SELECT namaMenu FROM vwallmenunoncoffe";
+            String queryCoffe = "SELECT namaMenu FROM vwallmenunoncoffe WHERE statusMenu = 'Ready' ";
             ResultSet resultDataCoffe = statement.executeQuery(queryCoffe);
             while (resultDataCoffe.next()) {
                 menuCoffe.add(resultDataCoffe.getString("namaMenu"));
@@ -3669,6 +4183,80 @@ public class Model {
         return hargaPromo;
     }
 
+    // Search Mitra
+    public static DefaultTableModel getCariMitraVerified(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "Nama", "Nomor Hp", "Email", "Alamat", "Password", "Status Terverifikasi",
+                "Status" };
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwmitraverified WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR nomorHpMitra LIKE '%" + keyword + "%' OR emailMitra LIKE '%" + keyword
+                    + "%' OR alamatMitra LIKE '%" + keyword + "%' OR passwordMitra LIKE '%" + keyword
+                    + "%' OR statusTerverifikasi LIKE '%" + keyword + "%' OR statusAktif LIKE '%" + keyword + "%' ";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("nomorHpMitra"),
+                        resultData.getString("emailMitra"),
+                        resultData.getString("alamatMitra"),
+                        resultData.getString("passwordMitra"),
+                        resultData.getString("statusTerverifikasi"),
+                        resultData.getString("statusAktif") };
+                tm.addRow(rowData);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // Search Mitra
+    public static DefaultTableModel getCariMitraTerverifikasi(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "Nama", "Nomor Hp", "Email", "Alamat", "Password", "Status Terverifikasi",
+                "Status" };
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwmitraterverifikasi WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR nomorHpMitra LIKE '%" + keyword + "%' OR emailMitra LIKE '%" + keyword
+                    + "%' OR alamatMitra LIKE '%" + keyword + "%' OR passwordMitra LIKE '%" + keyword
+                    + "%' OR statusTerverifikasi LIKE '%" + keyword + "%' OR statusAktif LIKE '%" + keyword + "%' ";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("nomorHpMitra"),
+                        resultData.getString("emailMitra"),
+                        resultData.getString("alamatMitra"),
+                        resultData.getString("passwordMitra"),
+                        resultData.getString("statusTerverifikasi"),
+                        resultData.getString("statusAktif") };
+                tm.addRow(rowData);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
     // Search Menu Makanan
     public static DefaultTableModel getCariMenuMakanan(String keyword) {
 
@@ -3689,13 +4277,13 @@ public class Model {
             ResultSet resultData = statement.executeQuery(query);
 
             while (resultData.next()) {
-                Object[] rowData = { resultData.getInt("idMenu"),
+                Object[] rowData = { "FM" + resultData.getInt("idMenu"),
                         resultData.getInt("idMitra"),
                         resultData.getString("namaMitra"),
                         resultData.getString("waktuMenu"),
                         resultData.getString("namaMenu"),
                         resultData.getInt("jumlahMenu"),
-                        resultData.getInt("hargaMenu"),
+                        "Rp. " + resultData.getInt("hargaMenu"),
                         resultData.getString("deskripsiMenu"),
                         resultData.getString("statusMenu") };
                 tm.addRow(rowData);
@@ -3726,13 +4314,13 @@ public class Model {
             ResultSet resultData = statement.executeQuery(query);
 
             while (resultData.next()) {
-                Object[] rowData = { resultData.getInt("idMenu"),
+                Object[] rowData = { "FM" + resultData.getInt("idMenu"),
                         resultData.getInt("idMitra"),
                         resultData.getString("namaMitra"),
                         resultData.getString("waktuMenu"),
                         resultData.getString("namaMenu"),
                         resultData.getInt("jumlahMenu"),
-                        resultData.getInt("hargaMenu"),
+                        "Rp. " + resultData.getInt("hargaMenu"),
                         resultData.getString("deskripsiMenu"),
                         resultData.getString("statusMenu") };
                 tm.addRow(rowData);
@@ -3763,13 +4351,13 @@ public class Model {
             ResultSet resultData = statement.executeQuery(query);
 
             while (resultData.next()) {
-                Object[] rowData = { resultData.getInt("idMenu"),
+                Object[] rowData = { "FM" + resultData.getInt("idMenu"),
                         resultData.getInt("idMitra"),
                         resultData.getString("namaMitra"),
                         resultData.getString("waktuMenu"),
                         resultData.getString("namaMenu"),
                         resultData.getInt("jumlahMenu"),
-                        resultData.getInt("hargaMenu"),
+                        "Rp. " + resultData.getInt("hargaMenu"),
                         resultData.getString("deskripsiMenu"),
                         resultData.getString("statusMenu") };
                 tm.addRow(rowData);
@@ -3840,7 +4428,7 @@ public class Model {
             ResultSet resultData = statement.executeQuery(query);
 
             while (resultData.next()) {
-                Object[] rowData = { resultData.getInt("idMeja"),
+                Object[] rowData = { "FN" + resultData.getInt("idMeja"),
                         resultData.getInt("idMitra"),
                         resultData.getString("namaMitra"),
                         resultData.getString("waktuMeja"),
@@ -3969,4 +4557,313 @@ public class Model {
         }
         return tm;
     }
+
+    // Search data Transaksi
+    public static DefaultTableModel getCariTransaksiDiproses(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "Mitra", "waktu", "Nama Pemesan", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga",
+                "Harga", "Harga", "Promo", "Nomor Meja", "Deskripsi", "Total Harga", "Harga Promo", "Pembayaran",
+                "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksidiproses WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR waktuTransaksi LIKE '%" + keyword + "%' OR namaTransaksi LIKE '%" + keyword
+                    + "%' OR makananTransaksi LIKE '%" + keyword + "%' OR coffeTransaksi LIKE '%" + keyword
+                    + "%' OR nonCoffeTransaksi LIKE '%" + keyword + "%' OR promoTransaksi LIKE '%" + keyword
+                    + "%' OR mejaTransaksi LIKE '%" + keyword + "%' OR deskripsiTransaksi LIKE '%" + keyword
+                    + "%' OR bayarTransaksi LIKE '%" + keyword + "%' OR uangTransaksi LIKE '%" + keyword
+                    + "%' OR kembalianTransaksi LIKE '%" + keyword + "%' OR statusTransaksi LIKE '%" + keyword + "%'";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("namaTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getInt("hargaPromo"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // Search data Transaksi
+    public static DefaultTableModel getCariTransaksiSelesai(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "Mitra", "waktu", "Nama Pemesan", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga",
+                "Harga", "Harga", "Promo", "Nomor Meja", "Deskripsi", "Total Harga", "Harga Promo", "Pembayaran",
+                "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksiselesai WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR waktuTransaksi LIKE '%" + keyword + "%' OR namaTransaksi LIKE '%" + keyword
+                    + "%' OR makananTransaksi LIKE '%" + keyword + "%' OR coffeTransaksi LIKE '%" + keyword
+                    + "%' OR nonCoffeTransaksi LIKE '%" + keyword + "%' OR promoTransaksi LIKE '%" + keyword
+                    + "%' OR mejaTransaksi LIKE '%" + keyword + "%' OR deskripsiTransaksi LIKE '%" + keyword
+                    + "%' OR bayarTransaksi LIKE '%" + keyword + "%' OR uangTransaksi LIKE '%" + keyword
+                    + "%' OR kembalianTransaksi LIKE '%" + keyword + "%' OR statusTransaksi LIKE '%" + keyword + "%'";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("namaTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getInt("hargaPromo"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // Search data Transaksi Online
+    public static DefaultTableModel getCariOnlineDiproses(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "ID Customer", "Mitra", "Nama Pemesan", "waktu", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga", "Harga", "Harga", "Promo", "Nomor Meja",
+                "Deskripsi", "Total Harga", "Pembayaran", "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksionlinediproses WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR waktuTransaksi LIKE '%" + keyword + "%' OR namaCustomer LIKE '%" + keyword
+                    + "%' OR makananTransaksi LIKE '%" + keyword + "%' OR coffeTransaksi LIKE '%" + keyword
+                    + "%' OR nonCoffeTransaksi LIKE '%" + keyword + "%' OR promoTransaksi LIKE '%" + keyword
+                    + "%' OR mejaTransaksi LIKE '%" + keyword + "%' OR deskripsiTransaksi LIKE '%" + keyword
+                    + "%' OR bayarTransaksi LIKE '%" + keyword + "%' OR uangTransaksi LIKE '%" + keyword
+                    + "%' OR kembalianTransaksi LIKE '%" + keyword + "%' OR statusTransaksi LIKE '%" + keyword + "%'";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getInt("idCustomer"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("namaCustomer"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // Search data Transaksi Online
+    public static DefaultTableModel getCariOnlineSelesai(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID", "ID Mitra", "ID Customer", "Mitra", "Nama Pemesan", "waktu", "Menu",
+                "Menu", "Menu", "Jumlah", "Jumlah", "Jumlah", "Harga", "Harga", "Harga", "Promo", "Nomor Meja",
+                "Deskripsi", "Total Harga", "Pembayaran", "Uang", "Kembalian", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vwtransaksionlineselesai WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR waktuTransaksi LIKE '%" + keyword + "%' OR namaCustomer LIKE '%" + keyword
+                    + "%' OR makananTransaksi LIKE '%" + keyword + "%' OR coffeTransaksi LIKE '%" + keyword
+                    + "%' OR nonCoffeTransaksi LIKE '%" + keyword + "%' OR promoTransaksi LIKE '%" + keyword
+                    + "%' OR mejaTransaksi LIKE '%" + keyword + "%' OR deskripsiTransaksi LIKE '%" + keyword
+                    + "%' OR bayarTransaksi LIKE '%" + keyword + "%' OR uangTransaksi LIKE '%" + keyword
+                    + "%' OR kembalianTransaksi LIKE '%" + keyword + "%' OR statusTransaksi LIKE '%" + keyword + "%'";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { "TR" + resultData.getInt("idTransaksi"),
+                        resultData.getInt("idMitra"),
+                        resultData.getInt("idCustomer"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("namaCustomer"),
+                        resultData.getString("waktuTransaksi"),
+                        resultData.getString("makananTransaksi"),
+                        resultData.getString("coffeTransaksi"),
+                        resultData.getString("nonCoffeTransaksi"),
+                        resultData.getInt("jumlahMakanan"),
+                        resultData.getInt("jumlahCoffe"),
+                        resultData.getInt("jumlahNonCoffe"),
+                        resultData.getInt("hargaMakanan"),
+                        resultData.getInt("hargaCoffe"),
+                        resultData.getInt("hargaNonCoffe"),
+                        resultData.getString("promoTransaksi"),
+                        resultData.getString("mejaTransaksi"),
+                        resultData.getString("deskripsiTransaksi"),
+                        resultData.getInt("hargaTransaksi"),
+                        resultData.getString("bayarTransaksi"),
+                        resultData.getInt("uangTransaksi"),
+                        resultData.getInt("kembalianTransaksi"),
+                        resultData.getString("statusTransaksi") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // Search Order Bahan Diproses
+    public static DefaultTableModel getCariOrderBahanDiproses(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID Order", "ID Mitra", "Mitra", "waktu", "Bahan", "PT", "Deskripsi", "Alamat",
+                "Jumlah", "Harga", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vworderbahandiproses WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR waktuOrder LIKE '%" + keyword + "%' OR bahanOrder LIKE '%" + keyword
+                    + "%' OR ptOrder LIKE '%" + keyword + "%' OR deskripsiOrder LIKE '%" + keyword
+                    + "%' OR alamatOrder LIKE '%" + keyword + "%' OR jumlahOrder LIKE '%" + keyword
+                    + "%' OR hargaOrder LIKE '%" + keyword + "%' OR statusOrder LIKE '%" + keyword + "%' ";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idOrder"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuOrder"),
+                        resultData.getString("bahanOrder"),
+                        resultData.getString("ptOrder"),
+                        resultData.getString("deskripsiOrder"),
+                        resultData.getString("alamatOrder"),
+                        resultData.getInt("jumlahOrder"),
+                        resultData.getInt("hargaOrder"),
+                        resultData.getString("statusOrder") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
+    // Search Order Bahan Diproses
+    public static DefaultTableModel getCariOrderBahanSelesai(String keyword) {
+
+        connection();
+
+        String[] dataHeader = { "ID Order", "ID Mitra", "Mitra", "waktu", "Bahan", "PT", "Deskripsi", "Alamat",
+                "Jumlah", "Harga", "Status" };
+
+        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
+
+        try {
+            statement = connect.createStatement();
+
+            String query = "SELECT * FROM vworderbahanselesai WHERE namaMitra LIKE '%" + keyword
+                    + "%' OR waktuOrder LIKE '%" + keyword + "%' OR bahanOrder LIKE '%" + keyword
+                    + "%' OR ptOrder LIKE '%" + keyword + "%' OR deskripsiOrder LIKE '%" + keyword
+                    + "%' OR alamatOrder LIKE '%" + keyword + "%' OR jumlahOrder LIKE '%" + keyword
+                    + "%' OR hargaOrder LIKE '%" + keyword + "%' OR statusOrder LIKE '%" + keyword + "%' ";
+
+            ResultSet resultData = statement.executeQuery(query);
+
+            while (resultData.next()) {
+                Object[] rowData = { resultData.getInt("idOrder"),
+                        resultData.getInt("idMitra"),
+                        resultData.getString("namaMitra"),
+                        resultData.getString("waktuOrder"),
+                        resultData.getString("bahanOrder"),
+                        resultData.getString("ptOrder"),
+                        resultData.getString("deskripsiOrder"),
+                        resultData.getString("alamatOrder"),
+                        resultData.getInt("jumlahOrder"),
+                        resultData.getInt("hargaOrder"),
+                        resultData.getString("statusOrder") };
+                tm.addRow(rowData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tm;
+    }
+
 }

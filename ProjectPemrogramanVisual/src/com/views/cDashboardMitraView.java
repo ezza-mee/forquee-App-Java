@@ -582,11 +582,14 @@ public class cDashboardMitraView extends cDashboardApp {
   private cTextField txtJumlahOrderBahan = new cTextField(190, 120, 300);
   private cErrorLabel errorJumlahOrderBahan = new cErrorLabel("Jumlah Bahan tidak boleh Kosong!", 190, 145, 400);
   private cLabelInfo labelPilihMenuOrderBahan = new cLabelInfo("Pilih Bahan", 190, 180, 300, 40);
-  private cComboBox pilihMenuOrderBahan = new cComboBox(new String[] { "Coffe", "Telur", "Beras" }, 190, 210, 300,
+  private cComboBox pilihMenuOrderBahan = new cComboBox(
+      new String[] { "Coffe", "Telur", "Beras", "Tepung", "Mie", "Gula", "Garem", "Penyedap", "Keju", "Saos", "Sawi" },
+      190, 210, 300,
       30);
   private cErrorLabel errorMenuOrderBahan = new cErrorLabel("Menu Bahan tidak boleh Kosong!", 190, 235, 300);
   private cLabelInfo labelPilihPTOrderBahan = new cLabelInfo("Pilih PT", 190, 270, 300, 40);
-  private cComboBox pilihPTOrderBahan = new cComboBox(new String[] { "PT SAWI", "PT COFFE", "PT CABE", "PT TOBRUT" },
+  private cComboBox pilihPTOrderBahan = new cComboBox(
+      new String[] { "PT SAWI", "PT COFFE", "PT CABE", "PT KENCANA", "PT AMBATUKAM", "PT AMOUNG US", "PT BERAS" },
       190, 302,
       300,
       30);
@@ -666,7 +669,7 @@ public class cDashboardMitraView extends cDashboardApp {
   // component of data laporan
   private cLabelInfo labelDataLaporan = new cLabelInfo("Pilih Data", 40, 20, 300, 40);
   private cComboBox pilihDataLaporan = new cComboBox(
-      new String[] { "Data Customer", "Data Karyawan", "Data Promo", "Data Meja" }, 150, 23, 200,
+      new String[] { "Data Customer", "Data Karyawan", "Data Transaksi", "Data Order Online" }, 150, 23, 200,
       30);
 
   // Component Data Report Customer
@@ -676,14 +679,10 @@ public class cDashboardMitraView extends cDashboardApp {
   private cButton btnCetakReportKaryawan = new cButton("Cetak", 400, 95, 150, 30, 20);
 
   // Component Data Report Promo
-  private cLabelInfo labelCariReportPromo = new cLabelInfo("Cari", 40, 95, 300, 40);
-  private cTextField txtCariReportPromo = new cTextField(100, 100, 300);
-  private cButton btnCetakReportPromo = new cButton("Cetak", 450, 100, 150, 30, 20);
+  private cButton btnCetakReportTransaksi = new cButton("Cetak",600, 95, 150, 30, 20);
 
   // Component Data Report Meja
-  private cLabelInfo labelCariReportMeja = new cLabelInfo("Cari", 40, 95, 300, 40);
-  private cTextField txtCariReportMeja = new cTextField(100, 100, 300);
-  private cButton btnCetakReportMeja = new cButton("Cetak", 450, 100, 150, 30, 20);
+  private cButton btnCetakReportTransaksiOnline = new cButton("Cetak", 600, 95, 150, 30, 20);
 
   // component of input data akun
   private cPanelRounded panelHeaderAkun = new cPanelRounded(0, 0, 1100, 75, 15);
@@ -962,7 +961,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariMenuMakanan.setText(null);
 
-    tblMenuMakanan = new cTable(Model.getAllMenuMakanan());
+    tblMenuMakanan = new cTable(Model.getAllMenuMakanan(idMitra));
 
     tblMenuMakanan.getColumnModel().getColumn(0).setMinWidth(80);
     tblMenuMakanan.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -1083,7 +1082,7 @@ public class cDashboardMitraView extends cDashboardApp {
                   "Data Menu berhasil dihapus!",
                   "Berhasil",
                   JOptionPane.INFORMATION_MESSAGE);
-              initsDataMeja();
+              initsMenuMakanan();
             } else {
               JOptionPane.showMessageDialog(cDashboardMitraView.this, "Data Menu gagal dihapus!", "Gagal",
                   JOptionPane.ERROR_MESSAGE);
@@ -1155,7 +1154,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariMenuCoffe.setText(null);
 
-    tblMenuCoffe = new cTable(Model.getAllMenuCoffe());
+    tblMenuCoffe = new cTable(Model.getAllMenuCoffe(idMitra));
 
     tblMenuCoffe.getColumnModel().getColumn(0).setMinWidth(80);
     tblMenuCoffe.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -1281,7 +1280,7 @@ public class cDashboardMitraView extends cDashboardApp {
                   "Data Menu berhasil dihapus!",
                   "Berhasil",
                   JOptionPane.INFORMATION_MESSAGE);
-              initsDataMeja();
+              initsMenuCoffe();
             } else {
               JOptionPane.showMessageDialog(cDashboardMitraView.this,
                   "Data Menu gagal dihapus!",
@@ -1355,7 +1354,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariMenuNonCoffe.setText(null);
 
-    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe());
+    tblMenuNonCoffe = new cTable(Model.getAllMenuNonCoffe(idMitra));
 
     tblMenuNonCoffe.getColumnModel().getColumn(0).setMinWidth(80);
     tblMenuNonCoffe.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -1487,7 +1486,7 @@ public class cDashboardMitraView extends cDashboardApp {
                   "Data Menu berhasil dihapus!",
                   "Berhasil",
                   JOptionPane.INFORMATION_MESSAGE);
-              initsDataMeja();
+              initsMenuNonCoffe();
             } else {
               JOptionPane.showMessageDialog(cDashboardMitraView.this,
                   "Data Menu gagal dihapus!",
@@ -1604,7 +1603,7 @@ public class cDashboardMitraView extends cDashboardApp {
           if (Model.ubahMenuMakanan(idMenu, idMitra, namaMenu, jumlahMakanan, hargaMakanan,
               deskripsiMakanan)) {
             // kalau berhasil
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Ditambah",
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Berhasil Diubah",
                 "Berhasil", JOptionPane.INFORMATION_MESSAGE);
             txtNamaUbahMakanan.setText(null);
             txtJumlahUbahMakanan.setText(null);
@@ -1613,7 +1612,7 @@ public class cDashboardMitraView extends cDashboardApp {
             initsMenuMakanan();
           } else {
             // kalau tidak berhasil
-            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Ditambah", "Gagal",
+            JOptionPane.showMessageDialog(cDashboardMitraView.this, "Menu Gagal Diubah!", "Gagal",
                 JOptionPane.ERROR_MESSAGE);
           }
         }
@@ -2212,7 +2211,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariPromo.setText(null);
 
-    tblDataPromo = new cTable(Model.getAllPromo());
+    tblDataPromo = new cTable(Model.getAllPromo(idMitra));
 
     tblDataPromo.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataPromo.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -2304,12 +2303,12 @@ public class cDashboardMitraView extends cDashboardApp {
           int idPromo = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
-          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin menghapus data Menu!",
-              "Konfirmasi Hapus Data Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
+          int konfirmasi = JOptionPane.showOptionDialog(null, "Yakin ingin menghapus data Promo!",
+              "Konfirmasi Hapus Data Promo", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,
               options[0]);
 
           if (konfirmasi == 0) {
-            boolean isDeleted = Model.hapusDataMenuMakanan(idPromo);
+            boolean isDeleted = Model.hapusDataPromo(idPromo);
             if (isDeleted) {
               JOptionPane.showMessageDialog(cDashboardMitraView.this,
                   "Data Promo berhasil dihapus!",
@@ -2658,7 +2657,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariMeja.setText(null);
 
-    tblDataMeja = new cTable(Model.getAllMeja());
+    tblDataMeja = new cTable(Model.getAllMeja(idMitra));
 
     tblDataMeja.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataMeja.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -2739,7 +2738,8 @@ public class cDashboardMitraView extends cDashboardApp {
         int selectedIndex = tblDataMeja.getSelectedRow();
 
         if (selectedIndex != -1) {
-          int idMeja = Integer.valueOf(tblDataMeja.getValueAt(selectedIndex, 0).toString());
+          String idString = tblDataMeja.getValueAt(selectedIndex, 0).toString();
+          int idMeja = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
 
           Object[] options = { "IYA", "BATAL" };
           int konfirmasi = JOptionPane.showOptionDialog(null,
@@ -3135,7 +3135,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariKaryawan.setText(null);
 
-    tblDataKaryawan = new cTable(Model.getAllKaryawanVerified());
+    tblDataKaryawan = new cTable(Model.getAllKaryawanVerified(idMitra));
 
     tblDataKaryawan.getColumnModel().getColumn(0).setMinWidth(0);
     tblDataKaryawan.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -3322,7 +3322,7 @@ public class cDashboardMitraView extends cDashboardApp {
 
     txtCariTerverifikasi.setText(null);
 
-    tblDataTerverifikasi = new cTable(Model.getAllKaryawantTerverifikasi());
+    tblDataTerverifikasi = new cTable(Model.getAllKaryawantTerverifikasi(idMitra));
 
     tblDataTerverifikasi.getColumnModel().getColumn(0).setMinWidth(0);
     tblDataTerverifikasi.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -3922,6 +3922,88 @@ public class cDashboardMitraView extends cDashboardApp {
 
     content.add(pilihTransaksi);
 
+    txtCariTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariTransaksi.getText();
+
+        tblDataTransaksi.setModel(Model.getCariTransaksiDiproses(keyword));
+
+        tblDataTransaksi.getColumnModel().getColumn(0).setMinWidth(80);
+        tblDataTransaksi.getColumnModel().getColumn(0).setMaxWidth(80);
+        tblDataTransaksi.getColumnModel().getColumn(0).setWidth(80);
+
+        tblDataTransaksi.getColumnModel().getColumn(1).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(1).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(2).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(2).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(3).setMinWidth(200);
+        tblDataTransaksi.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblDataTransaksi.getColumnModel().getColumn(3).setWidth(200);
+
+        tblDataTransaksi.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(5).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(6).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(6).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(7).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(8).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(8).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(8).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(9).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(10).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(10).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(10).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(11).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(11).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(11).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(12).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(12).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(12).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(13).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(13).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(13).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(14).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(14).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(14).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(15).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(15).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(15).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(16).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(16).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(16).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(17).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(17).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(17).setWidth(0);
+
+        tblDataTransaksi.getColumnModel().getColumn(18).setMinWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(18).setMaxWidth(0);
+        tblDataTransaksi.getColumnModel().getColumn(18).setWidth(0);
+
+      }
+    });
+
     btnTambahTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -3987,7 +4069,7 @@ public class cDashboardMitraView extends cDashboardApp {
                   "Data Transaksi berhasil dihapus!",
                   "Berhasil",
                   JOptionPane.INFORMATION_MESSAGE);
-              initsDataMeja();
+              initsDataTransaksi();
             } else {
               JOptionPane.showMessageDialog(cDashboardMitraView.this,
                   "Data Transaksi gagal dihapus!",
@@ -4087,7 +4169,7 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    tblDataTransaksi = new cTable(Model.getAllTransaksiDiproses());
+    tblDataTransaksi = new cTable(Model.getAllTransaksiDiproses(idMitra));
 
     tblDataTransaksi.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataTransaksi.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -5028,7 +5110,7 @@ public class cDashboardMitraView extends cDashboardApp {
                   + String.format("%-80s Uang                 : %s", "", uangTransaksi) + "\n"
                   + String.format("%-80s Kembalian            : %s", "", kembalianTransaksi) + "\n"
                   + "=======================================================\n"
-                  + "---------------TERIMAKASIH BY ARCOO NGAWI---------------\n"
+                  + "-----------------------------TERIMAKASIH----------------------\n"
                   + "=======================================================\n"
 
                   + "\n\n\n";
@@ -5250,6 +5332,88 @@ public class cDashboardMitraView extends cDashboardApp {
     groupButtonRadio.add(rdOfflineProsesTransaksi);
     groupButtonRadio.add(rdOnlineProsesTransaksi);
 
+    txtCariProsesOrderOffline.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariProsesOrderOffline.getText();
+
+        tblDataProsesOrderOffline.setModel(Model.getCariTransaksiDiproses(keyword));
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(0).setMinWidth(80);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(0).setMaxWidth(80);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(0).setWidth(80);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(1).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(1).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(2).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(2).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(3).setMinWidth(200);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(3).setWidth(200);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(5).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(6).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(6).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(7).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(8).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(8).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(8).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(9).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(10).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(10).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(10).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(11).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(11).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(11).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(12).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(12).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(12).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(13).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(13).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(13).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(14).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(14).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(14).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(15).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(15).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(15).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(16).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(16).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(16).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(17).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(17).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(17).setWidth(0);
+
+        tblDataProsesOrderOffline.getColumnModel().getColumn(18).setMinWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(18).setMaxWidth(0);
+        tblDataProsesOrderOffline.getColumnModel().getColumn(18).setWidth(0);
+
+      }
+    });
+
     btnDetailProsesOrderOffline.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -5361,7 +5525,7 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    tblDataProsesOrderOffline = new cTable(Model.getAllTransaksiDiproses());
+    tblDataProsesOrderOffline = new cTable(Model.getAllTransaksiDiproses(idMitra));
 
     tblDataProsesOrderOffline.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataProsesOrderOffline.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -5374,6 +5538,10 @@ public class cDashboardMitraView extends cDashboardApp {
     tblDataProsesOrderOffline.getColumnModel().getColumn(2).setMinWidth(0);
     tblDataProsesOrderOffline.getColumnModel().getColumn(2).setMaxWidth(0);
     tblDataProsesOrderOffline.getColumnModel().getColumn(2).setWidth(0);
+
+    tblDataProsesOrderOffline.getColumnModel().getColumn(3).setMinWidth(200);
+    tblDataProsesOrderOffline.getColumnModel().getColumn(3).setMaxWidth(200);
+    tblDataProsesOrderOffline.getColumnModel().getColumn(3).setWidth(200);
 
     tblDataProsesOrderOffline.getColumnModel().getColumn(5).setMinWidth(0);
     tblDataProsesOrderOffline.getColumnModel().getColumn(5).setMaxWidth(0);
@@ -5595,7 +5763,7 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    tblDataProsesOrderOnline = new cTable(Model.getAllOnlineDiproses());
+    tblDataProsesOrderOnline = new cTable(Model.getAllOnlineAdminDiproses());
 
     tblDataProsesOrderOnline.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataProsesOrderOnline.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -5695,7 +5863,41 @@ public class cDashboardMitraView extends cDashboardApp {
     menuOrderBahan.setSidebarAktif();
     menuTitle.setText("Data Oder Bahan");
 
-    tblOrderBahan = new cTable(Model.getAllOrderBahanDiproses());
+    txtCariOrderBahan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariOrderBahan.getText();
+
+        tblOrderBahan.setModel(Model.getCariOrderBahanDiproses(keyword));
+
+        tblOrderBahan.getColumnModel().getColumn(0).setMinWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(0).setWidth(0);
+
+        tblOrderBahan.getColumnModel().getColumn(1).setMinWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(1).setWidth(0);
+
+        tblOrderBahan.getColumnModel().getColumn(2).setMinWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(2).setWidth(0);
+
+        tblOrderBahan.getColumnModel().getColumn(3).setMinWidth(200);
+        tblOrderBahan.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblOrderBahan.getColumnModel().getColumn(3).setWidth(200);
+
+        tblOrderBahan.getColumnModel().getColumn(6).setMinWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(6).setWidth(0);
+
+        tblOrderBahan.getColumnModel().getColumn(7).setMinWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblOrderBahan.getColumnModel().getColumn(7).setWidth(0);
+
+      }
+    });
+
+    tblOrderBahan = new cTable(Model.getAllOrderBahanMitraDiproses(idMitra));
 
     tblOrderBahan.getColumnModel().getColumn(0).setMinWidth(0);
     tblOrderBahan.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -5841,21 +6043,49 @@ public class cDashboardMitraView extends cDashboardApp {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Coffe")) {
-          hargaBahan = 10000;
-          String bahanHarga = Integer.toString(hargaBahan);
-          txtHargaOrderUbahBahan.setText(bahanHarga);
+          hargaBahan = 15000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
         } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Telur")) {
-          hargaBahan = 1000;
-          String bahanHarga = Integer.toString(hargaBahan);
-          txtHargaOrderUbahBahan.setText(bahanHarga);
+          hargaBahan = 18000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
         } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Beras")) {
-          hargaBahan = 2000;
-          String bahanHarga = Integer.toString(hargaBahan);
-          txtHargaOrderUbahBahan.setText(bahanHarga);
-        } else {
+          hargaBahan = 50000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Tepung")) {
+          hargaBahan = 20000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Mie")) {
+          hargaBahan = 25000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Gula")) {
+          hargaBahan = 16000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Garem")) {
+          hargaBahan = 13000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Penyedap")) {
+          hargaBahan = 14000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Keju")) {
+          hargaBahan = 13500;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else if (pilihMenuOrderUbahBahan.getSelectedItem().equals("Saos")) {
           hargaBahan = 5000;
-          String bahanHarga = Integer.toString(hargaBahan);
-          txtHargaOrderUbahBahan.setText(bahanHarga);
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
+        } else {
+          hargaBahan = 35000;
+          String UbahBahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderUbahBahan.setText(UbahBahanHarga);
         }
       }
     });
@@ -5919,7 +6149,8 @@ public class cDashboardMitraView extends cDashboardApp {
               + "====================================================\n"
               + String.format("%-40s: %s", "Harga Total", txtHargaTotalUbahBahan.getText()) + "\n"
               + "====================================================\n"
-              + "Masukan Uang";
+              + "Masukan Uang"
+              + "====================================================\n";
 
           String checkoutOrder = JOptionPane.showInputDialog(null, PembayaranOrder, "Pembayaran",
               JOptionPane.QUESTION_MESSAGE);
@@ -6006,19 +6237,47 @@ public class cDashboardMitraView extends cDashboardApp {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
         if (pilihMenuOrderBahan.getSelectedItem().equals("Coffe")) {
-          hargaBahan = 10000;
+          hargaBahan = 15000;
           String bahanHarga = Integer.toString(hargaBahan);
           txtHargaOrderBahan.setText(bahanHarga);
         } else if (pilihMenuOrderBahan.getSelectedItem().equals("Telur")) {
-          hargaBahan = 1000;
+          hargaBahan = 18000;
           String bahanHarga = Integer.toString(hargaBahan);
           txtHargaOrderBahan.setText(bahanHarga);
         } else if (pilihMenuOrderBahan.getSelectedItem().equals("Beras")) {
-          hargaBahan = 2000;
+          hargaBahan = 50000;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Tepung")) {
+          hargaBahan = 20000;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Mie")) {
+          hargaBahan = 25000;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Gula")) {
+          hargaBahan = 16000;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Garem")) {
+          hargaBahan = 13000;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Penyedap")) {
+          hargaBahan = 14000;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Keju")) {
+          hargaBahan = 13500;
+          String bahanHarga = Integer.toString(hargaBahan);
+          txtHargaOrderBahan.setText(bahanHarga);
+        } else if (pilihMenuOrderBahan.getSelectedItem().equals("Saos")) {
+          hargaBahan = 5000;
           String bahanHarga = Integer.toString(hargaBahan);
           txtHargaOrderBahan.setText(bahanHarga);
         } else {
-          hargaBahan = 5000;
+          hargaBahan = 35000;
           String bahanHarga = Integer.toString(hargaBahan);
           txtHargaOrderBahan.setText(bahanHarga);
         }
@@ -6196,7 +6455,41 @@ public class cDashboardMitraView extends cDashboardApp {
 
     content.add(pilihHistory);
 
-    tblHistoryBahan = new cTable(Model.getAllOrderBahanSelesai());
+    txtCariHistoryBahan.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariHistoryBahan.getText();
+
+        tblHistoryBahan.setModel(Model.getCariOrderBahanSelesai(keyword));
+
+        tblHistoryBahan.getColumnModel().getColumn(0).setMinWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(0).setWidth(0);
+
+        tblHistoryBahan.getColumnModel().getColumn(1).setMinWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(1).setWidth(0);
+
+        tblHistoryBahan.getColumnModel().getColumn(2).setMinWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(2).setWidth(0);
+
+        tblHistoryBahan.getColumnModel().getColumn(3).setMinWidth(200);
+        tblHistoryBahan.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblHistoryBahan.getColumnModel().getColumn(3).setWidth(200);
+
+        tblHistoryBahan.getColumnModel().getColumn(6).setMinWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(6).setWidth(0);
+
+        tblHistoryBahan.getColumnModel().getColumn(7).setMinWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblHistoryBahan.getColumnModel().getColumn(7).setWidth(0);
+
+      }
+    });
+
+    tblHistoryBahan = new cTable(Model.getAllOrderBahanMitraSelesai(idMitra));
 
     tblHistoryBahan.getColumnModel().getColumn(0).setMinWidth(0);
     tblHistoryBahan.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -6280,6 +6573,88 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(pilihHistory);
     content.add(labelHistory);
 
+    txtCariHistoryTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariHistoryTransaksi.getText();
+
+        tblDataHistoryTransaksi.setModel(Model.getCariTransaksiSelesai(keyword));
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMinWidth(80);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMaxWidth(80);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(0).setWidth(80);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(1).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(1).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(2).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(2).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(3).setMinWidth(200);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(3).setWidth(200);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(5).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(6).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(6).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(7).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(8).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(8).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(8).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(9).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(10).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(10).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(10).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(11).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(11).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(11).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(12).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(12).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(12).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(13).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(13).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(13).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(14).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(14).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(14).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(15).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(15).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(15).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(16).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(16).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(16).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(17).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(17).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(17).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(18).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(18).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(18).setWidth(0);
+
+      }
+    });
+
     btnDetailHistoryTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -6355,7 +6730,7 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    tblDataHistoryTransaksi = new cTable(Model.getAllTransaksiSelesai());
+    tblDataHistoryTransaksi = new cTable(Model.getAllTransaksiSelesai(idMitra));
 
     tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -6457,6 +6832,83 @@ public class cDashboardMitraView extends cDashboardApp {
     content.add(pilihHistory);
     content.add(labelHistory);
 
+    txtCariHistoryTransaksiOnline.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariHistoryTransaksiOnline.getText();
+
+        tblDataHistoryTransaksiOnline.setModel(Model.getCariOnlineSelesai(keyword));
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMinWidth(80);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMaxWidth(80);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setWidth(80);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setWidth(0);
+      }
+    });
+
     btnDetailHistoryTransaksiOnline.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -6541,7 +6993,7 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    tblDataHistoryTransaksiOnline = new cTable(Model.getAllOnlineDiproses());
+    tblDataHistoryTransaksiOnline = new cTable(Model.getAllOnlineAdminSelesai());
 
     tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMinWidth(80);
     tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -6647,10 +7099,10 @@ public class cDashboardMitraView extends cDashboardApp {
           initsDataReportCustomer();
         } else if (selectedItem.equals("Data Karyawan")) {
           initsDataReportKaryawan();
-        } else if (selectedItem.equals("Data Promo")) {
-          initsDataReportPromo();
-        } else if (selectedItem.equals("Data Meja")) {
-          initsDataReportMeja();
+        } else if (selectedItem.equals("Data Transaksi")) {
+          initsDataReportTransaksi();
+        } else if (selectedItem.equals("Data Order Online")) {
+          initsDataReportTransaksiOnline();
         }
       }
     });
@@ -6741,7 +7193,7 @@ public class cDashboardMitraView extends cDashboardApp {
       }
     });
 
-    tblDataTerverifikasi = new cTable(Model.getAllKaryawantTerverifikasi());
+    tblDataTerverifikasi = new cTable(Model.getAllKaryawantTerverifikasi(idMitra));
 
     tblDataTerverifikasi.getColumnModel().getColumn(0).setMinWidth(0);
     tblDataTerverifikasi.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -6832,95 +7284,536 @@ public class cDashboardMitraView extends cDashboardApp {
     setVisible(true);
   }
 
-  private void initsDataReportPromo() {
+  private void initsDataReportTransaksi() {
     resetSidebar();
     menuReport.setBackground(cColor.GREEN);
     menuReport.setForeground(cColor.WHITE);
     menuReport.setSidebarAktif();
     refreshContent();
-    menuTitle.setText("Data Report Karyawan");
+    menuTitle.setText("Data Laporan Transaksi");
 
     content.add(pilihDataLaporan);
     content.add(labelDataLaporan);
+    content.add(btnCetakReportTransaksi);
 
-    btnCetakReportPromo.addActionListener(new java.awt.event.ActionListener() {
+    btnCetakReportTransaksi.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
 
       }
     });
 
-    tblDataPromo = new cTable(Model.getAllPromo());
+    txtCariHistoryTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariHistoryTransaksi.getText();
 
-    tblDataPromo.getColumnModel().getColumn(0).setMinWidth(0);
-    tblDataPromo.getColumnModel().getColumn(0).setMaxWidth(0);
-    tblDataPromo.getColumnModel().getColumn(0).setWidth(0);
+        tblDataHistoryTransaksi.setModel(Model.getCariTransaksiSelesai(keyword));
 
-    tblDataPromo.getColumnModel().getColumn(1).setMinWidth(0);
-    tblDataPromo.getColumnModel().getColumn(1).setMaxWidth(0);
-    tblDataPromo.getColumnModel().getColumn(1).setWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMinWidth(80);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMaxWidth(80);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(0).setWidth(80);
 
-    tblDataPromo.getColumnModel().getColumn(2).setMinWidth(0);
-    tblDataPromo.getColumnModel().getColumn(2).setMaxWidth(0);
-    tblDataPromo.getColumnModel().getColumn(2).setWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(1).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(1).setWidth(0);
 
-    tblDataPromo.getColumnModel().getColumn(8).setMinWidth(0);
-    tblDataPromo.getColumnModel().getColumn(8).setMaxWidth(0);
-    tblDataPromo.getColumnModel().getColumn(8).setWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(2).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(2).setWidth(0);
 
-    spDataPromo = new cScrollPane(tblDataPromo, 0, 150, 1080, 300);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(3).setMinWidth(200);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(3).setMaxWidth(200);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(3).setWidth(200);
 
-    content.add(spDataPromo);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(5).setWidth(0);
 
-    content.add(labelCariReportPromo);
-    content.add(txtCariReportPromo);
-    content.add(btnCetakReportPromo);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(6).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(6).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(7).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(8).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(8).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(8).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(9).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(10).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(10).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(10).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(11).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(11).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(11).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(12).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(12).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(12).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(13).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(13).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(13).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(14).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(14).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(14).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(15).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(15).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(15).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(16).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(16).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(16).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(17).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(17).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(17).setWidth(0);
+
+        tblDataHistoryTransaksi.getColumnModel().getColumn(18).setMinWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(18).setMaxWidth(0);
+        tblDataHistoryTransaksi.getColumnModel().getColumn(18).setWidth(0);
+
+      }
+    });
+
+    btnDetailHistoryTransaksi.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblDataHistoryTransaksi.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          String idString = tblDataHistoryTransaksi.getValueAt(selectedIndex, 0).toString();
+          int idTransaksi = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
+
+          String transaksiId = Model.getDetailTransaksiSelesai(idTransaksi)[0].toString();
+          String mitraId = Model.getDetailTransaksiSelesai(idTransaksi)[1].toString();
+          String namaMitra = Model.getDetailTransaksiSelesai(idTransaksi)[2].toString();
+          String waktuTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[3].toString();
+          String namaTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[4].toString();
+          String makananTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[5].toString();
+          String coffeTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[6].toString();
+          String nonCoffeTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[7].toString();
+          String jumlahMakanan = Model.getDetailTransaksiSelesai(idTransaksi)[8].toString();
+          String jumlahCoffe = Model.getDetailTransaksiSelesai(idTransaksi)[9].toString();
+          String jumlahNonCoffe = Model.getDetailTransaksiSelesai(idTransaksi)[10].toString();
+          String hargaMakanan = Model.getDetailTransaksiSelesai(idTransaksi)[11].toString();
+          String hargaCoffe = Model.getDetailTransaksiSelesai(idTransaksi)[12].toString();
+          String hargaNonCoffe = Model.getDetailTransaksiSelesai(idTransaksi)[13].toString();
+          String promoTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[14].toString();
+          String mejaTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[15].toString();
+          String deskripsiTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[16].toString();
+          String hargaTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[17].toString();
+          String bayarTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[18].toString();
+          String statusTransaksi = Model.getDetailTransaksiSelesai(idTransaksi)[19].toString();
+
+          String detailTransaksi = "\tForque" + "\n\n"
+              + "Jl. Jagal No.3A RT 007/004, Jl. Jagal, Rangkapan Jaya,\n"
+              + "Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435\n"
+              + "====================================================\n"
+              + String.format("%-40s:  %s", "Tanggal/Waktu", waktuTransaksi) + "\n"
+              + String.format("%-40s:  TR%s", "ID Transaksi", transaksiId) + "\n"
+              + String.format("%-44s:  MI%s", "ID Mitra", mitraId) + "\n"
+              + String.format("%-39s: %s", "Nama Mitra", namaMitra) + "\n"
+              + "====================================================\n"
+              + String.format("%-44s: %s", "Status Transaksi", statusTransaksi) + "\n"
+              + String.format("%-44s: %s", "Nomor Meja", mejaTransaksi) + "\n"
+              + String.format("%-39s: %s", "Nama Pemesan", namaTransaksi) + "\n"
+              + String.format("%-44s: %s", "Pembayaran", bayarTransaksi) + "\n"
+              + String.format("%-49s: %s", "Promo", promoTransaksi) + "\n"
+              + String.format("%-38s: %s", "Deskripsi Pesanan", deskripsiTransaksi) + "\n"
+              + "====================================================\n"
+              + String.format("%-60s %-30s %-10s", makananTransaksi, jumlahMakanan, hargaMakanan) + "\n"
+              + String.format("%-60s %-30s %-10s", coffeTransaksi, jumlahCoffe, hargaCoffe) + "\n"
+              + String.format("%-60s %-30s %-10s", nonCoffeTransaksi, jumlahNonCoffe, hargaNonCoffe) + "\n"
+              + "====================================================\n"
+              + String.format("%-80s Harga Total   : %s", "", hargaTransaksi) + "\n"
+              + "====================================================\n"
+              + "\n";
+
+          Object[] options = { "KEMBALI" };
+          JOptionPane.showOptionDialog(
+              null,
+              detailTransaksi,
+              "detailTransaksi",
+              JOptionPane.DEFAULT_OPTION,
+              JOptionPane.QUESTION_MESSAGE,
+              null,
+              options,
+              options[0]);
+
+        } else {
+          // Jika tidak ada yang dipilih
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data terlebih dahulu!",
+              "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    tblDataHistoryTransaksi = new cTable(Model.getAllTransaksiSelesai(idMitra));
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMinWidth(80);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(0).setMaxWidth(80);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(0).setWidth(80);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(1).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(1).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(2).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(2).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(3).setMinWidth(200);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(3).setMaxWidth(200);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(3).setWidth(200);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(5).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(5).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(5).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(6).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(6).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(6).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(7).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(7).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(8).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(8).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(8).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(9).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(9).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(9).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(10).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(10).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(10).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(11).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(11).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(11).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(12).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(12).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(12).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(13).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(13).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(13).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(14).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(14).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(14).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(15).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(15).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(15).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(16).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(16).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(16).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(17).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(17).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(17).setWidth(0);
+
+    tblDataHistoryTransaksi.getColumnModel().getColumn(18).setMinWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(18).setMaxWidth(0);
+    tblDataHistoryTransaksi.getColumnModel().getColumn(18).setWidth(0);
+
+    spDataHistoryTransaksi = new cScrollPane(tblDataHistoryTransaksi, 0, 150, 1100, 400);
+
+    TitledBorder titledBorder = new TitledBorder(new LineBorder(cColor.BLACK), "Cari");
+    titledBorder.setTitleFont(cFonts.CARI_FONT);
+
+    txtCariHistoryTransaksi.setBorder(titledBorder);
+    txtCariHistoryTransaksi.setSize(300, 45);
+
+    content.add(btnDetailHistoryTransaksi);
+
+    content.add(spDataHistoryTransaksi);
+    content.add(txtCariHistoryTransaksi);
+    content.add(panelHeaderHistoryTransaksi);
 
     setVisible(true);
   }
 
-  private void initsDataReportMeja() {
+  private void initsDataReportTransaksiOnline() {
     resetSidebar();
     menuReport.setBackground(cColor.GREEN);
     menuReport.setForeground(cColor.WHITE);
     menuReport.setSidebarAktif();
     refreshContent();
-    menuTitle.setText("Data Report Meja");
+    menuTitle.setText("Data Laporan Transaksi Online");
 
     content.add(pilihDataLaporan);
+    content.add(labelDataLaporan);
+    content.add(btnCetakReportTransaksiOnline);
 
-    btnCetakReportMeja.addActionListener(new java.awt.event.ActionListener() {
+    btnCetakReportTransaksiOnline.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(java.awt.event.ActionEvent ae) {
 
       }
     });
 
-    tblDataMeja = new cTable(Model.getAllMeja());
+    txtCariHistoryTransaksiOnline.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        String keyword = txtCariHistoryTransaksiOnline.getText();
 
-    tblDataMeja.getColumnModel().getColumn(0).setMinWidth(0);
-    tblDataMeja.getColumnModel().getColumn(0).setMaxWidth(0);
-    tblDataMeja.getColumnModel().getColumn(0).setWidth(0);
+        tblDataHistoryTransaksiOnline.setModel(Model.getCariOnlineSelesai(keyword));
 
-    tblDataMeja.getColumnModel().getColumn(1).setMinWidth(0);
-    tblDataMeja.getColumnModel().getColumn(1).setMaxWidth(0);
-    tblDataMeja.getColumnModel().getColumn(1).setWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMinWidth(80);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMaxWidth(80);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setWidth(80);
 
-    tblDataMeja.getColumnModel().getColumn(2).setMinWidth(0);
-    tblDataMeja.getColumnModel().getColumn(2).setMaxWidth(0);
-    tblDataMeja.getColumnModel().getColumn(2).setWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setWidth(0);
 
-    tblDataMeja.getColumnModel().getColumn(6).setMinWidth(0);
-    tblDataMeja.getColumnModel().getColumn(6).setMaxWidth(0);
-    tblDataMeja.getColumnModel().getColumn(6).setWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setWidth(0);
 
-    spDataMeja = new cScrollPane(tblDataMeja, 0, 150, 1080, 300);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setWidth(0);
 
-    content.add(spDataMeja);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setWidth(0);
 
-    content.add(labelCariReportMeja);
-    content.add(txtCariReportMeja);
-    content.add(btnCetakReportMeja);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setWidth(0);
+
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setMinWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setMaxWidth(0);
+        tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setWidth(0);
+      }
+    });
+
+    btnDetailHistoryTransaksiOnline.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent ae) {
+        int selectedIndex = tblDataHistoryTransaksiOnline.getSelectedRow();
+
+        if (selectedIndex != -1) {
+          String idString = tblDataHistoryTransaksiOnline.getValueAt(selectedIndex, 0).toString();
+          int idTransaksi = Integer.parseInt(idString.replaceAll("[^0-9]", ""));
+
+          String transaksiId = Model.getDetailOnlineDiproses(idTransaksi)[0].toString();
+          String mitraId = Model.getDetailOnlineDiproses(idTransaksi)[1].toString();
+          String customerId = Model.getDetailOnlineDiproses(idTransaksi)[2].toString();
+          String namaMitra = Model.getDetailOnlineDiproses(idTransaksi)[3].toString();
+          String namaCustomer = Model.getDetailOnlineDiproses(idTransaksi)[4].toString();
+          String waktuTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[5].toString();
+          String makananTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[6].toString();
+          String coffeTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[7].toString();
+          String nonCoffeTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[8].toString();
+          String jumlahMakanan = Model.getDetailOnlineDiproses(idTransaksi)[9].toString();
+          String jumlahCoffe = Model.getDetailOnlineDiproses(idTransaksi)[10].toString();
+          String jumlahNonCoffe = Model.getDetailOnlineDiproses(idTransaksi)[11].toString();
+          String hargaMakanan = Model.getDetailOnlineDiproses(idTransaksi)[12].toString();
+          String hargaCoffe = Model.getDetailOnlineDiproses(idTransaksi)[13].toString();
+          String hargaNonCoffe = Model.getDetailOnlineDiproses(idTransaksi)[14].toString();
+          String promoTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[15].toString();
+          String mejaTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[16].toString();
+          String deskripsiTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[17].toString();
+          String hargaTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[18].toString();
+          String hargaPromo = Model.getDetailOnlineDiproses(idTransaksi)[19].toString();
+          String bayarTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[20].toString();
+          String uangTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[21].toString();
+          String kembalianTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[22].toString();
+          String statusTransaksi = Model.getDetailOnlineDiproses(idTransaksi)[23].toString();
+
+          String detailTransaksi = "\tForque" + "\n\n"
+              + "Jl. Jagal No.3A RT 007/004, Jl. Jagal, Rangkapan Jaya,\n"
+              + "Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435\n"
+              + "====================================================\n"
+              + String.format("%-40s:  %s", "Tanggal/Waktu", waktuTransaksi) + "\n"
+              + String.format("%-40s:  TR%s", "ID Transaksi", transaksiId) + "\n"
+              + String.format("%-44s:  MI%s", "ID Mitra", mitraId) + "\n"
+              + String.format("%-39s: %s", "Nama Mitra", namaMitra) + "\n"
+              + "====================================================\n"
+              + String.format("%-44s:  CS%s", "ID Mitra", customerId) + "\n"
+              + String.format("%-44s: %s", "Status Transaksi", statusTransaksi) + "\n"
+              + String.format("%-44s: %s", "Nomor Meja", mejaTransaksi) + "\n"
+              + String.format("%-39s: %s", "Nama Pemesan", namaCustomer) + "\n"
+              + String.format("%-44s: %s", "Pembayaran", bayarTransaksi) + "\n"
+              + String.format("%-49s: %s", "Promo", promoTransaksi) + "\n"
+              + String.format("%-38s: %s", "Deskripsi Pesanan", deskripsiTransaksi) + "\n"
+              + "====================================================\n"
+              + String.format("%-60s %-30s %-10s", makananTransaksi, jumlahMakanan, hargaMakanan) + "\n"
+              + String.format("%-60s %-30s %-10s", coffeTransaksi, jumlahCoffe, hargaCoffe) + "\n"
+              + String.format("%-60s %-30s %-10s", nonCoffeTransaksi, jumlahNonCoffe, hargaNonCoffe) + "\n"
+              + "====================================================\n"
+              + String.format("%-80s Harga Total   : %s", "", hargaTransaksi) + "\n"
+              + String.format("%-80s Harga Promo          : %s", "", hargaPromo) + "\n"
+              + String.format("%-80s Uang                 : %s", "", uangTransaksi) + "\n"
+              + String.format("%-80s Kembalian            : %s", "", kembalianTransaksi) + "\n"
+              + "=======================================================\n"
+              + "---------------TERIMAKASIH BY ARCOO NGAWI---------------\n"
+              + "=======================================================\n"
+              + "\n";
+          Object[] options = { "KEMBALI" };
+          JOptionPane.showOptionDialog(
+              null,
+              detailTransaksi,
+              "detailTransaksi",
+              JOptionPane.DEFAULT_OPTION,
+              JOptionPane.QUESTION_MESSAGE,
+              null,
+              options,
+              options[0]);
+
+        } else {
+          // Jika tidak ada yang dipilih
+          JOptionPane.showMessageDialog(cDashboardMitraView.this,
+              "Pilih data terlebih dahulu!",
+              "Peringatan",
+              JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    tblDataHistoryTransaksiOnline = new cTable(Model.getAllOnlineAdminSelesai());
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMinWidth(80);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setMaxWidth(80);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(0).setWidth(80);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(1).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(2).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(5).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(6).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(7).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(8).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(9).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(10).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(11).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(12).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(13).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(14).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(15).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(16).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(17).setWidth(0);
+
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setMinWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setMaxWidth(0);
+    tblDataHistoryTransaksiOnline.getColumnModel().getColumn(18).setWidth(0);
+
+    spDataHistoryTransaksiOnline = new cScrollPane(tblDataHistoryTransaksiOnline, 0, 150, 1100, 400);
+
+    TitledBorder titledBorder = new TitledBorder(new LineBorder(cColor.BLACK), "Cari");
+    titledBorder.setTitleFont(cFonts.CARI_FONT);
+
+    txtCariHistoryTransaksiOnline.setBorder(titledBorder);
+    txtCariHistoryTransaksiOnline.setSize(300, 45);
+
+    content.add(btnDetailHistoryTransaksiOnline);
+
+    content.add(spDataHistoryTransaksiOnline);
+    content.add(txtCariHistoryTransaksiOnline);
+    content.add(panelHeaderHistoryTransaksiOnline);
 
     setVisible(true);
   }

@@ -178,6 +178,8 @@ public class cLoginView extends cFrameLoginApp {
                         Controller
                                 .showDashboardCustomer(
                                         Integer.valueOf(Model.getDetailCustomerByEmail(email)[0].toString()));
+                        txtEmailLoginCustomer.setText(null);
+                        txtPasswordLoginCustomer.setText(null);
                         cLoginView.this.setVisible(false);
                     } else {
                         // kalo gagal login
@@ -242,6 +244,8 @@ public class cLoginView extends cFrameLoginApp {
                         // kalo berhasil login
                         Controller
                                 .showDashboardMitra(Integer.valueOf(Model.getDetailMitraByEmail(email)[0].toString()));
+                        txtEmailLoginMitra.setText(null);
+                        txtPasswordLoginMitra.setText(null);
                         cLoginView.this.setVisible(false);
                     } else {
                         // kalo gagal login
@@ -291,6 +295,8 @@ public class cLoginView extends cFrameLoginApp {
                 String password = String.valueOf(txtPasswordLoginAdmin.getPassword());
 
                 if (Email.equals("admin") && password.equals("admin")) {
+                    txtEmailLoginAdmin.setText(null);
+                    txtPasswordLoginAdmin.setText(null);
                     // loginnya Berhasil
                     Controller.showDashboardAdmin(true);
                     cLoginView.this.setVisible(false);

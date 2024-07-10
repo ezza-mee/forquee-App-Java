@@ -172,6 +172,11 @@ public class cRegisView extends cFrameRegisApp {
                             // kalau berhasil daftar
                             JOptionPane.showMessageDialog(cRegisView.this, "Daftar Berhasil!!", "Berhasil Daftar",
                                     JOptionPane.INFORMATION_MESSAGE);
+                            txtNamaDaftarCustomer.setText(null);
+                            txtEmailDaftarCustomer.setText(null);
+                            txtNomorHpDaftarCustomer.setText(null);
+                            txtPasswordDaftarCustomer.setText(null);
+                            Controller.showLoginCustomer();
                             cRegisView.this.setVisible(false);
                         } else {
                             // kalau gagal daftar
@@ -260,6 +265,11 @@ public class cRegisView extends cFrameRegisApp {
                             // kalau berhasil daftar
                             JOptionPane.showMessageDialog(cRegisView.this, "Daftar Berhasil!!", "Berhasil Daftar",
                                     JOptionPane.INFORMATION_MESSAGE);
+                            txtNamaDaftarMitra.setText(null);
+                            txtEmailDaftarMitra.setText(null);
+                            txtNomorHpDaftarMitra.setText(null);
+                            txtPasswordDaftarMitra.setText(null);
+                            Controller.showLoginMitra();
                             cRegisView.this.setVisible(false);
                         } else {
                             // kalau gagal daftar
